@@ -58,7 +58,7 @@ public class Laser extends GameObject {
      @Override
      public void update() {
           if(enabled) {
-               sprite.setRotation(getAngleFromCursor());
+               this.setRotation(getAngleFromCursor());
           }
      }
 

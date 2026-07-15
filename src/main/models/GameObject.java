@@ -78,6 +78,14 @@ public abstract class GameObject {
           this.sprite = sprite;
      }
 
+     public void setRotation(float angle) {
+          sprite.setRotation(angle);
+     }
+
+     public void rotate(float angle) {
+          sprite.rotate(angle);
+     }
+
      // Abstract methods
      public abstract void update();
      public abstract void render(Graphics2D g);
