@@ -1,6 +1,9 @@
 package main.game;
 
 import javax.swing.*;
+
+import main.input.MouseInput;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
@@ -11,6 +14,11 @@ public class Window {
      public Window(String title, int width, int height) {
           frame = new JFrame(title);
           canvas = new Canvas();
+
+          // Creates a new input handler
+          MouseInput mInput = new MouseInput();
+          // Sets the listener
+          canvas.addMouseMotionListener(mInput);
 
           frame.setUndecorated(true);
           frame.setResizable(false);

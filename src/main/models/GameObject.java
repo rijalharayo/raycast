@@ -6,8 +6,9 @@ import main.math.Vector2;
 
 // Model representing the components that can exist within a scene
 public abstract class GameObject {
-     private Vector2 position;
-     private String name;
+     protected Vector2 position;
+     protected String name;
+     protected Sprite sprite;
 
      // Overloaded constructors
      public GameObject() {
@@ -48,6 +49,10 @@ public abstract class GameObject {
           return position;
      }
 
+     public Sprite getSprite() {
+          return sprite;
+     }
+
      // Main setters
      public void setName(String name) {
           if(name == null) {
@@ -63,6 +68,14 @@ public abstract class GameObject {
      
      public void setPosition(float x, float y) {
           this.position = new Vector2(x, y);
+     }
+
+     public void setSprite(Sprite sprite) {
+          if(sprite == null) {
+               throw new IllegalArgumentException("Sprite can't be null");
+          }
+
+          this.sprite = sprite;
      }
 
      // Abstract methods

@@ -13,12 +13,16 @@ public abstract class LevelScene extends Scene {
           this.levelName = levelName;
           this.levelIndex = levelIndex;
           this.background = new Sprite("background1.png");
+
+          loadObjects();
      }
 
      public LevelScene(String levelName, int levelIndex, Sprite backgroundImage) {
           this.levelName = levelName;
           this.levelIndex = levelIndex;
           this.background = backgroundImage;
+
+          loadObjects();
      }
 
      // Getters
@@ -29,6 +33,8 @@ public abstract class LevelScene extends Scene {
      public int getLevelIndex() {
           return levelIndex;
      }
+
+     public abstract void loadObjects();
 
      @Override
      public void render(Graphics2D g) {
