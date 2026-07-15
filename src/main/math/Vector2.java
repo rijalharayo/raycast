@@ -1,4 +1,4 @@
-package math;
+package main.math;
 
 // Class representing vector quantites (positions, velocity etc..)
 public class Vector2 {

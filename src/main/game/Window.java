@@ -1,11 +1,10 @@
-package game;
+package main.game;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 public class Window {
-
      private final JFrame frame;
      private final Canvas canvas;
 

@@ -1,10 +1,12 @@
-package game;
+package main.game;
+
+import java.awt.Toolkit;
 
 // Class to handle game rendering and loop
 public class Game implements Runnable {
-
-     public static final int WIDTH = 1280;
-     public static final int HEIGHT = 720;
+     
+     public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
+     public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
      public static final String TITLE = "Ray Shooter";
 
      private Window window;

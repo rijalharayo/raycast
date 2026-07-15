@@ -1,14 +1,16 @@
-package game;
+package main.game;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.GameObject;
+import main.models.GameObject;
+import main.models.Sprite;
 
 public abstract class Scene {
 
      protected final List<GameObject> gameObjects = new ArrayList<>();
+     protected Sprite background;
 
      // Adds object to the list
      public void add(GameObject gameObject) {
@@ -40,5 +42,10 @@ public abstract class Scene {
           for(GameObject obj : gameObjects) {
                obj.render(g);
           }
+     }
+
+     // Getters
+     public Sprite getBackground() {
+          return background;
      }
 }

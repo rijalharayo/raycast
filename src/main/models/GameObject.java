@@ -1,8 +1,8 @@
-package models;
+package main.models;
 
 import java.awt.Graphics2D;
 
-import math.Vector2;
+import main.math.Vector2;
 
 // Model representing the components that can exist within a scene
 public abstract class GameObject {
@@ -44,7 +44,7 @@ public abstract class GameObject {
           return name;
      }
 
-     public Vector2 getPos() {
+     public Vector2 getPosition() {
           return position;
      }
 
@@ -57,11 +57,11 @@ public abstract class GameObject {
           this.name = name;
      }
 
-     public void setPos(Vector2 pos) {
+     public void setPosition(Vector2 pos) {
           this.position = pos;
      }
      
-     public void setPos(float x, float y) {
+     public void setPosition(float x, float y) {
           this.position = new Vector2(x, y);
      }
 
