@@ -8,25 +8,28 @@ import main.input.MouseInput;
 import main.math.Vector2;
 import main.models.GameObject;
 import main.models.Sprite;
+import main.physics.rays.Ray;
 
 public class Laser extends GameObject {
      private boolean enabled;
      private boolean on;
 
-     private List<Ray> rays = new ArrayList<>();
+     private List<LightRay> lightRays = new ArrayList<>();
+
+     private final String SPRITE_NAME = "laser-pointer.png";
 
      public Laser(float x, float y) {
           super("Laser", x, y);
           enabled = true;
           on = true;
 
-          Sprite laserSprite = new Sprite("laser-pointer.png");
+          Sprite laserSprite = new Sprite(SPRITE_NAME);
           setSprite(laserSprite);
           sprite.scale(1.5f);
 
           // Adds a default ray
           addRay(
-               new Ray(position, getAngleFromCursor(), 0)
+               new LightRay(position, getAngleFromCursor(), 0)
           );
      }
 
@@ -56,8 +59,8 @@ public class Laser extends GameObject {
           this.on = true;
      }
 
-     public void addRay(Ray ray) {
-          rays.add(ray);
+     public void addRay(LightRay ray) {
+          lightRays.add(ray);
      }
 
      // Returns rotation from the cursor to the centre of the sprite
@@ -79,8 +82,8 @@ public class Laser extends GameObject {
 
                // Update rays if the laser is turned on
                if(on) {
-                    for(Ray ray : rays) {
-                         // Update code
+                    for(LightRay ray : lightRays) {
+                        
                     }
                }
           }
@@ -91,8 +94,8 @@ public class Laser extends GameObject {
           sprite.draw(g, position.getX(), position.getY());
           // Render all the rays shot from the laser if its on
           if(on) {
-               for(Ray ray : rays) {
-                    ray.render(g);
+               for(LightRay ray : lightRays) {
+                    
                }
           }
      }
