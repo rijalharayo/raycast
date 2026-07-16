@@ -1,6 +1,6 @@
 import main.game.Game;
 import main.game.SceneManager;
-import main.game.scenes.TestLevel;
+import main.game.TestLevel;
 
 // Main app
 public class App {

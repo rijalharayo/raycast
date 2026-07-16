@@ -1,6 +1,8 @@
 package main.models.entities;
 
 import java.awt.Graphics2D;
+import java.util.List;
+import java.util.ArrayList;
 
 import main.input.MouseInput;
 import main.math.Vector2;
@@ -11,14 +13,21 @@ public class Laser extends GameObject {
      private boolean enabled;
      private boolean on;
 
+     private List<Ray> rays = new ArrayList<>();
+
      public Laser(float x, float y) {
           super("Laser", x, y);
           enabled = true;
-          on = false;
+          on = true;
 
           Sprite laserSprite = new Sprite("laser-pointer.png");
           setSprite(laserSprite);
           sprite.scale(1.5f);
+
+          // Adds a default ray
+          addRay(
+               new Ray(position, getAngleFromCursor(), 0)
+          );
      }
 
      // Getters
@@ -39,8 +48,16 @@ public class Laser extends GameObject {
           this.enabled = false;
      }
 
-     public void setState(boolean state) {
-          this.on = state;
+     public void turnOff() {
+          this.on = false;
+     }
+
+     public void turnOn() {
+          this.on = true;
+     }
+
+     public void addRay(Ray ray) {
+          rays.add(ray);
      }
 
      // Returns rotation from the cursor to the centre of the sprite
@@ -59,11 +76,24 @@ public class Laser extends GameObject {
      public void update() {
           if(enabled) {
                this.setRotation(getAngleFromCursor());
+
+               // Update rays if the laser is turned on
+               if(on) {
+                    for(Ray ray : rays) {
+                         // Update code
+                    }
+               }
           }
      }
 
      @Override
      public void render(Graphics2D g) {
           sprite.draw(g, position.getX(), position.getY());
+          // Render all the rays shot from the laser if its on
+          if(on) {
+               for(Ray ray : rays) {
+                    ray.render(g);
+               }
+          }
      }
 }

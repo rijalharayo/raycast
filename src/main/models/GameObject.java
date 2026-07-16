@@ -75,6 +75,11 @@ public abstract class GameObject {
                throw new IllegalArgumentException("Sprite can't be null");
           }
 
+          this.position = new Vector2(
+               position.getX() + sprite.getImage().getWidth() / 2,
+               position.getY() + sprite.getImage().getHeight() / 2
+          );
+
           this.sprite = sprite;
      }
 

@@ -1,6 +1,5 @@
-package main.game.scenes;
+package main.game;
 
-import main.game.LevelScene;
 import main.models.Sprite;
 import main.models.entities.Laser;
 
@@ -16,6 +15,6 @@ public class TestLevel extends LevelScene {
 
      @Override
      public void loadObjects() {
-          add(new Laser(100, 20));
+          add(new Laser(1000, 600));
      }
 }

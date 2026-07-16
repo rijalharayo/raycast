@@ -118,4 +118,10 @@ public class Vector2 {
      public String toString() {
           return "<" + x + ", " + y + ">";
      }
+
+     @Override
+     public boolean equals(Object obj) {
+          Vector2 v = (Vector2) obj;
+          return (x == v.getX()) && (y == v.getY());
+     }
 }

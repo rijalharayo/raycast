@@ -47,13 +47,18 @@ public class Sprite {
           int width = (int) (image.getWidth() * scale);
           int height = (int) (image.getHeight() * scale);
 
+          // Rotates around the center of ths sprite
           g.rotate(
                rotation,
-               x + width / 2.0,
-               y + height / 2.0
+               x,
+               y
           );
 
-          g.drawImage(image, (int) x, (int) y, width, height, null);
+          // Converts the center position to the top-left coordinate required for drawing
+          int newX = (int) (x - width/2);
+          int newY = (int) (y - height/2);
+
+          g.drawImage(image, newX, newY, width, height, null);
           g.setTransform(old);
      }
 
@@ -63,13 +68,18 @@ public class Sprite {
           int scaledWidth = (int) (width * scale);
           int scaledHeight = (int) (height * scale);
 
+          // Rotates around the center of the sprite
           g.rotate(
                rotation,
-               x + scaledWidth / 2.0,
-               y + scaledHeight / 2.0
+               x,
+               y
           );
 
-          g.drawImage(image, (int) x, (int) y, scaledWidth, scaledHeight, null);
+          // Converts the center position to the top-left coordinate required for drawing
+          int newX = (int) (x - scaledWidth/2);
+          int newY = (int) (y - scaledHeight / 2.0);
+
+          g.drawImage(image, newX, newY, scaledWidth, scaledHeight, null);
           g.setTransform(old);
      }
 
