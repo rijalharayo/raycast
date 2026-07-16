@@ -6,15 +6,12 @@ import main.math.Vector2;
 
 // Model representing the components that can exist within a scene
 public abstract class GameObject {
-     protected Vector2 position;
-     protected String name;
+     protected Vector2 position = Vector2.ZERO;
+     protected String name = "";
      protected Sprite sprite;
 
      // Overloaded constructors
-     public GameObject() {
-          this.name = "";
-          this.position = Vector2.ZERO;
-     }
+     public GameObject() {};
 
      public GameObject(String name) {
           this.name = (name == null || name.isBlank())
