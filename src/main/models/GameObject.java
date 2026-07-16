@@ -17,8 +17,6 @@ public abstract class GameObject {
           this.name = (name == null || name.isBlank())
                     ? getClass().getSimpleName()
                     : name;
-
-          position = Vector2.ZERO;
      }
 
      public GameObject(String name, Vector2 position) {
