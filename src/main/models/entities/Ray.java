@@ -115,6 +115,8 @@ public class Ray extends GameObject {
           this.directionNormalized = endPos.subtract(startPos).getNormalized();
           // Sets the magnitude
           this.magnitude = directionVector.getMagnitude();
+          // Sets the default position to the start pos
+          this.position = startPos;
      }
 
      @Override
