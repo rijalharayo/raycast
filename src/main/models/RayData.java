@@ -43,7 +43,7 @@ public class RayData {
 
      // Setters
      // Sets the origin and end-point of the ray
-     protected void setPoints(Vector2 start, Vector2 end) {
+     public void setPoints(Vector2 start, Vector2 end) {
           // Prevent start & end positions from being null or equal
           if(start == null || end == null) throw new IllegalArgumentException("Start & end can't be null");
           if(start == end) throw new IllegalArgumentException("Start & end positions can't be equal");
@@ -54,7 +54,7 @@ public class RayData {
           setMagnitudeAndDirection();
      }
 
-     protected void setPoints(float x1, float y1, float x2, float y2) {
+     public void setPoints(float x1, float y1, float x2, float y2) {
           // Prevent intialization if the front and tail are equal
           if((x1 == x2) && (y1 == y2)) {
                throw new IllegalArgumentException("Start & end positions can't be equal");
@@ -67,7 +67,7 @@ public class RayData {
      }
 
      // Sets the origin & endpoint based on angle & length
-     protected void setFromDirection(Vector2 start, float angle, float magnitude) {
+     public void setFromDirection(Vector2 start, float angle, float magnitude) {
           // Creates a new endpoint
 
           // Offsets the angle to match the laser's default orientation by subtracting π/2

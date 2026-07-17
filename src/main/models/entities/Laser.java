@@ -8,7 +8,6 @@ import main.input.MouseInput;
 import main.math.Vector2;
 import main.models.GameObject;
 import main.models.Sprite;
-import main.physics.rays.Ray;
 
 public class Laser extends GameObject {
      private boolean enabled;
@@ -83,7 +82,7 @@ public class Laser extends GameObject {
                // Update rays if the laser is turned on
                if(on) {
                     for(LightRay ray : lightRays) {
-                        
+                        ray.setFromDirection(position, getAngleFromCursor(), 50f);
                     }
                }
           }
@@ -95,7 +94,7 @@ public class Laser extends GameObject {
           // Render all the rays shot from the laser if its on
           if(on) {
                for(LightRay ray : lightRays) {
-                    
+                    ray.render(g);
                }
           }
      }

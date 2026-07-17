@@ -42,6 +42,11 @@ public class LightRay extends GameObject implements Ray {
           rayData = new RayData(start, angle, magnitude);
      }
 
+     public LightRay(RayData data) {
+          super("", data.getStart());
+          this.rayData = data;
+     }
+
      // Getters
      public Color getRayColor() {
           return rayColor;
