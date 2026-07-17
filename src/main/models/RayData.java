@@ -70,6 +70,21 @@ public class RayData {
      public void setFromDirection(Vector2 start, float angle, float magnitude) {
           // Creates a new endpoint
 
+          /* 
+               <x, y> = <x' + rcosθ, y'+ rsinθ>
+          */
+          Vector2 end = new Vector2(
+               start.getX() + (float) (magnitude * Math.cos(angle)),
+               start.getY() + (float) (magnitude * Math.sin(angle))
+          );
+
+          setPoints(start, end);
+     }
+
+     // Sets the origin & endpoint based on angle
+     public void setFromDirection(Vector2 start, float angle) {
+          // Creates a new endpoint
+
           // Offsets the angle to match the laser's default orientation by subtracting π/2
           float theta = (float) (angle - Math.PI/2);
 
@@ -77,8 +92,8 @@ public class RayData {
                <x, y> = <x' + rcosθ, y'+ rsinθ>
           */
           Vector2 end = new Vector2(
-               start.getX() + (float) (magnitude * Math.cos(theta)),
-               start.getY() + (float) (magnitude * Math.sin(theta))
+               start.getX() + (float) (1f * Math.cos(theta)),
+               start.getY() + (float) (1f * Math.sin(theta))
           );
 
           setPoints(start, end);
@@ -91,5 +106,10 @@ public class RayData {
           this.directionNormalized = endPos.subtract(startPos).getNormalized();
           // Sets the magnitude
           this.magnitude = directionVector.getMagnitude();
+     }
+
+     @Override
+     public String toString() {
+          return "Start: " + startPos + "\nEnd: " + endPos;
      }
 }

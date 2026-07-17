@@ -27,4 +27,8 @@ public interface Ray {
      default void setFromDirection(Vector2 start, float angle, float length) {
           getRayData().setFromDirection(start, angle, length);
      }
+
+     default void setFromDirection(Vector2 start, float angle) {
+          getRayData().setFromDirection(start, angle);
+     }
 }

@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import main.input.MouseInput;
 import main.math.Vector2;
 import main.models.GameObject;
+import main.models.RayData;
 import main.models.Sprite;
+import main.physics.rays.RayHit;
 
 public class Laser extends GameObject {
      private boolean enabled;
@@ -28,7 +30,7 @@ public class Laser extends GameObject {
 
           // Adds a default ray
           addRay(
-               new LightRay(position, getAngleFromCursor(), 0)
+               new LightRay(getRayOriginPoint(), getAngleFromCursor(), 50f)
           );
      }
 
@@ -74,16 +76,54 @@ public class Laser extends GameObject {
           return vectorBetween.getAngle() - (float) Math.PI/2;
      }
 
+     // Returns the position of the tip of the laser
+     private Vector2 getRayOriginPoint() {
+          float heightOffSet = sprite.getHeight() / 2;
+          // Gets the local tip of the vector
+          Vector2 localTip = new Vector2(0, -heightOffSet);
+
+          Vector2 rotatedTip = localTip.rotate(getAngleFromCursor());
+          // Gets the global tip by rotating the localTip
+          return position.add(rotatedTip);
+     }
+
+     // Casts & updates the rays
+     private void castRays() {
+          LightRay initialRay = lightRays.getFirst();
+          // Updates the initial/original ray
+          initialRay.setFromDirection(getRayOriginPoint(), getAngleFromCursor());
+          // Tracks the previous endpoint of the ray (start point if its the original ray)
+          Vector2 prevPos = initialRay.getStart();
+
+          // Stores any new rays created during the process
+          List<LightRay> newRays = new ArrayList<>();
+
+          for(LightRay ray : lightRays) {
+               // Returns collision info
+               RayHit rayHit = ray.trace(prevPos);
+               RayData next = rayHit.getNextRayData();
+               // If next ray data is null, the original ray hasn't hit any surface
+               if(next != null) {
+                    newRays.add(new LightRay(next));
+               }
+
+               // Updates the previous start position of the ray
+               prevPos = ray.getEnd();
+          }
+
+          // Adds any new rays created
+          lightRays.addAll(newRays);
+          // Clears the array after use
+          newRays.clear();
+     }
+
      @Override
      public void update() {
           if(enabled) {
                this.setRotation(getAngleFromCursor());
-
                // Update rays if the laser is turned on
                if(on) {
-                    for(LightRay ray : lightRays) {
-                        ray.setFromDirection(position, getAngleFromCursor(), 50f);
-                    }
+                    castRays();
                }
           }
      }

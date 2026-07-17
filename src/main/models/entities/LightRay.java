@@ -8,6 +8,8 @@ import main.math.Vector2;
 import main.models.GameObject;
 import main.models.RayData;
 import main.physics.rays.Ray;
+import main.physics.rays.RayHit;
+import main.physics.rays.VirtualRay;
 
 // Class for the light ray
 public class LightRay extends GameObject implements Ray {
@@ -19,17 +21,17 @@ public class LightRay extends GameObject implements Ray {
      // Constructors
      public LightRay(Vector2 start, Vector2 end) {
           super("", start);
-          rayData = new RayData(start, end);
+          this.rayData = new RayData(start, end);
      }
 
      public LightRay(float x1, float y1, float x2, float y2) {
           super("", new Vector2(x1, y1));
-          rayData = new RayData(x1, y1, x2, y2);
+          this.rayData = new RayData(x1, y1, x2, y2);
      }
 
      public LightRay(Vector2 start, Vector2 end, Color color) {
           super("", start);
-          rayData = new RayData(start, end);
+          this.rayData = new RayData(start, end);
 
           if(color != null) {
                this.rayColor = color;
@@ -58,6 +60,36 @@ public class LightRay extends GameObject implements Ray {
           this.rayColor = color;
      }
 
+     // Traces/Updates the light ray and returns data on collision
+     public RayHit trace(Vector2 prevPos) {
+          // Creates and casts a virtaul ray from the position of the light ray
+          VirtualRay vRay = new VirtualRay(prevPos, this.getRayData().getNormalizedDirection());
+          // Gets the collision data
+          RayHit rayHit = vRay.cast();
+          // Calculates the path of the next ray based on the ray hit event
+          RayData nextRayData = handleCollision(rayHit);
+          if(rayHit.hasHit()) {
+               rayHit.setNextRayData(nextRayData);
+          }
+
+          /* 
+               Since the cast() method stops when it collides,
+               the endpoint of the light ray is set as the collision point of the virtual ray
+          */ 
+          this.setPoints(prevPos, rayHit.getCollisionPoint());
+
+          return rayHit;
+     }
+
+     // Handles & calculates new ray data based on collision type of the rayhit
+     private RayData handleCollision(RayHit rayHit) {
+          switch (rayHit.getCollisionType()) {
+               default:
+                    // Do nothing if its a default/collision with the bounds
+                    return null;
+          }
+     }
+
      @Override
      public void update() {
           // Code
@@ -84,5 +116,10 @@ public class LightRay extends GameObject implements Ray {
      @Override
      public RayData getRayData() {
           return rayData;
+     }
+
+     @Override
+     public String toString() {
+          return rayData.toString();
      }
 }

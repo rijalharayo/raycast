@@ -70,19 +70,20 @@ public abstract class GameObject {
                throw new IllegalArgumentException("Sprite can't be null");
           }
 
-          this.position = new Vector2(
-               position.getX() + sprite.getImage().getWidth() / 2,
-               position.getY() + sprite.getImage().getHeight() / 2
-          );
-
           this.sprite = sprite;
      }
 
      public void setRotation(float angle) {
+          if(sprite == null) {
+               throw new NullPointerException("No sprite set");
+          }
           sprite.setRotation(angle);
      }
 
      public void rotate(float angle) {
+          if(sprite == null) {
+               throw new NullPointerException("No sprite set");
+          }
           sprite.rotate(angle);
      }
 

@@ -15,12 +15,18 @@ public class Sprite {
      private float rotation = 0;
      private float scale = 1f;
 
+     private int width;
+     private int height;
+
      public Sprite(String path) {
           // Loads the sprite
           try {
                image = ImageIO.read(
                     new File(IMAGE_FOLDER + path)
                );
+
+               this.width = image.getWidth();
+               this.height = image.getHeight();
           }
           catch(IOException e) {
                throw new RuntimeException("Couldn't load sprite: " + path, e);
@@ -40,12 +46,17 @@ public class Sprite {
           return scale;
      }
 
+     public int getWidth() {
+          return width;
+     }
+
+     public int getHeight() {
+          return height;
+     }
+
      // Draw / Render methods
      public void draw(Graphics2D g, float x, float y) {
           AffineTransform old = g.getTransform();
-
-          int width = (int) (image.getWidth() * scale);
-          int height = (int) (image.getHeight() * scale);
 
           // Rotates around the center of ths sprite
           g.rotate(
@@ -65,9 +76,6 @@ public class Sprite {
      public void draw(Graphics2D g, float x, float y, int width, int height) {
           AffineTransform old = g.getTransform();
 
-          int scaledWidth = (int) (width * scale);
-          int scaledHeight = (int) (height * scale);
-
           // Rotates around the center of the sprite
           g.rotate(
                rotation,
@@ -76,31 +84,38 @@ public class Sprite {
           );
 
           // Converts the center position to the top-left coordinate required for drawing
-          int newX = (int) (x - scaledWidth/2);
-          int newY = (int) (y - scaledHeight / 2.0);
+          int newX = (int) (x - width / 2);
+          int newY = (int) (y - height / 2);
 
-          g.drawImage(image, newX, newY, scaledWidth, scaledHeight, null);
+          g.drawImage(image, newX, newY, width, height, null);
           g.setTransform(old);
      }
 
      // Rotates the sprite (in radians)
      public void rotate(float angle) {
-          rotation += angle;
+          this.rotation += angle;
      }
 
      // Sets the rotation (in radians)
      public void setRotation(float angle) {
-          rotation = angle;
+          this.rotation = angle;
      }
 
      // Scales the sprite
      public void scale(float sc) {
-          scale *= sc;
+          this.scale *= sc;
+          // Scales the width & height
+          this.width *= sc;
+          this.height *= sc;
      }
 
      // Sets the scale
      public void setScale(float sc) {
-          scale = sc;
+          this.scale = sc;
+          // Scales the width & height
+          this.width *= scale;
+          this.height *= scale;
+          
      }
 
 }
