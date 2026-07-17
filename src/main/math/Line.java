@@ -4,7 +4,7 @@ package main.math;
 public class Line {
      protected Vector2 start;
      protected Vector2 end;
-     protected Vector2 directionNormalized;
+     protected Vector2 lineVector;
 
      // Constructors
      public Line() {}
@@ -16,8 +16,8 @@ public class Line {
 
           this.start = start;
           this.end = end;
-          // Stores the direction as a unit vector
-          this.directionNormalized = end.subtract(start).getNormalized();
+          // Stores the line in a vector form
+          this.lineVector = end.subtract(start);
      }
      
      // Getters
@@ -30,7 +30,7 @@ public class Line {
      }
 
      public Vector2 getNormalizedDirection() {
-          return directionNormalized;
+          return lineVector.getNormalized();
      }
 
      public float getLength() {
@@ -38,14 +38,14 @@ public class Line {
      }
 
      public Vector2 getNormal() {
-          return directionNormalized.rotate((float) Math.PI/2);
+          return getNormalizedDirection().rotate((float) Math.PI/2);
      }
 
      // Rotates the line by a certain angle (in radians)
      public void rotate(float theta) {
           this.start = start.rotate(theta);
           this.end = end.rotate(theta);
-          this.directionNormalized = directionNormalized.rotate(theta);
+          this.lineVector = lineVector.rotate(theta);
      }
 
      public void rotateAround(Vector2 center, float theta) {
@@ -67,6 +67,6 @@ public class Line {
           Vector2 endRelativeToCenter = end.subtract(center);
           this.end = endRelativeToCenter.rotate(theta).add(center);
           // Gets the new normalized direction
-          this.directionNormalized = end.subtract(start).getNormalized();
+          this.lineVector = end.subtract(start);
      }
 }
