@@ -29,6 +29,10 @@ public class Line {
           return end;
      }
 
+     public Vector2 getLineVector() {
+          return lineVector;
+     }
+
      public Vector2 getNormalizedDirection() {
           return lineVector.getNormalized();
      }
