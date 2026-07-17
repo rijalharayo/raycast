@@ -1,19 +1,16 @@
 package main.models;
 
+import main.math.Line;
 import main.math.Vector2;
 
 // Class to store the general data of a ray
-public class RayData {
-     private Vector2 startPos;
-     private Vector2 endPos;
-     private Vector2 directionNormalized;
-     private float magnitude;
+public class RayData extends Line {
 
      // Constructors
      public RayData() {}
 
      public RayData(Vector2 start, Vector2 end) {
-          setPoints(start, end);
+          super(start, end);
      }
 
      public RayData(float x1, float y1, float x2, float y2) {
@@ -25,20 +22,8 @@ public class RayData {
      }
 
      // Getters
-     public Vector2 getStart() {
-          return startPos;
-     }
-
-     public Vector2 getEnd() {
-          return endPos;
-     }
-
-     public Vector2 getNormalizedDirection() {
-          return directionNormalized;
-     }
-
      public float getRayLength() {
-          return magnitude;
+          return this.getLength();
      }
 
      // Setters
@@ -48,10 +33,10 @@ public class RayData {
           if(start == null || end == null) throw new IllegalArgumentException("Start & end can't be null");
           if(start == end) throw new IllegalArgumentException("Start & end positions can't be equal");
      
-          this.startPos = start;
-          this.endPos = end;
+          this.start = start;
+          this.end = end;
 
-          setMagnitudeAndDirection();
+          setDirection();
      }
 
      public void setPoints(float x1, float y1, float x2, float y2) {
@@ -60,10 +45,10 @@ public class RayData {
                throw new IllegalArgumentException("Start & end positions can't be equal");
           }
 
-          this.startPos = new Vector2(x1, y1);
-          this.endPos = new Vector2(x2, y2);
+          this.start = new Vector2(x1, y1);
+          this.end = new Vector2(x2, y2);
 
-          setMagnitudeAndDirection();
+          setDirection();
      }
 
      // Sets the origin & endpoint based on angle & length
@@ -99,17 +84,13 @@ public class RayData {
           setPoints(start, end);
      }
 
-     private void setMagnitudeAndDirection() {
-          Vector2 directionVector = endPos.subtract(startPos);
-
+     private void setDirection() {
           // Sets the normalized vector of the direction of the ray
-          this.directionNormalized = endPos.subtract(startPos).getNormalized();
-          // Sets the magnitude
-          this.magnitude = directionVector.getMagnitude();
+          this.directionNormalized = end.subtract(start).getNormalized();
      }
 
      @Override
      public String toString() {
-          return "Start: " + startPos + "\nEnd: " + endPos;
+          return "Start: " + start + "\nEnd: " + end;
      }
 }
