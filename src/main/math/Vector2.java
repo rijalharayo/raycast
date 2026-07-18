@@ -99,6 +99,25 @@ public class Vector2 {
           return v;
      }
 
+     public Vector2 rotateAround(Vector2 center, float theta) {
+          /* For rotating a vector around the centre, the formula is:
+
+               p' = R(θ) * (p - c) + c
+             where,
+               p' = new vector
+               R(θ) = 2D rotation matrix
+               p = vector
+               c = centre of rotation  
+          */
+
+          // Rotates the vector around a centre
+
+          Vector2 vectorRelativeToCenter = this.subtract(center);
+          Vector2 rotatedVector = vectorRelativeToCenter.rotate(theta).add(center);
+
+          return rotatedVector;
+     }
+
      // Adds two vectors
      public static Vector2 add(Vector2 v1, Vector2 v2) {
           return v1.add(v2);
