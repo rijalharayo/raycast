@@ -8,6 +8,8 @@ public abstract class Shape {
      protected float rotation = 0f;
 
      // Constructors
+     protected Shape() {} // Default implicit constructor
+
      public Shape(Vector2 position) {
           this.position = position;
      }

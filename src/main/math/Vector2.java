@@ -7,9 +7,9 @@ public class Vector2 {
 
      public static final Vector2 ZERO = new Vector2(0, 0);
 
-     // Standard unit vectors
-     public static final Vector2 UP = new Vector2(0, 1);
-     public static final Vector2 DOWN = new Vector2(0, -1);
+     // Standard unit vectors (Up & Down are exchanged in this co-ordinate system)
+     public static final Vector2 UP = new Vector2(0, -1);
+     public static final Vector2 DOWN = new Vector2(0, 1);
      public static final Vector2 RIGHT = new Vector2(1, 0);
      public static final Vector2 LEFT = new Vector2(-1, 0);
 
