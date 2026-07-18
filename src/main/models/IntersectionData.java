@@ -1,4 +1,4 @@
-package main.math.shapes;
+package main.models;
 
 import main.math.Line;
 import main.math.Vector2;

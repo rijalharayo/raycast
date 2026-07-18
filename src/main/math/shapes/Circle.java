@@ -2,6 +2,7 @@ package main.math.shapes;
 
 import main.math.Line;
 import main.math.Vector2;
+import main.models.IntersectionData;
 
 // Represents a circle
 public class Circle extends Shape {

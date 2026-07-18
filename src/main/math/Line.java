@@ -1,6 +1,6 @@
 package main.math;
 
-import main.math.shapes.IntersectionData;
+import main.models.IntersectionData;
 
 // Stores a line data
 public class Line {
