@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 import main.math.Line;
-import main.math.Shape;
 import main.math.Vector2;
 import main.math.shapes.IntersectionData;
+import main.math.shapes.Shape;
 
 public class Polygon extends Shape {
      // Vertices are local to the position

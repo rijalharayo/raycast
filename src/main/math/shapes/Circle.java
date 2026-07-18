@@ -1,7 +1,6 @@
 package main.math.shapes;
 
 import main.math.Line;
-import main.math.Shape;
 import main.math.Vector2;
 
 // Represents a circle

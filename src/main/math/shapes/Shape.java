@@ -1,6 +1,7 @@
-package main.math;
+package main.math.shapes;
 
-import main.math.shapes.IntersectionData;
+import main.math.Line;
+import main.math.Vector2;
 
 // Represents a mathemtical shape
 public abstract class Shape {
