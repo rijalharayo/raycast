@@ -8,8 +8,7 @@ import main.models.IntersectionData;
 public class Circle extends Shape {
      private float radius;
 
-     public Circle(Vector2 position, float radius) {
-          super(position);
+     public Circle(float radius) {
           this.radius = radius;
      }
 
@@ -30,7 +29,7 @@ public class Circle extends Shape {
      }
 
      @Override
-     public IntersectionData intersects(Line line) {
+     public IntersectionData intersects(Line line, Vector2 parentPosition) {
           // Code
           return null;
      }

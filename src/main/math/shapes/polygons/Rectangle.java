@@ -8,15 +8,15 @@ public class Rectangle extends Polygon {
      private int height = 1;
 
      // Constructors
-     public Rectangle(Vector2 position, int width, int height) {
-          super(position, calculateLocalVertices(width, height, 0f));
+     public Rectangle(int width, int height) {
+          super(calculateLocalVertices(width, height, 0f));
 
           this.width = width;
           this.height = height;
      }
 
-     public Rectangle(Vector2 position, int width, int height, float rotation) {
-          super(position, rotation, calculateLocalVertices(width, height, rotation));
+     public Rectangle(int width, int height, float rotation) {
+          super(rotation, calculateLocalVertices(width, height, rotation));
 
           this.width = width;
           this.height = height;
