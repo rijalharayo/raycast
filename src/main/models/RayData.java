@@ -70,15 +70,12 @@ public class RayData extends Line {
      public void setFromDirection(Vector2 start, float angle) {
           // Creates a new endpoint
 
-          // Offsets the angle to match the laser's default orientation by subtracting π/2
-          float theta = (float) (angle - Math.PI/2);
-
           /* 
                <x, y> = <x' + rcosθ, y'+ rsinθ>
           */
           Vector2 end = new Vector2(
-               start.getX() + (float) (1f * Math.cos(theta)),
-               start.getY() + (float) (1f * Math.sin(theta))
+               start.getX() + (float) (1f * Math.cos(angle)),
+               start.getY() + (float) (1f * Math.sin(angle))
           );
 
           setPoints(start, end);

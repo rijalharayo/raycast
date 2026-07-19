@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import main.game.Scene;
 import main.math.Vector2;
 import main.models.GameObject;
 import main.models.RayData;
@@ -102,12 +103,15 @@ public class LightRay extends GameObject implements Ray {
           // Sets stroke width & color
           g2.setColor(rayColor);
           g2.setStroke(new BasicStroke(STROKE_WIDTH));
+
+          Vector2 screenStart = Scene.worldToScreen(getStart());
+          Vector2 screenEnd = Scene.worldToScreen(getEnd());
           
           g2.drawLine(
-               (int) getStart().getX(),
-               (int) getStart().getY(),
-               (int) getEnd().getX(),
-               (int) getEnd().getY()
+               (int) screenStart.getX(),
+               (int) screenStart.getY(),
+               (int) screenEnd.getX(),
+               (int) screenEnd.getY()
           );
 
           g2.dispose();

@@ -40,7 +40,7 @@ public abstract class LevelScene extends Scene {
      public void render(Graphics2D g) {
           // Renders the background
           if(background != null) {
-               background.draw(g, Game.WIDTH/2, Game.HEIGHT/2, Game.WIDTH, Game.HEIGHT);
+               background.draw(g, 0, 0, Game.WIDTH, Game.HEIGHT);
           }
 
           super.render(g);

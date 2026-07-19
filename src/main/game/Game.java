@@ -2,12 +2,16 @@ package main.game;
 
 import java.awt.Toolkit;
 
+import main.math.Vector2;
+
 // Class to handle game rendering and loop
 public class Game implements Runnable {
      
      public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
      public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
      public static final String TITLE = "Ray Shooter";
+
+     public static final Vector2 WORLD_CENTER = new Vector2((float) WIDTH / 2, (float) HEIGHT / 2);
 
      private Window window;
      private boolean running;

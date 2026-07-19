@@ -7,9 +7,9 @@ public class Vector2 {
 
      public static final Vector2 ZERO = new Vector2(0, 0);
 
-     // Standard unit vectors (Up & Down are exchanged in this co-ordinate system)
-     public static final Vector2 UP = new Vector2(0, -1);
-     public static final Vector2 DOWN = new Vector2(0, 1);
+     // Standard unit vectors
+     public static final Vector2 UP = new Vector2(0, 1);
+     public static final Vector2 DOWN = new Vector2(0, -1);
      public static final Vector2 RIGHT = new Vector2(1, 0);
      public static final Vector2 LEFT = new Vector2(-1, 0);
 
@@ -90,12 +90,9 @@ public class Vector2 {
           return v;
      }
 
-     // Rotates the vector by an angle theta (in radians)
+     // Rotates the vector by an angle theta (in radians) around the world centre
      public Vector2 rotate(float theta) {
-          float newX = (float) (x * Math.cos(theta) - y * Math.sin(theta));
-          float newY = (float) (x * Math.sin(theta) + y * Math.cos(theta));
-
-          Vector2 v = new Vector2(newX, newY);
+          Vector2 v = rotateAround(Vector2.ZERO, theta);
           return v;
      }
 
@@ -113,7 +110,15 @@ public class Vector2 {
           // Rotates the vector around a centre
 
           Vector2 vectorRelativeToCenter = this.subtract(center);
-          Vector2 rotatedVector = vectorRelativeToCenter.rotate(theta).add(center);
+
+          float x1 = vectorRelativeToCenter.getX();
+          float y1 = vectorRelativeToCenter.getY();
+
+          // Calculates R(θ) * (p - c)
+          float newX = (float) (x1 * Math.cos(theta) - y1 * Math.sin(theta));
+          float newY = (float) (x1 * Math.sin(theta) + y1 * Math.cos(theta));
+          // Adds vector 'c' to R(θ) * (p - c)
+          Vector2 rotatedVector = new Vector2(newX, newY).add(center);
 
           return rotatedVector;
      }

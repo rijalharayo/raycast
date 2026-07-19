@@ -1,6 +1,7 @@
 package main.physics.rays;
 
 import main.game.Game;
+import main.game.Scene;
 import main.math.Vector2;
 import main.models.RayData;
 import main.physics.colliders.CollisionType;
@@ -64,13 +65,15 @@ public class VirtualRay implements Ray {
      // Checks if the virtaul ray has gone out of bounds
      public boolean isOutOfBounds() {
           boolean outOfBounds = false;
+          // Converts world position to screen position
+          Vector2 screenPosition = Scene.worldToScreen(currentPosition);
 
           // Checks if the ray has gone out of bounds on the X-axis
-          if((currentPosition.getX() >= Game.WIDTH) || (currentPosition.getX() <= 0)) {
+          if((screenPosition.getX() >= Game.WIDTH) || (screenPosition.getX() <= 0)) {
                outOfBounds = true;
           }
           // Checks if the ray has gone out of bounds on the Y-axis
-          if((currentPosition.getY() >= Game.HEIGHT) || (currentPosition.getY() <= 0)) {
+          if((screenPosition.getY() >= Game.HEIGHT) || (screenPosition.getY() <= 0)) {
                outOfBounds = true;
           }
 

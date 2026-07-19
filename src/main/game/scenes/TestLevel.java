@@ -16,6 +16,6 @@ public class TestLevel extends LevelScene {
 
      @Override
      public void loadObjects() {
-          add(new Laser(1000, 600));
+          add(new Laser(0, 0));
      }
 }

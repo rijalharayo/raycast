@@ -66,24 +66,21 @@ public class Laser extends GameObject {
 
      // Returns rotation from the cursor to the centre of the sprite
      private float getAngleFromCursor() {
-          Vector2 mousePos = new Vector2(
-               MouseInput.getMouseX(),
-               MouseInput.getMouseY()
-          );
+          Vector2 mousePos = MouseInput.getMousePosition();
 
           Vector2 vectorBetween = mousePos.subtract(position);
           // Offsets the angle to match the sprite's default orientation by subtracting π/2
-          return vectorBetween.getAngle() - (float) Math.PI/2;
+          return vectorBetween.getAngle();
      }
 
      // Returns the position of the tip of the laser
      private Vector2 getRayOriginPoint() {
-          float heightOffSet = sprite.getHeight() / 2;
+          float widthOffset = sprite.getWidth() / 2;
           // Gets the local tip of the vector
-          Vector2 localTip = new Vector2(0, -heightOffSet);
+          Vector2 localTip = new Vector2(-widthOffset, 0);
 
           Vector2 rotatedTip = localTip.rotate(getAngleFromCursor());
-          // Gets the global tip by rotating the localTip
+          // Gets the world tip by rotating the localTip
           return position.add(rotatedTip);
      }
 
@@ -91,7 +88,8 @@ public class Laser extends GameObject {
      private void castRays() {
           LightRay initialRay = lightRays.getFirst();
           // Updates the initial/original ray
-          initialRay.setFromDirection(getRayOriginPoint(), getAngleFromCursor());
+          // The angle is offset by π as the ray faces away from the cursor
+          initialRay.setFromDirection(getRayOriginPoint(), getAngleFromCursor() + (float) Math.PI);
           // Tracks the previous endpoint of the ray (start point if its the original ray)
           Vector2 prevPos = initialRay.getStart();
 
