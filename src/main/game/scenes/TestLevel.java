@@ -1,5 +1,6 @@
-package main.game;
+package main.game.scenes;
 
+import main.game.LevelScene;
 import main.models.Sprite;
 import main.models.entities.Laser;
 

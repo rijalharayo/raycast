@@ -27,7 +27,7 @@ public class Laser extends GameObject {
           Sprite laserSprite = new Sprite(SPRITE_NAME);
           setSprite(laserSprite);
           sprite.scale(1.5f);
-
+          
           // Adds a default ray
           addRay(
                new LightRay(getRayOriginPoint(), getAngleFromCursor(), 50f)
