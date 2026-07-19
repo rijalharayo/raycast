@@ -12,6 +12,7 @@ public class VirtualRay implements Ray {
      public static final float LENGTH = 2f;
 
      private Vector2 currentPosition;
+     private Vector2 prevPosition;
      
      // Overloaded constructors
      public VirtualRay(Vector2 origin, Vector2 direction) {
@@ -55,6 +56,8 @@ public class VirtualRay implements Ray {
                }
 
                Vector2 velocity = rayData.getNormalizedDirection().multiply(LENGTH);
+               // Updates the previous position
+               prevPosition = currentPosition;
                // Updates ray position
                currentPosition = currentPosition.add(velocity);
           }

@@ -1,0 +1,42 @@
+package main.models.environment.reflectors;
+
+import java.awt.Graphics2D;
+
+import main.math.Vector2;
+import main.models.IntersectionData;
+import main.models.environment.OpticalObject;
+import main.physics.colliders.Collider;
+import main.physics.rays.Ray;
+import main.physics.rays.RayHit;
+import main.physics.rays.reflectors.OpticalObjectType;
+
+public abstract class Reflector extends OpticalObject {
+     // Constructors
+     public Reflector(Vector2 position, Collider collider) {
+          super(position, collider, OpticalObjectType.REFLECTOR);
+     }
+
+     public Reflector(String name, Vector2 position, Collider collider) {
+          super(name, position, collider, OpticalObjectType.REFLECTOR);
+     }
+
+     // Getters
+     @Override
+     protected RayHit interactWithRay(Ray ray, IntersectionData intersectionData) {
+          return this.reflect(ray, intersectionData);
+     }
+
+     @Override
+     public void update() {
+          // Code
+     }
+
+     @Override
+     public void render(Graphics2D g) {
+          // Renders the reflector
+          this.sprite.draw(g, position.getX(), position.getY());
+     }
+     
+     // Abstract methods
+     abstract RayHit reflect(Ray ray, IntersectionData intersectionData);
+}

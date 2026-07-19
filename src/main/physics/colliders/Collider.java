@@ -4,7 +4,7 @@ import main.math.Line;
 import main.math.Vector2;
 import main.math.shapes.Shape;
 import main.models.IntersectionData;
-import main.physics.rays.VirtualRay;
+import main.physics.rays.Ray;
 
 public abstract class Collider {
      protected Shape shape;
@@ -48,7 +48,7 @@ public abstract class Collider {
           this.position = pos;
      }
 
-     protected IntersectionData collideWithRay(VirtualRay vRay) {
+     public IntersectionData collideWithRay(Ray vRay) {
           Line rayLine = vRay.getRayData();
           return shape.intersects(rayLine, this.position);
      }
