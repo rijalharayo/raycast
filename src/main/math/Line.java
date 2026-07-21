@@ -184,8 +184,8 @@ public class Line {
                     4. CD ⋅ DA ∈ (-∞, 0]
 
                If P is the intersection point between the two segments, it must satisfy:
-                    1. AB ⋅ AI ∈ [0, |AB|^2]     (I is between A and B)
-                    2. CD ⋅ CI ∈ [0, |CD|^2]     (I is between C and D)
+                    1. AB ⋅ AP ∈ [0, |AB|²]     (P is between A and B)
+                    2. CD ⋅ CP ∈ [0, |CD|²]     (P is between C and D)
           */
           
           // Checking constraints
