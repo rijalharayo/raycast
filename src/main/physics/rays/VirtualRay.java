@@ -2,8 +2,10 @@ package main.physics.rays;
 
 import main.game.Game;
 import main.game.Scene;
+import main.game.SceneManager;
 import main.math.Vector2;
 import main.models.RayData;
+import main.models.environment.OpticalObject;
 import main.physics.colliders.CollisionType;
 
 // Virtual rays used for raycasting
@@ -19,12 +21,14 @@ public class VirtualRay implements Ray {
           rayData = new RayData();
           rayData.setFromDirection(origin, direction.getAngle(), LENGTH);
           this.currentPosition = origin;
+          this.prevPosition = origin;
      }
 
      public VirtualRay(Vector2 origin, float angle) {
           rayData = new RayData();
           rayData.setFromDirection(origin, angle, LENGTH);
           this.currentPosition = origin;
+          this.prevPosition = origin;
      }
 
      // Getters
@@ -41,7 +45,8 @@ public class VirtualRay implements Ray {
           // Run until it collides
           while(!collision) {
                boolean out = isOutOfBounds();
-               boolean hit = hasCollidedWithCollider();
+               RayData newRayData = checkOpticalObjectCollision();
+               boolean hit = newRayData != null;
 
                if(out || hit) {
                     collision = true;
@@ -51,32 +56,48 @@ public class VirtualRay implements Ray {
                     }
                     
                     if(hit) {
-                         // Code
+                         rayHit = new RayHit(true, newRayData.getStart(), CollisionType.MIRROR_COLLISION);
+                         rayHit.setNextRayData(newRayData);
                     }
+
+                    break;
                }
 
-               Vector2 velocity = rayData.getNormalizedDirection().multiply(LENGTH);
+               Vector2 velocity = rayData.getLineVector();
                // Updates the previous position
                prevPosition = currentPosition;
                // Updates ray position
-               currentPosition = currentPosition.add(velocity);
+               currentPosition = prevPosition.add(velocity);
           }
 
           return rayHit;
      }
 
-     // Checks if the virtaul ray has gone out of bounds
+     // Checks if the virtual ray has gone out of bounds
      public boolean isOutOfBounds() {
           boolean outOfBounds = false;
-          // Converts world position to screen position
-          Vector2 screenPosition = Scene.worldToScreen(currentPosition);
 
-          // Checks if the ray has gone out of bounds on the X-axis
+          // Converts world positions to screen positions
+          Vector2 screenPosition = Scene.worldToScreen(currentPosition);
+          Vector2 prevScreenPosition = Scene.worldToScreen(prevPosition);
+
+          // Checks if the current position has gone out of bounds on the X-axis
           if((screenPosition.getX() >= Game.WIDTH) || (screenPosition.getX() <= 0)) {
                outOfBounds = true;
           }
-          // Checks if the ray has gone out of bounds on the Y-axis
+
+          // Checks if the current position has gone out of bounds on the Y-axis
           if((screenPosition.getY() >= Game.HEIGHT) || (screenPosition.getY() <= 0)) {
+               outOfBounds = true;
+          }
+
+          // Checks if the previous position has gone out of bounds on the X-axis
+          if((prevScreenPosition.getX() >= Game.WIDTH) || (prevScreenPosition.getX() <= 0)) {
+               outOfBounds = true;
+          }
+
+          // Checks if the previous position has gone out of bounds on the Y-axis
+          if((prevScreenPosition.getY() >= Game.HEIGHT) || (prevScreenPosition.getY() <= 0)) {
                outOfBounds = true;
           }
 
@@ -84,9 +105,29 @@ public class VirtualRay implements Ray {
      }
 
      // Checks if the virtual ray has collided with a collider
-     public boolean hasCollidedWithCollider() {
-          // Code
-          return false;
+     public RayData checkOpticalObjectCollision() {
+          // The ray hasn't moved yet
+          if(currentPosition.equals(prevPosition)) {
+               return null;
+          }
+
+          Scene currentScene = SceneManager.getCurrentScene();
+          // Gets the list of optical objects in that scene
+          OpticalObject[] opticalObjects = currentScene.getSceneOpticalObjects();
+
+          RayData currentRayData = new RayData(prevPosition, currentPosition);
+          this.rayData = currentRayData;
+
+          // Checks for collision between all optical objects
+          for(OpticalObject opticalObject : opticalObjects) {
+               RayData newRayData = opticalObject.interact(this);
+               if(newRayData != null) {
+                    // The ray has hit something
+                    return newRayData;
+               }
+          }
+
+          return null;
      }
 
      @Override

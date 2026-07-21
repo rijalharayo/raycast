@@ -4,6 +4,6 @@ package main.physics.rays.reflectors;
 public enum OpticalObjectType {
      REFLECTOR,
      ABSORBER,
-     MEDIUM,
+     REFRACTORS,
      UNIVERSAL
 }

@@ -4,10 +4,10 @@ import java.awt.Graphics2D;
 
 import main.math.Vector2;
 import main.models.IntersectionData;
+import main.models.RayData;
 import main.models.environment.OpticalObject;
 import main.physics.colliders.Collider;
 import main.physics.rays.Ray;
-import main.physics.rays.RayHit;
 import main.physics.rays.reflectors.OpticalObjectType;
 
 public abstract class Reflector extends OpticalObject {
@@ -22,7 +22,7 @@ public abstract class Reflector extends OpticalObject {
 
      // Getters
      @Override
-     protected RayHit interactWithRay(Ray ray, IntersectionData intersectionData) {
+     protected RayData interactWithRay(Ray ray, IntersectionData intersectionData) {
           return this.reflect(ray, intersectionData);
      }
 
@@ -38,5 +38,5 @@ public abstract class Reflector extends OpticalObject {
      }
      
      // Abstract methods
-     abstract RayHit reflect(Ray ray, IntersectionData intersectionData);
+     protected abstract RayData reflect(Ray ray, IntersectionData intersectionData);
 }

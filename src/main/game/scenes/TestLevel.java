@@ -3,6 +3,7 @@ package main.game.scenes;
 import main.game.LevelScene;
 import main.models.Sprite;
 import main.models.entities.Laser;
+import main.models.environment.reflectors.mirrors.PlaneMirror;
 
 public class TestLevel extends LevelScene {
 
@@ -16,6 +17,7 @@ public class TestLevel extends LevelScene {
 
      @Override
      public void loadObjects() {
-          add(new Laser(0, 0));
+          add(new Laser(-100, -50));
+          add(new PlaneMirror(100, 20, 150, 30, 3f));
      }
 }

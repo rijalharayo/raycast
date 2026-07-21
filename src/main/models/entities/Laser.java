@@ -102,7 +102,7 @@ public class Laser extends GameObject {
                RayData next = rayHit.getNextRayData();
                // If next ray data is null, the original ray hasn't hit any surface
                if(next != null) {
-                    newRays.add(new LightRay(next));
+                    // newRays.add(new LightRay(next));
                }
 
                // Updates the previous start position of the ray

@@ -57,6 +57,15 @@ public class Sprite {
           return height;
      }
 
+     // Setters
+     public void setWidth(int w) {
+          this.width = w;
+     }
+
+     public void setHeight(int h) {
+          this.height = h;
+     }
+
      // Draw / Render methods
      public void draw(Graphics2D g, float x, float y) {
           AffineTransform old = g.getTransform();

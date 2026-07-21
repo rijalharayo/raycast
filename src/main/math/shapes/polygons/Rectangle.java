@@ -9,14 +9,15 @@ public class Rectangle extends Polygon {
 
      // Constructors
      public Rectangle(int width, int height) {
-          super(calculateLocalVertices(width, height, 0f));
+          super(calculateLocalVertices(width, height));
 
           this.width = width;
           this.height = height;
      }
 
      public Rectangle(int width, int height, float rotation) {
-          super(rotation, calculateLocalVertices(width, height, rotation));
+          super(rotation, calculateLocalVertices(width, height));
+     
 
           this.width = width;
           this.height = height;
@@ -49,15 +50,15 @@ public class Rectangle extends Polygon {
      }
 
      // Calculates the local vertices based on width, height & rotation
-     public static Vector2[] calculateLocalVertices(int width, int height, float rotation) {
+     public static Vector2[] calculateLocalVertices(int width, int height) {
           float widthOffset = width / 2;
           float heightOffset = height / 2;
 
-          Vector2 topLeft = new Vector2(-widthOffset, heightOffset).rotate(rotation);
-          Vector2 topRight = new Vector2(widthOffset, heightOffset).rotate(rotation);
+          Vector2 topLeft = new Vector2(-widthOffset, heightOffset);
+          Vector2 topRight = new Vector2(widthOffset, heightOffset);
 
-          Vector2 bottomLeft = new Vector2(-widthOffset, -heightOffset).rotate(rotation);
-          Vector2 bottomRight = new Vector2(widthOffset, -heightOffset).rotate(rotation);
+          Vector2 bottomLeft = new Vector2(-widthOffset, -heightOffset);
+          Vector2 bottomRight = new Vector2(widthOffset, -heightOffset);
 
           return new Vector2[] { topLeft, topRight, bottomRight, bottomLeft };
      }

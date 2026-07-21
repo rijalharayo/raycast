@@ -32,6 +32,11 @@ public class Vector2 {
           return x * v2.getX() + y * v2.getY();
      }
 
+     // Returns the 2D cross prodcut
+     public float cross(Vector2 v2) {
+          return x * v2.getY() - y * v2.getX();
+     }
+
      // Returns the angle of the vector
      public float getAngle() {
           return (float) Math.atan2(y, x);
@@ -136,6 +141,11 @@ public class Vector2 {
      // Gets the dot product between two vectors
      public static float dot(Vector2 v1, Vector2 v2) {
           return v1.dot(v2);
+     }
+
+     // Returns the 2D cross prodcut
+     public static float cross(Vector2 v1, Vector2 v2) {
+          return v1.getX() * v2.getY() - v1.getY() * v2.getX();
      }
 
      @Override

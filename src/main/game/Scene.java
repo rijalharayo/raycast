@@ -7,10 +7,13 @@ import java.util.List;
 import main.math.Vector2;
 import main.models.GameObject;
 import main.models.Sprite;
+import main.models.environment.OpticalObject;
 
 public abstract class Scene {
 
      protected final List<GameObject> gameObjects = new ArrayList<>();
+     protected final List<OpticalObject> opticalObjects = new ArrayList<>();
+
      protected Sprite background;
 
      // Adds object to the list
@@ -20,6 +23,10 @@ public abstract class Scene {
           }
 
           gameObjects.add(gameObject);
+          // If the game object is an optical object, add it to the optical objects list as well
+          if(gameObject instanceof OpticalObject) {
+               opticalObjects.add((OpticalObject) gameObject);
+          }
      }
      
      // Removes object from the list
@@ -28,7 +35,15 @@ public abstract class Scene {
                throw new IllegalArgumentException("Object can't be null");
           }
 
-               gameObjects.remove(gameObject);
+          gameObjects.remove(gameObject);
+          // If the game object is an optical object, remove it from the optical objects list as well
+          if(gameObject instanceof OpticalObject) {
+               opticalObjects.remove((OpticalObject) gameObject);
+          }
+     }
+
+     public OpticalObject[] getSceneOpticalObjects() {
+          return opticalObjects.toArray(new OpticalObject[0]);
      }
 
      // Updates the scene logic every frame

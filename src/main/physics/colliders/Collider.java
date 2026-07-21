@@ -1,5 +1,9 @@
 package main.physics.colliders;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
+import main.game.Scene;
 import main.math.Line;
 import main.math.Vector2;
 import main.math.shapes.Shape;
@@ -14,12 +18,6 @@ public abstract class Collider {
      public Collider(Vector2 position, Shape shape) {
           this.shape = shape;
           this.position = position;
-     }
-
-     public Collider(Vector2 position, Shape shape, float rotation) {
-          this.position = position;
-          this.shape = shape;
-          shape.setRotation(rotation);
      }
 
      // Getters
@@ -52,4 +50,43 @@ public abstract class Collider {
           Line rayLine = vRay.getRayData();
           return shape.intersects(rayLine, this.position);
      }
+
+     // Draws the collider hitbox
+     public void draw(Graphics2D g) {
+     Line[] edges = shape.getWorldEdges(position);
+
+     g.setColor(Color.RED);
+
+     for(Line edge : edges) {
+          Vector2 start = Scene.worldToScreen(edge.getStart());
+          Vector2 end = Scene.worldToScreen(edge.getEnd());
+
+          // Draw edge
+          g.drawLine(
+               (int) start.getX(),
+               (int) start.getY(),
+               (int) end.getX(),
+               (int) end.getY()
+          );
+
+          // Draw start vertex
+          g.fillOval(
+               (int) start.getX() - 4,
+               (int) start.getY() - 4,
+               8,
+               8
+          );
+     }
+
+     // Draw center
+     Vector2 center = Scene.worldToScreen(position);
+
+     g.setColor(Color.BLUE);
+     g.fillOval(
+          (int) center.getX() - 5,
+          (int) center.getY() - 5,
+          10,
+          10
+     );
+}
 }

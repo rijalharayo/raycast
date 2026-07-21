@@ -38,5 +38,10 @@ public class Circle extends Shape {
      public void rotateAround(Vector2 center, float theta) {
           // Code
      }
+
+     @Override
+     public Line[] getWorldEdges(Vector2 parentPosition) {
+          return null;
+     }
      
 }

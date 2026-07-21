@@ -85,9 +85,4 @@ public class RayData extends Line {
           // Sets the line(in vector form) representation of a ray
           this.lineVector = end.subtract(start);
      }
-
-     @Override
-     public String toString() {
-          return "Start: " + start + "\nEnd: " + end;
-     }
 }

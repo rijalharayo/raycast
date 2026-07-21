@@ -36,7 +36,7 @@ public class Line {
      }
 
      public float getSlope() {
-          float m = (float) Math.tan(getLineVector().getY() / getLineVector().getX());
+          float m = (float) getLineVector().getY() / getLineVector().getX();
           return m;
      }
 
@@ -67,7 +67,7 @@ public class Line {
      }
 
      // Checks if the lines are collinear(or parrallel)
-     public static boolean areParallel(Line l1, Line l2) {
+     public static boolean haveParalellDirection(Line l1, Line l2) {
           /* 
                Two lines are parrallel or collinear,
                if the dot product between their unit vectors is either +1 or -1
@@ -77,7 +77,7 @@ public class Line {
           float d1 = Math.abs(dotProduct - 1.0f);
           float d2 = Math.abs(dotProduct + 1.0f);
 
-          float epsilon = 0.00000001f;
+          float epsilon = 0.0001f;
           // Accounts for precision errors & returns
           return d1 <= epsilon || d2 <= epsilon;
      }
@@ -86,8 +86,31 @@ public class Line {
      public Vector2 findIntersection(Line line2) {
           Vector2 solution = null;
           // They don't have a solution if they are parallel
-          if(areParallel(this, line2)) {
+          if(haveParalellDirection(this, line2)) {
                return null;
+          }
+
+          float dx1 = this.lineVector.getX();
+          float dx2 = line2.lineVector.getX();
+
+          // First line is vertical
+          if(dx1 == 0) {
+               float x = this.start.getX();
+               float m2 = line2.getSlope();
+
+               float y = m2 * (x - line2.start.getX()) + line2.start.getY();
+
+               return new Vector2(x, y);
+          }
+
+          // Second line is vertical
+          if(dx2 == 0) {
+               float x = line2.start.getX();
+               float m1 = this.getSlope();
+
+               float y = m1 * (x - this.start.getX()) + this.start.getY();
+
+               return new Vector2(x, y);
           }
 
           /* 
@@ -123,12 +146,30 @@ public class Line {
           return solution;
      }
 
+     // Checks if a point is projected to a line
+     private boolean liesBetween(Vector2 pA, Vector2 pB, Vector2 position) {
+          /* 
+               pA = A
+               pB = B
+               postion = C
+          */
+          
+          Vector2 AB = pB.subtract(pA);
+          Vector2 AP = position.subtract(pA);
+          Vector2 BP = position.subtract(pB);
+
+          float d1 = AB.dot(AP);
+          float d2 = AB.dot(BP);
+
+          return d1 * d2 <= 0;
+     }
+
      // Checks and returns data if the lines intersect
      public IntersectionData intersects(Line line2) {
           IntersectionData iData = null;
 
           // Line segments can't intersect if they are parralell
-          if(areParallel(line2, line2)) {
+          if(haveParalellDirection(this, line2)) {
                return null;
           }
 
@@ -141,38 +182,48 @@ public class Line {
                     2. AB ⋅ BC ∈ (-∞, 0]
                     3. CD ⋅ CA ∈ [0, ∞)
                     4. CD ⋅ DA ∈ (-∞, 0]
+
+               If P is the intersection point between the two segments, it must satisfy:
+                    1. AB ⋅ AI ∈ [0, |AB|^2]     (I is between A and B)
+                    2. CD ⋅ CI ∈ [0, |CD|^2]     (I is between C and D)
           */
           
-          // Vectors required
-          Vector2 AB = this.lineVector;
-          Vector2 CD = line2.lineVector;
-
-          Vector2 AC = line2.getStart().subtract(this.getStart());
-          Vector2 BC = line2.getEnd().subtract(this.getStart());
-
-          Vector2 CA = AC.multiply(-1);
-          Vector2 DA = this.getStart().subtract(line2.getEnd());
-
-          // The respective dot products
-          float ABdotAC = AB.dot(AC);
-          float ABdotBC = AB.dot(BC);
-          float CDdotCA = CD.dot(CA);
-          float CDdotDA = CD.dot(DA);
-
           // Checking constraints
-          boolean check1 = ABdotAC >= 0;
-          boolean check2 = ABdotBC <= 0;
-          boolean check3 = CDdotCA >= 0;
-          boolean check4 = CDdotDA <= 0;
 
-          // If all checks are true, then the lines intersect
-          if(check1 && check2 && check3 && check4) {
-               // Calculate their intersection point
-               Vector2 intersection = this.findIntersection(line2);
-               // Sets the intersection data
+          // Checks if the end-points themselves are the intersections
+          boolean C_on_AB = liesBetween(start, end, line2.getStart());
+          boolean D_on_AB = liesBetween(start, end, line2.getEnd());
+
+          boolean A_on_CD = liesBetween(line2.getStart(), line2.getEnd(), start);
+          boolean B_on_CD = liesBetween(line2.getStart(), line2.getEnd(), end);
+          // Checks if the segments could possibly intersect somewhere
+          boolean possibleIntersection = C_on_AB || D_on_AB || A_on_CD || B_on_CD;
+
+          // Return null if no possibility of intersection to save efficiency
+          if(!possibleIntersection) {
+               return null;
+          }
+
+          // Finds the intersection of the infinite lines the segments lie on
+          Vector2 intersection = this.findIntersection(line2);
+          if (intersection == null) {
+               return null;
+          }
+
+          // Checks if the intersection lies within the line segments
+          boolean onThisSegment = liesBetween(this.start, this.end, intersection);
+          boolean onLine2Segment = liesBetween(line2.getStart(), line2.getEnd(), intersection);
+
+          if ((onThisSegment && onLine2Segment)) {
+               // That is the interseciton point
                iData = new IntersectionData(intersection, this, line2);
           }
 
           return iData;
+     }
+
+     @Override
+     public String toString() {
+          return "Start: " + start + "\nEnd: " + end;
      }
 }

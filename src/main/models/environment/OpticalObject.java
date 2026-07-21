@@ -3,15 +3,15 @@ package main.models.environment;
 import main.math.Vector2;
 import main.models.GameObject;
 import main.models.IntersectionData;
+import main.models.RayData;
 import main.physics.colliders.Collider;
 import main.physics.rays.Ray;
-import main.physics.rays.RayHit;
 import main.physics.rays.reflectors.OpticalObjectType;
 import main.physics.rays.reflectors.RayInteractable;
 
 // Class representing optical objects that can alter light rays
 public abstract class OpticalObject extends GameObject implements RayInteractable {
-     private final Collider collider;
+     private Collider collider;
      private final OpticalObjectType opticalObjectType;
 
      // Constructors
@@ -36,13 +36,19 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
           return opticalObjectType;
      }
 
+     // Setters
+     protected void setCollider(Collider collider) {
+          this.collider = collider;
+     }
+
      @Override
-     public RayHit interact(Ray ray) {
+     public RayData interact(Ray ray) {
           IntersectionData iData = collider.collideWithRay(ray);
+          if(iData == null) return null;
           return this.interactWithRay(ray, iData);
      }
      // Abstract methods
 
      // Interacts & returns data when a ray collides
-     protected abstract RayHit interactWithRay(Ray ray, IntersectionData intersectionData);
+     protected abstract RayData interactWithRay(Ray ray, IntersectionData intersectionData);
 }

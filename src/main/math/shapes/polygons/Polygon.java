@@ -113,6 +113,7 @@ public class Polygon extends Shape {
 
 
      // Returns the edges converted to world coordinates
+     @Override
      public Line[] getWorldEdges(Vector2 parentPosition) {
           Line[] worldEdges = new Line[localEdges.length];
 
