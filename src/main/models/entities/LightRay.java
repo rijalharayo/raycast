@@ -67,12 +67,6 @@ public class LightRay extends GameObject implements Ray {
           VirtualRay vRay = new VirtualRay(prevPos, this.getRayData().getNormalizedDirection());
           // Gets the collision data
           RayHit rayHit = vRay.cast();
-          // Calculates the path of the next ray based on the ray hit event
-          RayData nextRayData = handleCollision(rayHit);
-          if(rayHit.hasHit()) {
-               rayHit.setNextRayData(nextRayData);
-          }
-
           /* 
                Since the cast() method stops when it collides,
                the endpoint of the light ray is set as the collision point of the virtual ray
@@ -80,15 +74,6 @@ public class LightRay extends GameObject implements Ray {
           this.setPoints(prevPos, rayHit.getCollisionPoint());
 
           return rayHit;
-     }
-
-     // Handles & calculates new ray data based on collision type of the rayhit
-     private RayData handleCollision(RayHit rayHit) {
-          switch (rayHit.getCollisionType()) {
-               default:
-                    // Do nothing if its a default/collision with the bounds
-                    return null;
-          }
      }
 
      @Override

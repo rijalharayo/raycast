@@ -6,14 +6,14 @@ import main.math.Vector2;
 // Stores the data of a intersection of lines
 public class IntersectionData {
      private Vector2 intersectionPoint;
+     private Line incomingLine;
      private Line targetLine;
-     private Line subjectLine;
 
      // Constructors
-     public IntersectionData(Vector2 intersectionPoint, Line targetLine, Line subjectLine) {
+     public IntersectionData(Vector2 intersectionPoint, Line incomingLine, Line targetLine) {
           this.intersectionPoint = intersectionPoint;
           this.targetLine = targetLine;
-          this.subjectLine = subjectLine;
+          this.incomingLine = incomingLine;
      }
 
      // Getters
@@ -25,7 +25,7 @@ public class IntersectionData {
           return targetLine;
      }
 
-     public Line getSubjectLine() {
-          return subjectLine;
+     public Line getIncomningLine() {
+          return incomingLine;
      }
 }

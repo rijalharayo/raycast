@@ -216,7 +216,7 @@ public class Line {
 
           if ((onThisSegment && onLine2Segment)) {
                // That is the interseciton point
-               iData = new IntersectionData(intersection, this, line2);
+               iData = new IntersectionData(intersection, line2, this);
           }
 
           return iData;

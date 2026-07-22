@@ -126,7 +126,7 @@ public class VirtualRay implements Ray {
                     return newRayData;
                }
           }
-
+          
           return null;
      }
 

@@ -1,7 +1,5 @@
 package main.models.environment.reflectors.mirrors;
 
-import java.awt.Graphics2D;
-
 import main.math.Vector2;
 import main.models.IntersectionData;
 import main.models.RayData;
@@ -48,19 +46,26 @@ public class PlaneMirror extends Mirror {
 
      @Override
      protected RayData reflect(Ray ray, IntersectionData intersectionData) {
-          return new RayData(intersectionData.getIntersectionPoint(), Vector2.LEFT);
-     }
-     
+          Vector2 mirrorSurface = intersectionData.getTargetLine().getLineVector();
+          Vector2 mirrorNormal = intersectionData.getTargetLine().getNormal();
+          // Incident ray
+          Vector2 incidentVector = intersectionData.getIncomningLine().getLineVector();
 
-     @Override
-     public void render(Graphics2D g) {
-          // Renders the mirror sprite
-          this.sprite.draw(
-               g,
-               position.getX(),
-               position.getY()
-          );
+          // If the incident ray & normal face the same direction, invert it
+          if(incidentVector.dot(mirrorNormal) > 0) {
+               mirrorNormal = mirrorNormal.multiply(-1f);
+          }
+          
+          // Projects the incident vector onto the normal
+          Vector2 incidentOnMirrorNormal = incidentVector.projectOnto(mirrorNormal);
+          Vector2 incidentOnMirrorSurface = incidentVector.projectOnto(mirrorSurface);
 
-          getCollider().draw(g);
+          Vector2 reflectionVector = incidentOnMirrorSurface.add(incidentOnMirrorNormal.multiply(-1f));
+          
+          Vector2 reflectionTip = intersectionData.getIntersectionPoint().add(reflectionVector);
+          // The tail is offset by a tiny bit (to account for precision errros)
+          Vector2 reflectionTail = intersectionData.getIntersectionPoint().add(reflectionVector.multiply(0.01f));
+
+          return new RayData(reflectionTail, reflectionTip);
      }
 }

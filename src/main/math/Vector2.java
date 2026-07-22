@@ -128,6 +128,24 @@ public class Vector2 {
           return rotatedVector;
      }
 
+     // Calculates the projection of one vector on another
+     public Vector2 projectOnto(Vector2 v2) {
+          /* 
+               By formula, the projection of vector a onto b is:
+
+                    a' = k * b
+                    Where
+                     k = (a ⋅ b) / |b|²
+          */
+
+          float dotProduct = this.dot(v2);
+          float v2Mag = v2.getMagnitude();
+
+          float k = dotProduct / (v2Mag * v2Mag);
+
+          return v2.multiply(k);
+     }
+
      // Adds two vectors
      public static Vector2 add(Vector2 v1, Vector2 v2) {
           return v1.add(v2);

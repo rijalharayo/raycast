@@ -86,33 +86,36 @@ public class Laser extends GameObject {
 
      // Casts & updates the rays
      private void castRays() {
+          // Initial ray
           LightRay initialRay = lightRays.getFirst();
-          // Updates the initial/original ray
-          // The angle is offset by π as the ray faces away from the cursor
-          initialRay.setFromDirection(getRayOriginPoint(), getAngleFromCursor() + (float) Math.PI);
-          // Tracks the previous endpoint of the ray (start point if its the original ray)
-          Vector2 prevPos = initialRay.getStart();
 
-          // Stores any new rays created during the process
-          List<LightRay> newRays = new ArrayList<>();
+          // Offesets by π as the ray faces away from the laser
+          initialRay.setFromDirection(
+               getRayOriginPoint(),
+               getAngleFromCursor() + (float)Math.PI
+          );
 
-          for(LightRay ray : lightRays) {
-               // Returns collision info
-               RayHit rayHit = ray.trace(prevPos);
-               RayData next = rayHit.getNextRayData();
-               // If next ray data is null, the original ray hasn't hit any surface
-               if(next != null) {
-                    // newRays.add(new LightRay(next));
-               }
+          // Clears the current list and adds the intial ray
+          lightRays.clear();
+          lightRays.add(initialRay);
 
-               // Updates the previous start position of the ray
-               prevPos = ray.getEnd();
+          LightRay currentRay = initialRay;
+
+          int maxRebounce = 10;
+          int currentRebounce = 0;
+
+          while(currentRebounce <= maxRebounce) {
+               RayHit hit = currentRay.trace(currentRay.getStart());
+               RayData next = hit.getNextRayData();
+
+               if(next == null)
+                    break;
+
+               currentRay = new LightRay(next);
+               lightRays.add(currentRay);
+
+               currentRebounce++;
           }
-
-          // Adds any new rays created
-          lightRays.addAll(newRays);
-          // Clears the array after use
-          newRays.clear();
      }
 
      @Override
