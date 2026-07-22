@@ -18,8 +18,8 @@ public class TestLevel extends LevelScene {
      @Override
      public void loadObjects() {
           add(new Laser(-100, -50));
-          add(new PlaneMirror(300, 20, 150, 30, 3f));
-          add(new PlaneMirror(100, 300, 150, 20, 0f));
-          add(new PlaneMirror(-100, -200, 150, 20, 1f));
+          add(new PlaneMirror(300, 20, 150, 30, 2f));
+          add(new PlaneMirror(100, 300, 150, 20, -1f));
+          add(new PlaneMirror(-100, -200, 150, 20, 2f));
      }
 }
