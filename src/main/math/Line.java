@@ -87,66 +87,90 @@ public class Line {
 
      // Calculates the intersection points of 2 lines
      public Vector2 findIntersection(Line line2) {
-          Vector2 solution = null;
-          // They don't have a solution if they are parallel
-          if(haveParalellDirection(this, line2)) {
+          // The following method uses crammer's rule
+
+          /* 
+               If two points of a line are given as:
+                    P(x1, y1)
+                    Q(x2, y2)
+
+               The standard form of a line will be:
+                    Ax + By = C
+                    
+                    Where,
+                         A = y1 - y2
+                         B = x2 - x1
+                         C = (y1 - y2) * x1 + (x2 - x1) * y1 or, Ax + By
+
+               ------------------------------------------------------------------------
+               ------------------------------------------------------------------------
+
+               According to crammer's rule, if two lines are given as:
+                    (1.) A₁x + B₁y = C₁
+                    (2.) A₂x + B₂y = C₂
+
+               Then their intersection point will be:
+                    x = det(Mx) / det(A)
+                    y = det(My) / det(A)
+
+               Where,
+                    A =  [A1 B1] (Coefficient matrix)
+                         [A2 B2]
+
+                    Ax = [C1 B1]
+                         [C2 B2]
+
+                    Ay = [A1 C1]
+                         [A2 C2]
+
+               And,
+                    det(M) = |M| = | a  b | = determinant of matrix M = ad - bc
+                                   | c  d |
+
+               If the coefficient matrix 'A' has a determinant 0
+               or,
+               if det(A) = 0, the lines are parallel or collinear
+          */
+
+          // Endpoints of first line
+          Vector2 l1Start = this.getStart();
+          Vector2 l1End = this.getEnd();
+          
+          float A1 = l1Start.getY() - l1End.getY();
+          float B1 = l1End.getX() - l1Start.getX();
+          float C1 = A1 * l1Start.getX() + B1 * l1Start.getY();
+
+          // Endpoints of second line
+          Vector2 l2Start = line2.getStart();
+          Vector2 l2End = line2.getEnd();
+
+          float A2 = l2Start.getY() - l2End.getY();
+          float B2 = l2End.getX() - l2Start.getX();
+          float C2 = A2 * l2Start.getX() + B2 * l2Start.getY();
+
+          // Constructs the coefficient matrix
+          Matrix2x2 coefficientMatrix = new Matrix2x2(
+                                             A1, B1,
+                                             A2, B2
+                                       );
+
+          float determinant = coefficientMatrix.getDeterminant();
+
+          // Determinant near zero means no unique intersection
+          // (parallel or coincident lines)
+          if(Math.abs(determinant) < 0.0001f) {
                return null;
           }
 
-          float dx1 = this.lineVector.getX();
-          float dx2 = line2.lineVector.getX();
+          Vector2 constantVector = new Vector2(C1, C2);
 
-          // First line is vertical
-          if(dx1 == 0) {
-               float x = this.start.getX();
-               float m2 = line2.getSlope();
+          Matrix2x2 Mx = new Matrix2x2(constantVector, coefficientMatrix.getColumn(2));
+          Matrix2x2 My = new Matrix2x2(coefficientMatrix.getColumn(1), constantVector);
 
-               float y = m2 * (x - line2.start.getX()) + line2.start.getY();
+          float x = Mx.getDeterminant() / determinant;
+          float y = My.getDeterminant() / determinant;
 
-               return new Vector2(x, y);
-          }
-
-          // Second line is vertical
-          if(dx2 == 0) {
-               float x = line2.start.getX();
-               float m1 = this.getSlope();
-
-               float y = m1 * (x - this.start.getX()) + this.start.getY();
-
-               return new Vector2(x, y);
-          }
-
-          /* 
-               Given two lines in their point-slope form:
-                    1. f(x) = m1 (x - a) + b
-                    2. g(x) = m2 (x - c) + d
-
-               Their point of intersection is:
-                    x = (d - b + m1 * a - m2 * c) / (m1 - m2)
-                    y = f(x) or g(x) (Putting the result into any of the 2 functions)
-          */
-
-          // Values for the variables
-          float m1 = this.getSlope();
-          float m2 = line2.getSlope();
-
-          float a = this.getStart().getX();
-          float b = this.getStart().getY();
-
-          float c = line2.getStart().getX();
-          float d = line2.getStart().getY();
-
-          float numerator = d - b + (m1 * a) - (m2 * c);
-          float denominator = m1 - m2;
-          // Calculate x
-          float x = numerator / denominator;
-          // Calculate y by putting x in f(x)
-          float y = m1 * (x - a) + b;
-
-          // Set the solution
-          solution = new Vector2(x, y);
-
-          return solution;
+          return new Vector2(x, y);
      }
 
      // Checks if a point is projected to a line
