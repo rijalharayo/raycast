@@ -1,6 +1,6 @@
 package main.physics.colliders;
 
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 import main.math.shapes.polygons.Rectangle;
 
 // Represents a rectangular / box collider

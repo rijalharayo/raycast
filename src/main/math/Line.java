@@ -1,5 +1,7 @@
 package main.math;
 
+import main.math.algebra.Matrix2x2;
+import main.math.algebra.Vector2;
 import main.models.IntersectionData;
 
 // Stores a line data
@@ -48,8 +50,9 @@ public class Line {
           return end.subtract(start).getMagnitude();
      }
 
+     // Returns one of the surface normal or the line
      public Vector2 getNormal() {
-          return getNormalizedDirection().rotate((float) Math.PI/2);
+          return Matrix2x2.ROTATE_ANTI_CLOCKWISE_90.transform(getNormalizedDirection());
      }
 
      // Rotates the line by a certain angle (in radians)

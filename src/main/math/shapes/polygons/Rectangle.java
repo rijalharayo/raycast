@@ -1,6 +1,6 @@
 package main.math.shapes.polygons;
 
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 
 // Represents a mathematical rectangle
 public class Rectangle extends Polygon {

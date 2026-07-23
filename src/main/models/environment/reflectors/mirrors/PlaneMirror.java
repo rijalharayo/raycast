@@ -1,6 +1,6 @@
 package main.models.environment.reflectors.mirrors;
 
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 import main.models.IntersectionData;
 import main.models.RayData;
 import main.models.Sprite;

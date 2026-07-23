@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import main.game.Scene;
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.RayData;
 import main.physics.rays.Ray;

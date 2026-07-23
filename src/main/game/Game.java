@@ -2,7 +2,7 @@ package main.game;
 
 import java.awt.Toolkit;
 
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 
 // Class to handle game rendering and loop
 public class Game implements Runnable {

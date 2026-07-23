@@ -3,7 +3,7 @@ package main.physics.rays;
 import main.game.Game;
 import main.game.Scene;
 import main.game.SceneManager;
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 import main.models.RayData;
 import main.models.environment.OpticalObject;
 import main.physics.colliders.CollisionType;

@@ -1,6 +1,6 @@
 package main.physics.rays;
 
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 import main.models.RayData;
 
 // Interface for rays

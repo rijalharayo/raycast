@@ -2,7 +2,7 @@ package main.models;
 
 import java.awt.Graphics2D;
 
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 
 // Model representing the components that can exist within a scene
 public abstract class GameObject {

@@ -1,4 +1,4 @@
-package main.math;
+package main.math.algebra;
 
 // Class representing vector quantites (positions, velocity etc..)
 public class Vector2 {
@@ -115,15 +115,10 @@ public class Vector2 {
           // Rotates the vector around a centre
 
           Vector2 vectorRelativeToCenter = this.subtract(center);
+          Matrix2x2 rotationMatrix = Matrix2x2.getRotationMatrix(theta);
 
-          float x1 = vectorRelativeToCenter.getX();
-          float y1 = vectorRelativeToCenter.getY();
-
-          // Calculates R(θ) * (p - c)
-          float newX = (float) (x1 * Math.cos(theta) - y1 * Math.sin(theta));
-          float newY = (float) (x1 * Math.sin(theta) + y1 * Math.cos(theta));
           // Adds vector 'c' to R(θ) * (p - c)
-          Vector2 rotatedVector = new Vector2(newX, newY).add(center);
+          Vector2 rotatedVector = rotationMatrix.transform(vectorRelativeToCenter).add(center);
 
           return rotatedVector;
      }
@@ -135,7 +130,7 @@ public class Vector2 {
 
                     a' = k * b
                     Where
-                     k = (a ⋅ b) / |b|²
+                         k = (a ⋅ b) / |b|²
           */
 
           float dotProduct = this.dot(v2);

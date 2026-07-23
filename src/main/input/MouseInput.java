@@ -4,7 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import main.game.Scene;
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 
 // Tracks mouse & keyboard inputs
 public class MouseInput implements MouseMotionListener {

@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.Sprite;
 import main.models.environment.OpticalObject;

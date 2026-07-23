@@ -1,7 +1,7 @@
 package main.models;
 
 import main.math.Line;
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 
 // Class to store the general data of a ray
 public class RayData extends Line {

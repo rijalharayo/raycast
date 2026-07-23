@@ -9,7 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.game.Scene;
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 
 public class Sprite {
      private BufferedImage image;

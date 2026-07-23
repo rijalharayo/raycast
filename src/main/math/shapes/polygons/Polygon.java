@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import main.math.Line;
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 import main.math.shapes.Shape;
 import main.models.IntersectionData;
 

@@ -1,7 +1,7 @@
 package main.models;
 
 import main.math.Line;
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 
 // Stores the data of a intersection of lines
 public class IntersectionData {

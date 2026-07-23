@@ -1,7 +1,7 @@
 package main.math.shapes;
 
 import main.math.Line;
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 import main.models.IntersectionData;
 
 // Represents a mathemtical shape

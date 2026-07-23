@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import main.input.MouseInput;
-import main.math.Vector2;
+import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.RayData;
 import main.models.Sprite;
