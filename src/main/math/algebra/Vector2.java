@@ -171,4 +171,13 @@ public class Vector2 {
           Vector2 v = (Vector2) obj;
           return (x == v.getX()) && (y == v.getY());
      }
+
+     public boolean isGeometricallyEqual(Vector2 other, float epsilon) {
+          if(epsilon < 0f) {
+               epsilon = 0.0001f;
+          }
+
+          return Math.abs(x - other.x) < epsilon &&
+                    Math.abs(y - other.y) < epsilon;
+     }
 }

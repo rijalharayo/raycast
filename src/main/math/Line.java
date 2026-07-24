@@ -249,6 +249,21 @@ public class Line {
           return iData;
      }
 
+     // Checks if two lines are geometrically identical
+     public boolean isSameSegment(Line other) {
+          float epsilon = 0.0001f;
+
+          boolean sameDirection =
+               start.isGeometricallyEqual(other.start, epsilon) &&
+               end.isGeometricallyEqual(other.end, epsilon);
+
+          boolean oppositeDirection =
+               start.isGeometricallyEqual(other.end, epsilon) &&
+               end.isGeometricallyEqual(other.start, epsilon);
+
+          return sameDirection || oppositeDirection;
+     }
+
      @Override
      public String toString() {
           return "Start: " + start + "\nEnd: " + end;
