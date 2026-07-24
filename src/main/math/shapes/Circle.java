@@ -10,7 +10,7 @@ public class Circle extends Shape {
      private float radius;
      private Polygon approximatePolygon;
      // Change in angle while making approximated polygon (in degrees)
-     private static final float DELTA_THETA = 5f;
+     private static final float DELTA_THETA = 20f;
 
      public Circle(float radius) {
           this.radius = radius;
@@ -61,8 +61,7 @@ public class Circle extends Shape {
 
      @Override
      public IntersectionData intersects(Line line, Vector2 parentPosition) {
-          // Code
-          return null;
+          return approximatePolygon.intersects(line, parentPosition);
      }
 
      @Override
