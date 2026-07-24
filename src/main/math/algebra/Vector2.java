@@ -2,8 +2,8 @@ package main.math.algebra;
 
 // Class representing vector quantites (positions, velocity etc..)
 public class Vector2 {
-     private float x;
-     private float y;
+     private final float x;
+     private final float y;
 
      public static final Vector2 ZERO = new Vector2(0, 0);
 

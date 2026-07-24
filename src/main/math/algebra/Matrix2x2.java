@@ -3,7 +3,7 @@ package main.math.algebra;
 // Represents a standard 2x2 matrix
 public class Matrix2x2 {
      // Internal version of the matrix
-     double[][] internalMatrix = new double[2][2];
+     private final double[][] internalMatrix = new double[2][2];
 
      // Represents the standard identity matrix
      public static final Matrix2x2 IDENTITY = new Matrix2x2(
@@ -39,8 +39,6 @@ public class Matrix2x2 {
      }
 
      public Matrix2x2(double[][] mArr) {
-          this.internalMatrix = new double[2][2];
-
           for(int i = 0; i < 2; i++) {
                for(int j = 0; j < 2; j++) {
                     this.internalMatrix[i][j] = mArr[i][j];

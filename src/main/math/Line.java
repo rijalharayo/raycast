@@ -8,7 +8,6 @@ import main.models.data.IntersectionData;
 public class Line {
      protected Vector2 start;
      protected Vector2 end;
-     protected Vector2 lineVector;
 
      // Constructors
      public Line() {}
@@ -20,8 +19,6 @@ public class Line {
 
           this.start = start;
           this.end = end;
-          // Stores the line in a vector form
-          this.lineVector = end.subtract(start);
      }
      
      // Getters
@@ -34,7 +31,7 @@ public class Line {
      }
 
      public Vector2 getLineVector() {
-          return lineVector;
+          return end.subtract(start);
      }
 
      public float getSlope() {
@@ -43,11 +40,11 @@ public class Line {
      }
 
      public Vector2 getNormalizedDirection() {
-          return lineVector.getNormalized();
+          return getLineVector().getNormalized();
      }
 
      public float getLength() {
-          return end.subtract(start).getMagnitude();
+          return getLineVector().getMagnitude();
      }
 
      // Returns one of the surface normal or the line
@@ -56,17 +53,12 @@ public class Line {
      }
 
      // Rotates the line by a certain angle (in radians)
-     public void rotate(float theta) {
-          this.start = start.rotate(theta);
-          this.end = end.rotate(theta);
-          this.lineVector = lineVector.rotate(theta);
+     public Line rotate(float theta) {
+          return new Line(start.rotate(theta), end.rotate(theta));
      }
 
-     public void rotateAround(Vector2 center, float theta) {
-          this.start = start.rotateAround(center, theta);
-          this.end = end.rotateAround(center, theta);
-          // Gets the new normalized direction
-          this.lineVector = end.subtract(start);
+     public Line rotateAround(Vector2 center, float theta) {
+          return new Line(start.rotateAround(center, theta), end.rotateAround(center, theta));
      }
 
      // Checks if the lines are collinear(or parrallel)

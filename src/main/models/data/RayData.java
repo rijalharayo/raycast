@@ -35,8 +35,6 @@ public class RayData extends Line {
      
           this.start = start;
           this.end = end;
-
-          setLine();
      }
 
      public void setPoints(float x1, float y1, float x2, float y2) {
@@ -47,8 +45,6 @@ public class RayData extends Line {
 
           this.start = new Vector2(x1, y1);
           this.end = new Vector2(x2, y2);
-
-          setLine();
      }
 
      // Sets the origin & endpoint based on angle & length
@@ -79,10 +75,5 @@ public class RayData extends Line {
           );
 
           setPoints(start, end);
-     }
-
-     private void setLine() {
-          // Sets the line(in vector form) representation of a ray
-          this.lineVector = end.subtract(start);
      }
 }
