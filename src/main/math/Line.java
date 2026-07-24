@@ -110,8 +110,8 @@ public class Line {
                     (2.) A₂x + B₂y = C₂
 
                Then their intersection point will be:
-                    x = det(Mx) / det(A)
-                    y = det(My) / det(A)
+                    x = det(Ax) / det(A)
+                    y = det(Ay) / det(A)
 
                Where,
                     A =  [A1 B1] (Coefficient matrix)
