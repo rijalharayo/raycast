@@ -66,6 +66,6 @@ public class Circle extends Shape {
 
      @Override
      public void rotateAround(Vector2 center, float theta) {
-          // Code
+          approximatePolygon.rotateAround(center, theta);
      }
 }
