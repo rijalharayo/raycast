@@ -1,11 +1,11 @@
 package main.models.environment.reflectors.mirrors;
 
+import main.math.Line;
 import main.math.algebra.Vector2;
 import main.models.IntersectionData;
-import main.models.RayData;
 import main.models.Sprite;
+import main.models.SurfaceData;
 import main.physics.colliders.BoxCollider;
-import main.physics.rays.Ray;
 
 // Represents a Plane reflective mirror
 public class PlaneMirror extends Mirror {
@@ -45,27 +45,20 @@ public class PlaneMirror extends Mirror {
      }
 
      @Override
-     protected RayData reflect(Ray ray, IntersectionData intersectionData) {
-          Vector2 mirrorSurface = intersectionData.getTargetLine().getLineVector();
-          Vector2 mirrorNormal = intersectionData.getTargetLine().getNormal();
-          // Incident ray
+     public SurfaceData calculateSurfaceData(IntersectionData intersectionData) {
+          Line targetLine = intersectionData.getTargetLine();
+
+          Vector2 normal = targetLine.getNormal();
           Vector2 incidentVector = intersectionData.getIncomningLine().getLineVector();
 
           // If the incident ray & normal face the same direction, invert it
-          if(incidentVector.dot(mirrorNormal) > 0) {
-               mirrorNormal = mirrorNormal.multiply(-1f);
+          if(incidentVector.dot(normal) > 0) {
+               normal = normal.multiply(-1f);
           }
-          
-          // Projects the incident vector onto the normal
-          Vector2 incidentOnMirrorNormal = incidentVector.projectOnto(mirrorNormal);
-          Vector2 incidentOnMirrorSurface = incidentVector.projectOnto(mirrorSurface);
 
-          Vector2 reflectionVector = incidentOnMirrorSurface.add(incidentOnMirrorNormal.multiply(-1f));
-          
-          Vector2 reflectionTip = intersectionData.getIntersectionPoint().add(reflectionVector);
-          // The tail is offset by a tiny bit (to account for precision errros)
-          Vector2 reflectionTail = intersectionData.getIntersectionPoint().add(reflectionVector.multiply(0.01f));
+          // The mirror's surface is the collider's edge
+          SurfaceData mirrorSurface = new SurfaceData(targetLine.getLineVector(), normal);
 
-          return new RayData(reflectionTail, reflectionTip);
+          return mirrorSurface;
      }
 }

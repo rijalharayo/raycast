@@ -1,12 +1,12 @@
 package main.models.environment.reflectors.mirrors;
 
+import main.math.algebra.Matrix2x2;
 import main.math.algebra.Vector2;
 import main.math.shapes.Circle;
 import main.models.IntersectionData;
-import main.models.RayData;
 import main.models.Sprite;
+import main.models.SurfaceData;
 import main.physics.colliders.CircleCollider;
-import main.physics.rays.Ray;
 
 // Represents a completely circular mirror
 public class CircularMirror extends Mirror {
@@ -40,27 +40,24 @@ public class CircularMirror extends Mirror {
      }
 
      @Override
-     protected RayData reflect(Ray ray, IntersectionData intersectionData) {
-          Vector2 mirrorSurface = intersectionData.getTargetLine().getLineVector();
-          Vector2 mirrorNormal = intersectionData.getTargetLine().getNormal();
-          // Incident ray
-          Vector2 incidentVector = intersectionData.getIncomningLine().getLineVector();
+     public SurfaceData calculateSurfaceData(IntersectionData intersectionData) {
+          Vector2 circleCenter = this.position;
+          Vector2 intersectionPoint = intersectionData.getIntersectionPoint();
 
-          // If the incident ray & normal face the same direction, invert it
-          if(incidentVector.dot(mirrorNormal) > 0) {
-               mirrorNormal = mirrorNormal.multiply(-1f);
-          }
-          
-          // Projects the incident vector onto the normal
-          Vector2 incidentOnMirrorNormal = incidentVector.projectOnto(mirrorNormal);
-          Vector2 incidentOnMirrorSurface = incidentVector.projectOnto(mirrorSurface);
+          /* 
+               The radius drawn from the circle to the tangent is perpendicular to the tangent.
+               
+               Since the intersection point lies on the tanget, & also on the circumference
+               of the circle, it's at a distance of radius 'r' from the center of the
+               circle.
 
-          Vector2 reflectionVector = incidentOnMirrorSurface.add(incidentOnMirrorNormal.multiply(-1f));
-          
-          Vector2 reflectionTip = intersectionData.getIntersectionPoint().add(reflectionVector);
-          // The tail is offset by a tiny bit (to account for precision errros)
-          Vector2 reflectionTail = intersectionData.getIntersectionPoint().add(reflectionVector.multiply(0.01f));
+               So the vector from the centre to the intersection-point will be the normal.
+               The same vector rotated 90deg will be the tangent line itself.
+          */
 
-          return new RayData(reflectionTail, reflectionTip);
+          Vector2 normal = intersectionPoint.subtract(circleCenter);
+          Vector2 tangent = Matrix2x2.ROTATE_ANTI_CLOCKWISE_90.transform(normal);
+
+          return new SurfaceData(tangent, normal);
      }
 }
