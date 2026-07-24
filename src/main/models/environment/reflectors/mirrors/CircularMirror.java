@@ -3,9 +3,9 @@ package main.models.environment.reflectors.mirrors;
 import main.math.algebra.Matrix2x2;
 import main.math.algebra.Vector2;
 import main.math.shapes.Circle;
-import main.models.IntersectionData;
 import main.models.Sprite;
-import main.models.SurfaceData;
+import main.models.data.IntersectionData;
+import main.models.data.SurfaceData;
 import main.physics.colliders.CircleCollider;
 
 // Represents a completely circular mirror

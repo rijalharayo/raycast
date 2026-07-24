@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import main.math.Line;
 import main.math.algebra.Vector2;
 import main.math.shapes.Shape;
-import main.models.IntersectionData;
+import main.models.data.IntersectionData;
 
 public class Polygon extends Shape {
      // Vertices are local to the shape

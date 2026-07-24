@@ -2,7 +2,7 @@ package main.math.shapes;
 
 import main.math.Line;
 import main.math.algebra.Vector2;
-import main.models.IntersectionData;
+import main.models.data.IntersectionData;
 
 // Represents a mathemtical shape
 public abstract class Shape {

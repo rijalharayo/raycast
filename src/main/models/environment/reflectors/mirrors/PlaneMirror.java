@@ -2,9 +2,9 @@ package main.models.environment.reflectors.mirrors;
 
 import main.math.Line;
 import main.math.algebra.Vector2;
-import main.models.IntersectionData;
 import main.models.Sprite;
-import main.models.SurfaceData;
+import main.models.data.IntersectionData;
+import main.models.data.SurfaceData;
 import main.physics.colliders.BoxCollider;
 
 // Represents a Plane reflective mirror

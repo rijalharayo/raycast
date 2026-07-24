@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import main.game.Scene;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
-import main.models.RayData;
+import main.models.data.RayData;
 import main.physics.rays.Ray;
 import main.physics.rays.RayHit;
 import main.physics.rays.VirtualRay;

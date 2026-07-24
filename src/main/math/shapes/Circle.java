@@ -3,7 +3,7 @@ package main.math.shapes;
 import main.math.Line;
 import main.math.algebra.Vector2;
 import main.math.shapes.polygons.Polygon;
-import main.models.IntersectionData;
+import main.models.data.IntersectionData;
 
 // Represents a circle
 public class Circle extends Shape {

@@ -3,8 +3,8 @@ package main.models.environment.reflectors;
 import java.awt.Graphics2D;
 
 import main.math.algebra.Vector2;
-import main.models.IntersectionData;
-import main.models.RayData;
+import main.models.data.IntersectionData;
+import main.models.data.RayData;
 import main.models.environment.OpticalObject;
 import main.physics.colliders.Collider;
 import main.physics.rays.Ray;

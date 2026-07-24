@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import main.input.MouseInput;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
-import main.models.RayData;
 import main.models.Sprite;
+import main.models.data.RayData;
 import main.physics.rays.RayHit;
 
 public class Laser extends GameObject {

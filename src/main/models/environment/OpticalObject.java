@@ -2,8 +2,8 @@ package main.models.environment;
 
 import main.math.algebra.Vector2;
 import main.models.GameObject;
-import main.models.IntersectionData;
-import main.models.RayData;
+import main.models.data.IntersectionData;
+import main.models.data.RayData;
 import main.physics.colliders.Collider;
 import main.physics.rays.Ray;
 import main.physics.rays.reflectors.OpticalObjectType;

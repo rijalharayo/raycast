@@ -1,4 +1,4 @@
-package main.models;
+package main.models.data;
 
 import main.math.algebra.Vector2;
 

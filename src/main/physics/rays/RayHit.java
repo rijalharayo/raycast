@@ -2,7 +2,7 @@ package main.physics.rays;
 
 import main.math.algebra.Vector2;
 import main.models.GameObject;
-import main.models.RayData;
+import main.models.data.RayData;
 import main.physics.colliders.CollisionType;
 
 // Stores the data after a ray collides with something

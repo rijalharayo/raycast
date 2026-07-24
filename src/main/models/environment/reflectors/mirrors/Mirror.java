@@ -1,9 +1,9 @@
 package main.models.environment.reflectors.mirrors;
 
 import main.math.algebra.Vector2;
-import main.models.IntersectionData;
-import main.models.RayData;
-import main.models.SurfaceData;
+import main.models.data.IntersectionData;
+import main.models.data.RayData;
+import main.models.data.SurfaceData;
 import main.models.environment.reflectors.Reflector;
 import main.physics.colliders.Collider;
 import main.physics.rays.Ray;

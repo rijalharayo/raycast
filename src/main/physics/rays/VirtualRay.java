@@ -4,7 +4,7 @@ import main.game.Game;
 import main.game.Scene;
 import main.game.SceneManager;
 import main.math.algebra.Vector2;
-import main.models.RayData;
+import main.models.data.RayData;
 import main.models.environment.OpticalObject;
 import main.physics.colliders.CollisionType;
 

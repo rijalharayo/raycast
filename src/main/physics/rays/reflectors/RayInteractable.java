@@ -1,6 +1,6 @@
 package main.physics.rays.reflectors;
 
-import main.models.RayData;
+import main.models.data.RayData;
 import main.physics.rays.Ray;
 
 // Implemented by the objects a ray can interact with

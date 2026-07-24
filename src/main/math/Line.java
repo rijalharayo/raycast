@@ -2,7 +2,7 @@ package main.math;
 
 import main.math.algebra.Matrix2x2;
 import main.math.algebra.Vector2;
-import main.models.IntersectionData;
+import main.models.data.IntersectionData;
 
 // Stores a line data
 public class Line {
