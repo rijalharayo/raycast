@@ -19,7 +19,7 @@ public class VirtualRay implements Ray {
      // Overloaded constructors
      public VirtualRay(Vector2 origin, Vector2 direction) {
           rayData = new RayData();
-          rayData.setFromDirection(origin, direction.getAngle(), LENGTH);
+          rayData.setFromDirection(origin, (float) Math.toDegrees(direction.getAngle()), LENGTH);
           this.currentPosition = origin;
           this.prevPosition = origin;
      }

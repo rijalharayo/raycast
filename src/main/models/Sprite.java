@@ -36,6 +36,13 @@ public class Sprite {
           } 
      }
 
+     public Sprite(BufferedImage image) {
+          this.image = image;
+
+          this.width = image.getWidth();
+          this.height = image.getHeight();
+     }
+
      // Getters
      public BufferedImage getImage() {
           return image;
