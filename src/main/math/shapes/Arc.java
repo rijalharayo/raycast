@@ -11,7 +11,7 @@ public class Arc extends Shape {
      private float angle;
      private float thickness;
 
-     private Polygon apporximatedPolygon;
+     private Polygon approximatedPolygon;
      private Line[] flatEdges = new Line[2];
 
      // Change in angle while making approximated polygon (in degrees)
@@ -27,7 +27,7 @@ public class Arc extends Shape {
      }
 
      public void apporximateArc() {
-          int arcVertexCount = Math.round(angle / DELTA_THETA) + 1;
+          int arcVertexCount = Math.round((float) Math.toDegrees(angle) / DELTA_THETA) + 1;
 
           Vector2[] localVertices = new Vector2[arcVertexCount * 2];
 
@@ -36,7 +36,7 @@ public class Arc extends Shape {
           // Outer arc
           for(int i = 0; i < arcVertexCount; i++) {
                // Converts from degree to radians
-               float theta = (float)Math.toRadians(i * DELTA_THETA);
+               float theta = (float) Math.toRadians(i * DELTA_THETA);
 
                localVertices[i] = new Vector2(
                     (float) (radius * Math.cos(theta)),
@@ -47,7 +47,7 @@ public class Arc extends Shape {
           // Inner arc backwards
           for(int i = 0; i < arcVertexCount; i++) {
                // Converts from degree to radians
-               float theta = (float)Math.toRadians(angle - i * DELTA_THETA);
+               float theta = angle - (float) Math.toRadians(i * DELTA_THETA);
 
                localVertices[i + arcVertexCount] = new Vector2(
                     (float) (innerRadius * Math.cos(theta)),
@@ -55,7 +55,7 @@ public class Arc extends Shape {
                );
           }
 
-          this.apporximatedPolygon = new Polygon(localVertices);
+          this.approximatedPolygon = new Polygon(localVertices);
 
           // The two flat edges connecting the arcs
           Line startFlat = new Line(
@@ -89,28 +89,56 @@ public class Arc extends Shape {
           return flatEdges.clone();
      }
 
+     public Vector2 getLocalCenterOffset() {
+          float middleAngle = angle / 2;
+
+          Vector2 surfaceOffset = new Vector2(
+               radius * (float) Math.cos(middleAngle),
+               radius * (float) Math.sin(middleAngle)
+          );
+
+          return surfaceOffset.multiply(-1f);
+     }
+
+     public Vector2 getWorldCenterOfCurvature(Vector2 parentPosition, float rotation) {
+          // Returns the center of curvature in world coordinates
+          return parentPosition.add(
+               getLocalCenterOffset().rotate(rotation)
+          );
+     }
+
      @Override
      public void rotate(float theta) {
-          apporximatedPolygon.rotate(theta);
+          approximatedPolygon.rotate(theta);
      }
 
      @Override
      public void rotateAround(Vector2 center, float theta) {
-          apporximatedPolygon.rotateAround(center, theta);
+          approximatedPolygon.rotateAround(center, theta);
      }
 
      @Override
      public Line[] getEdges() {
-          return apporximatedPolygon.getEdges();
+          return approximatedPolygon.getEdges();
      }
 
      @Override
      public Line[] getWorldEdges(Vector2 parentPosition) {
-          return apporximatedPolygon.getWorldEdges(parentPosition);
+          Vector2 center = getWorldCenterOfCurvature(
+               parentPosition,
+               rotation
+          );
+
+          return approximatedPolygon.getWorldEdges(center);
      }
 
      @Override
      public IntersectionData intersects(Line line, Vector2 parentPosition) {
-          return apporximatedPolygon.intersects(line, parentPosition);
+          Vector2 center = getWorldCenterOfCurvature(
+               parentPosition,
+               rotation
+          );
+
+          return approximatedPolygon.intersects(line, center);
      }
 }

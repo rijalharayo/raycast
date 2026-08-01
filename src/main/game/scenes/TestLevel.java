@@ -4,6 +4,7 @@ import main.game.LevelScene;
 import main.models.Sprite;
 import main.models.entities.Laser;
 import main.models.environment.reflectors.mirrors.CircularMirror;
+import main.models.environment.reflectors.mirrors.CurvedMirror;
 import main.models.environment.reflectors.mirrors.PlaneMirror;
 
 public class TestLevel extends LevelScene {
@@ -22,5 +23,6 @@ public class TestLevel extends LevelScene {
           
           add(new PlaneMirror(400, 20, 200, 20, 1f));
           add(new CircularMirror(-400, 20, 100f));
+          add(new CurvedMirror(400, -200, 50f, 2f, 20f));
      }
 }

@@ -47,6 +47,7 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
           if(iData == null) return null;
           return this.interactWithRay(ray, iData);
      }
+     
      // Abstract methods
 
      // Interacts & returns data when a ray collides
