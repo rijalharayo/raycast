@@ -5,13 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Path2D;
-import java.awt.image.BufferedImage;
 
 import main.game.Scene;
-import main.graphics.ImageMasker;
 import main.math.algebra.Vector2;
 import main.math.shapes.Arc;
-import main.models.Sprite;
 import main.models.data.IntersectionData;
 import main.models.data.SurfaceData;
 import main.physics.colliders.ArcCollider;
@@ -23,16 +20,12 @@ public class CurvedMirror extends Mirror {
           super(position, 
                new ArcCollider(position, radius, angle, thickness)
           );
-
-          instantiateSprite();
      }
 
      public CurvedMirror(float x, float y, float radius, float angle, float thickness) {
           super(new Vector2(x, y), 
                new ArcCollider(new Vector2(x, y), radius, angle, thickness)
           );
-
-          instantiateSprite();
      }
 
      public CurvedMirror(Vector2 position, float radius, float angle, float thickness, float rotation) {
@@ -40,7 +33,6 @@ public class CurvedMirror extends Mirror {
                new ArcCollider(position, radius, angle, thickness) 
           );
 
-          instantiateSprite();
           this.setRotation(rotation);
      }
 
@@ -49,32 +41,7 @@ public class CurvedMirror extends Mirror {
                new ArcCollider(new Vector2(x, y), radius, angle, thickness)
           );
           
-          instantiateSprite();
           this.setRotation(angle);
-     }
-
-     // Provides the object with the default sprite
-     private void instantiateSprite() {
-          ArcCollider collider = (ArcCollider) this.getCollider();
-          float radius = collider.getRadius();
-
-          Sprite originalSprite = new Sprite("circular-mirror.png");
-          
-
-
-          originalSprite.setWidth((int) (radius * 2));
-          originalSprite.setHeight((int) (radius * 2));
-
-          // Crops the sprite
-          BufferedImage croppedImage = ImageMasker.maskAnnularSector(
-                                                       originalSprite.getImage(),
-                                                       radius,
-                                                       collider.getAngle(),
-                                                       collider.getThickness()
-                                                   );
-
-          Sprite newSprite = new Sprite(croppedImage);
-          this.setSprite(newSprite);
      }
 
      @Override
