@@ -52,7 +52,7 @@ public class Line {
           return Matrix2x2.ROTATE_ANTI_CLOCKWISE_90.transform(getNormalizedDirection());
      }
 
-     // Rotates the line by a certain angle (in radians)
+     // Rotates the line by a certain angle (in degrees)
      public Line rotate(float theta) {
           return new Line(start.rotate(theta), end.rotate(theta));
      }

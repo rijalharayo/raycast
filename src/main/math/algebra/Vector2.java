@@ -39,7 +39,7 @@ public class Vector2 {
 
      // Returns the angle of the vector
      public float getAngle() {
-          return (float) Math.atan2(y, x);
+          return (float) Math.toDegrees(Math.atan2(y, x));
      }
 
      // Returns the magnitude of a vector
@@ -114,8 +114,10 @@ public class Vector2 {
 
           // Rotates the vector around a centre
 
+          float thetaRads = (float) Math.toRadians(theta);
+
           Vector2 vectorRelativeToCenter = this.subtract(center);
-          Matrix2x2 rotationMatrix = Matrix2x2.getRotationMatrix(theta);
+          Matrix2x2 rotationMatrix = Matrix2x2.getRotationMatrix(thetaRads);
 
           // Adds vector 'c' to R(θ) * (p - c)
           Vector2 rotatedVector = rotationMatrix.transform(vectorRelativeToCenter).add(center);

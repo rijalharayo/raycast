@@ -74,7 +74,7 @@ public class Sprite {
 
           // Rotates around the center of ths sprite (rotation is inverted in screen coordinates)
           g.rotate(
-               -rotation,
+               -Math.toRadians(rotation),
                centerScreen.getX(),
                centerScreen.getY()
           );
@@ -99,7 +99,7 @@ public class Sprite {
 
           // Rotates around the center of ths sprite (rotation is inverted in screen coordinates)
           g.rotate(
-               -rotation,
+               -Math.toRadians(rotation),
                centerScreen.getX(),
                centerScreen.getY()
           );

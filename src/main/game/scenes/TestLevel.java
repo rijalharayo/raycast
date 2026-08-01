@@ -21,8 +21,8 @@ public class TestLevel extends LevelScene {
      public void loadObjects() {
           add(new Laser(-100, -50));
           
-          add(new PlaneMirror(400, 20, 200, 20, 1f));
+          add(new PlaneMirror(400, 20, 200, 20, 90f));
           add(new CircularMirror(-400, 20, 100f));
-          add(new CurvedMirror(400, -200, 50f, 2f, 20f));
+          add(new CurvedMirror(400, -200, 50f, 30f, 20f));
      }
 }

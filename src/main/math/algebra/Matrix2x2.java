@@ -183,18 +183,18 @@ public class Matrix2x2 {
      }
 
      // Returns the standard rotation matrix of an angle (in radians)
-     public static Matrix2x2 getRotationMatrix(float theta) {
+     public static Matrix2x2 getRotationMatrix(float thetaRads) {
           /* 
                The standard 2D rotation matrx is:
                     R(θ) = [cosθ -sinθ]
                            [sinθ  cosθ]
           */
 
-          float m_00 = (float) Math.cos(theta);
-          float m_10 = (float) Math.sin(theta);
+          float m_00 = (float) Math.cos(thetaRads);
+          float m_10 = (float) Math.sin(thetaRads);
 
-          float m_01 = (float) -Math.sin(theta);
-          float m_11 = (float) Math.cos(theta);
+          float m_01 = (float) -Math.sin(thetaRads);
+          float m_11 = (float) Math.cos(thetaRads);
 
           return new Matrix2x2(m_00, m_01, m_10, m_11);
      }

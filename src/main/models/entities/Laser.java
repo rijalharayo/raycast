@@ -69,8 +69,8 @@ public class Laser extends GameObject {
           Vector2 mousePos = MouseInput.getMousePosition();
 
           Vector2 vectorBetween = mousePos.subtract(position);
-          // Offsets the angle to match the sprite's default orientation by subtracting π/2
-          return vectorBetween.getAngle();
+          // Returns in degrees
+          return (float) vectorBetween.getAngle();
      }
 
      // Returns the position of the tip of the laser
@@ -89,10 +89,10 @@ public class Laser extends GameObject {
           // Initial ray
           LightRay initialRay = lightRays.getFirst();
 
-          // Offesets by π as the ray faces away from the laser
+          // Offsets by π / 180 as the ray faces away from the laser
           initialRay.setFromDirection(
                getRayOriginPoint(),
-               getAngleFromCursor() + (float)Math.PI
+               getAngleFromCursor() + 180f
           );
 
           // Clears the current list and adds the intial ray
