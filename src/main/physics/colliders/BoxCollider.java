@@ -10,6 +10,6 @@ public class BoxCollider extends Collider {
      }
 
      public BoxCollider(Vector2 position, int width, int height, float rotation) {
-          super(position, new Rectangle(width, height, rotation));
+          super(position, new Rectangle(width, height, (float) Math.toRadians(rotation)));
      }
 }
