@@ -132,6 +132,11 @@ public class Arc extends Shape {
 
      @Override
      public IntersectionData intersects(Line line, Vector2 parentPosition) {
-          return approximatedPolygon.intersects(line, parentPosition);
+          Vector2 center = getWorldCenterOfCurvature(
+               parentPosition,
+               rotation
+          );
+
+          return approximatedPolygon.intersects(line, center);
      }
 }

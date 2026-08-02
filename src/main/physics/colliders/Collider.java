@@ -53,40 +53,40 @@ public abstract class Collider {
 
      // Draws the collider hitbox
      public void draw(Graphics2D g) {
-     Line[] edges = shape.getWorldEdges(position);
+          Line[] edges = shape.getWorldEdges(position);
 
-     g.setColor(Color.RED);
+          g.setColor(Color.RED);
 
-     for(Line edge : edges) {
-          Vector2 start = Scene.worldToScreen(edge.getStart());
-          Vector2 end = Scene.worldToScreen(edge.getEnd());
+          for(Line edge : edges) {
+               Vector2 start = Scene.worldToScreen(edge.getStart());
+               Vector2 end = Scene.worldToScreen(edge.getEnd());
 
-          // Draw edge
-          g.drawLine(
-               (int) start.getX(),
-               (int) start.getY(),
-               (int) end.getX(),
-               (int) end.getY()
-          );
+               // Draw edge
+               g.drawLine(
+                    (int) start.getX(),
+                    (int) start.getY(),
+                    (int) end.getX(),
+                    (int) end.getY()
+               );
 
-          // Draw start vertex
+               // Draw start vertex
+               g.fillOval(
+                    (int) start.getX() - 4,
+                    (int) start.getY() - 4,
+                    8,
+                    8
+               );
+          }
+
+          // Draw center
+          Vector2 center = Scene.worldToScreen(position);
+
+          g.setColor(Color.BLUE);
           g.fillOval(
-               (int) start.getX() - 4,
-               (int) start.getY() - 4,
-               8,
-               8
+               (int) center.getX() - 5,
+               (int) center.getY() - 5,
+               10,
+               10
           );
      }
-
-     // Draw center
-     Vector2 center = Scene.worldToScreen(position);
-
-     g.setColor(Color.BLUE);
-     g.fillOval(
-          (int) center.getX() - 5,
-          (int) center.getY() - 5,
-          10,
-          10
-     );
-}
 }
