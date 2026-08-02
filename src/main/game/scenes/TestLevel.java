@@ -23,6 +23,6 @@ public class TestLevel extends LevelScene {
           
           add(new PlaneMirror(400, 20, 200, 20, 90f));
           add(new CircularMirror(-400, 20, 100f));
-          add(new CurvedMirror(400, -200, 150f, 120f, 50f, 30f));
+          add(new CurvedMirror(400, -200, 150f, 120f, 50f, -60f));
      }
 }
