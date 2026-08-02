@@ -42,7 +42,7 @@ public class LightRay extends GameObject implements Ray {
 
      public LightRay(Vector2 start, float angle, float magnitude) {
           super("", start);
-          rayData = new RayData(start, angle, magnitude);
+          rayData = new RayData(start, (float) Math.toRadians(angle), magnitude);
      }
 
      public LightRay(RayData data) {

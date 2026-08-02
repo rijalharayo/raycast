@@ -55,10 +55,9 @@ public class RayData extends Line {
                <x, y> = <x' + rcosθ, y'+ rsinθ>
           */
           
-          float theta = (float) Math.toRadians(angle);
           Vector2 end = new Vector2(
-               start.getX() + (float) (magnitude * Math.cos(theta)),
-               start.getY() + (float) (magnitude * Math.sin(theta))
+               start.getX() + (float) (magnitude * Math.cos(angle)),
+               start.getY() + (float) (magnitude * Math.sin(angle))
           );
 
           setPoints(start, end);
@@ -71,10 +70,10 @@ public class RayData extends Line {
           /* 
                <x, y> = <x' + rcosθ, y'+ rsinθ>
           */
-          float theta = (float) Math.toRadians(angle);
+          
           Vector2 end = new Vector2(
-               start.getX() + (float) Math.cos(theta),
-               start.getY() + (float) Math.sin(theta)
+               start.getX() + (float) Math.cos(angle),
+               start.getY() + (float) Math.sin(angle)
           );
 
           setPoints(start, end);

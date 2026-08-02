@@ -14,8 +14,8 @@ public class Arc extends Shape {
      private Polygon approximatedPolygon;
      private Line[] flatEdges = new Line[2];
 
-     // Change in angle while making approximated polygon (in degrees)
-     private static final float DELTA_THETA = 10f;
+     // Change in angle while making approximated polygon (in radians)
+     private static final float DELTA_THETA = (float) Math.toRadians(10f);
 
      // Constructors
      public Arc(float radius, float angle, float thickness) {
@@ -35,8 +35,7 @@ public class Arc extends Shape {
 
           // Outer arc
           for(int i = 0; i < arcVertexCount; i++) {
-               // Converts from degree to radians
-               float theta = (float) Math.toRadians(i * DELTA_THETA);
+               float theta = i * DELTA_THETA;
 
                localVertices[i] = new Vector2(
                     (float) (radius * Math.cos(theta)),
@@ -46,8 +45,7 @@ public class Arc extends Shape {
 
           // Inner arc backwards
           for(int i = 0; i < arcVertexCount; i++) {
-               // Converts from degree to radians
-               float theta = (float) Math.toRadians(angle - i * DELTA_THETA);
+               float theta = angle - (i * DELTA_THETA);
 
                localVertices[i + arcVertexCount] = new Vector2(
                     (float) (innerRadius * Math.cos(theta)),
@@ -90,7 +88,7 @@ public class Arc extends Shape {
      }
 
      public Vector2 getLocalCenterOffset() {
-          float middleAngle = (float) Math.toRadians(angle / 2);
+          float middleAngle = angle / 2;
 
           Vector2 surfaceOffset = new Vector2(
                radius * (float) Math.cos(middleAngle),
@@ -134,11 +132,6 @@ public class Arc extends Shape {
 
      @Override
      public IntersectionData intersects(Line line, Vector2 parentPosition) {
-          Vector2 center = getWorldCenterOfCurvature(
-               parentPosition,
-               rotation
-          );
-
-          return approximatedPolygon.intersects(line, center);
+          return approximatedPolygon.intersects(line, parentPosition);
      }
 }

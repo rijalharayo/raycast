@@ -18,19 +18,19 @@ public class CurvedMirror extends Mirror {
      // Constructors
      public CurvedMirror(Vector2 position, float radius, float angle, float thickness) {
           super(position, 
-               new ArcCollider(position, radius, angle, thickness)
+               new ArcCollider(position, radius, (float) Math.toRadians(angle), thickness)
           );
      }
 
      public CurvedMirror(float x, float y, float radius, float angle, float thickness) {
           super(new Vector2(x, y), 
-               new ArcCollider(new Vector2(x, y), radius, angle, thickness)
+               new ArcCollider(new Vector2(x, y), radius, (float) Math.toRadians(angle), thickness)
           );
      }
 
      public CurvedMirror(Vector2 position, float radius, float angle, float thickness, float rotation) {
           super(position, 
-               new ArcCollider(position, radius, angle, thickness) 
+               new ArcCollider(position, radius, (float) Math.toRadians(angle), thickness) 
           );
 
           this.setRotation(rotation);
@@ -38,7 +38,7 @@ public class CurvedMirror extends Mirror {
 
      public CurvedMirror(float x, float y, float radius, float angle, float thickness, float rotation) {
           super(new Vector2(x, y), 
-               new ArcCollider(new Vector2(x, y), radius, angle, thickness)
+               new ArcCollider(new Vector2(x, y), radius, (float) Math.toRadians(angle), thickness)
           );
           
           this.setRotation(angle);
@@ -103,7 +103,7 @@ public class CurvedMirror extends Mirror {
                     radius * 2,
                     radius * 2,
                     0,
-                    angle,
+                    (float) Math.toDegrees(angle),
                     Arc2D.OPEN
                );
 
@@ -115,8 +115,8 @@ public class CurvedMirror extends Mirror {
                     cy - innerRadius,
                     innerRadius * 2,
                     innerRadius * 2,
-                    angle,
-                    -angle,
+                    (float) Math.toDegrees(angle),
+                    (float) Math.toDegrees(-angle),
                     Arc2D.OPEN
                );
 

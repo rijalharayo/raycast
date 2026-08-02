@@ -30,7 +30,7 @@ public class Laser extends GameObject {
           
           // Adds a default ray
           addRay(
-               new LightRay(getRayOriginPoint(), getAngleFromCursor(), 50f)
+               new LightRay(getRayOriginPoint(), (float) Math.toDegrees(getAngleFromCursor()), 50f)
           );
      }
 
@@ -69,8 +69,8 @@ public class Laser extends GameObject {
           Vector2 mousePos = MouseInput.getMousePosition();
 
           Vector2 vectorBetween = mousePos.subtract(position);
-          // Returns in degrees
-          return (float) Math.toDegrees(vectorBetween.getAngle());
+          
+          return (float) vectorBetween.getAngle();
      }
 
      // Returns the position of the tip of the laser
@@ -92,7 +92,7 @@ public class Laser extends GameObject {
           // Offsets by π / 180 as the ray faces away from the laser
           initialRay.setFromDirection(
                getRayOriginPoint(),
-               getAngleFromCursor() + 180f
+               getAngleFromCursor() + (float) Math.PI
           );
 
           // Clears the current list and adds the intial ray
@@ -121,7 +121,7 @@ public class Laser extends GameObject {
      @Override
      public void update() {
           if(enabled) {
-               this.setRotation(getAngleFromCursor());
+               this.setRotation((float) Math.toDegrees(getAngleFromCursor()));
                // Update rays if the laser is turned on
                if(on) {
                     castRays();
