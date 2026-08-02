@@ -16,6 +16,12 @@ public class ArcCollider extends Collider {
                new Arc(radius, angle, thickness)
           );
      }
+
+     public ArcCollider(Vector2 position, float radius, float angle, float thickness, float rotation) {
+          super(position, 
+               new Arc(radius, angle, thickness, rotation)
+          );
+     }
      
      // Getters
      public float getRadius() {

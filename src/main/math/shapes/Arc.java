@@ -26,6 +26,15 @@ public class Arc extends Shape {
           apporximateArc();
      }
 
+     public Arc(float radius, float angle, float thickness, float rotation) {
+          this.radius = radius;
+          this.angle = angle;
+          this.thickness = thickness;
+          this.rotation = rotation;
+
+          apporximateArc();
+     }
+
      public void apporximateArc() {
           int arcVertexCount = Math.round(angle / DELTA_THETA) + 1;
 
@@ -35,7 +44,8 @@ public class Arc extends Shape {
 
           // Outer arc
           for(int i = 0; i < arcVertexCount; i++) {
-               float theta = i * DELTA_THETA;
+               // Accounts for rotation
+               float theta = rotation + i * DELTA_THETA;
 
                localVertices[i] = new Vector2(
                     (float) (radius * Math.cos(theta)),
@@ -45,7 +55,8 @@ public class Arc extends Shape {
 
           // Inner arc backwards
           for(int i = 0; i < arcVertexCount; i++) {
-               float theta = angle - (i * DELTA_THETA);
+               // Accounts for rotation
+               float theta = rotation + angle - (i * DELTA_THETA);
 
                localVertices[i + arcVertexCount] = new Vector2(
                     (float) (innerRadius * Math.cos(theta)),
@@ -88,7 +99,10 @@ public class Arc extends Shape {
      }
 
      public Line[] getWorldFlatEdges(Vector2 parentPosition) {
-          Vector2 center = getWorldCenterOfCurvature(parentPosition, rotation);
+          Vector2 center = getWorldCenterOfCurvature(
+               parentPosition,
+               rotation
+          );
 
           return new Line[] {
                flatEdges[0].translate(center),
@@ -117,11 +131,13 @@ public class Arc extends Shape {
      @Override
      public void rotate(float theta) {
           approximatedPolygon.rotate(theta);
+          this.rotation += theta;
      }
 
      @Override
      public void rotateAround(Vector2 center, float theta) {
           approximatedPolygon.rotateAround(center, theta);
+          this.rotation += theta;
      }
 
      @Override
