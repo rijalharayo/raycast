@@ -61,6 +61,13 @@ public class Line {
           return new Line(start.rotateAround(center, theta), end.rotateAround(center, theta));
      }
 
+     public Line translate(Vector2 offset) {
+          return new Line(
+               getStart().add(offset),
+               getEnd().add(offset)
+          );
+     }
+
      // Checks if the lines are collinear(or parrallel)
      public static boolean haveParalellDirection(Line l1, Line l2) {
           /* 

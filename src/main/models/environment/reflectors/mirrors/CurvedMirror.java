@@ -140,6 +140,6 @@ public class CurvedMirror extends Mirror {
 
 
           // Draw collider outline
-          this.getCollider().draw(g);
+          // this.getCollider().draw(g);
      }
 }

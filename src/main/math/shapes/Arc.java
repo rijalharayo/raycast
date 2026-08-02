@@ -87,6 +87,15 @@ public class Arc extends Shape {
           return flatEdges.clone();
      }
 
+     public Line[] getWorldFlatEdges(Vector2 parentPosition) {
+          Vector2 center = getWorldCenterOfCurvature(parentPosition, rotation);
+
+          return new Line[] {
+               flatEdges[0].translate(center),
+               flatEdges[1].translate(center)
+          };
+     }
+
      public Vector2 getLocalCenterOffset() {
           float middleAngle = angle / 2;
 
