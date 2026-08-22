@@ -132,26 +132,27 @@ public class Polygon extends Shape {
 
 
      @Override
-     public void rotate(float theta) {
-          // Rotates all vertices
-          for(int i = 0; i < localVertices.length; i++) {
-               localVertices[i] = localVertices[i].rotate(theta);
+     public Polygon rotate(float theta) {
+          Vector2[] vertices = new Vector2[localVertices.length];
+
+          for (int i = 0; i < localVertices.length; i++) {
+               vertices[i] = localVertices[i].rotate(theta);
           }
 
-          // Vertices have been modified
-          dirty = true;
+          return new Polygon(vertices);
      }
 
 
      @Override
-     public void rotateAround(Vector2 localCenter, float theta) {
+     public Polygon rotateAround(Vector2 localCenter, float theta) {
+          Vector2[] vertices = new Vector2[localVertices.length];
+
           // Rotates all vertices
           for(int i = 0; i < localVertices.length; i++) {
-               localVertices[i] = localVertices[i].rotateAround(localCenter, theta);
+               vertices[i] = localVertices[i].rotateAround(localCenter, theta);
           }
 
-          // Vertices have been modified
-          dirty = true;
+          return new Polygon(vertices);
      }
 
 

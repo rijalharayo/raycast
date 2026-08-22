@@ -129,15 +129,20 @@ public class Arc extends Shape {
      }
 
      @Override
-     public void rotate(float theta) {
-          approximatedPolygon.rotate(theta);
-          this.rotation += theta;
+     public Arc rotate(float theta) {
+          return new Arc(
+               radius,
+               angle,
+               thickness,
+               rotation + theta
+          );
      }
 
      @Override
-     public void rotateAround(Vector2 center, float theta) {
+     public Arc rotateAround(Vector2 center, float theta) {
           approximatedPolygon.rotateAround(center, theta);
           this.rotation += theta;
+          return this;
      }
 
      @Override

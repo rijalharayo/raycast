@@ -26,8 +26,8 @@ public abstract class Shape {
      }
 
      // Abstract methods
-     public abstract void rotate(float theta);
-     public abstract void rotateAround(Vector2 center, float theta);
+     public abstract Shape rotate(float theta);
+     public abstract Shape rotateAround(Vector2 center, float theta);
      public abstract Line[] getEdges();
      public abstract Line[] getWorldEdges(Vector2 parentPosition);
      public abstract IntersectionData intersects(Line line, Vector2 parentPosition);

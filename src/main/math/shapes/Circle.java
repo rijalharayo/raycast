@@ -47,8 +47,10 @@ public class Circle extends Shape {
      }
 
      @Override
-     public void rotate(float theta) {
+     public Circle rotate(float theta) {
           // Code
+          System.out.println("A circle rotation is symmetric");
+          return null;
      }
 
      @Override
@@ -67,7 +69,7 @@ public class Circle extends Shape {
      }
 
      @Override
-     public void rotateAround(Vector2 center, float theta) {
-          approximatePolygon.rotateAround(center, theta);
+     public Shape rotateAround(Vector2 center, float theta) {
+          return approximatePolygon.rotateAround(center, theta);
      }
 }
