@@ -38,8 +38,10 @@ public class Polygon extends Shape {
 
           this.localVertices = localVertices.clone();
 
-          // Rotates all vertices
-          rotate(rotation);
+          // Rotates all vertices and returns the new polygon
+          Polygon newPolygon = rotate(rotation);
+          // Sets the local vertices again
+          this.localVertices = newPolygon.localVertices;
 
           // Builds the edges
           rebuildEdges();
