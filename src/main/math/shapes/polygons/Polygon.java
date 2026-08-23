@@ -39,7 +39,7 @@ public class Polygon extends Shape {
           this.localVertices = localVertices.clone();
 
           // Rotates all vertices and returns the new polygon
-          Polygon newPolygon = rotate(rotation);
+          Polygon newPolygon = rotateShape(rotation);
           // Sets the local vertices again
           this.localVertices = newPolygon.localVertices;
 
@@ -134,7 +134,7 @@ public class Polygon extends Shape {
 
 
      @Override
-     public Polygon rotate(float theta) {
+     protected Polygon rotateShape(float theta) {
           Vector2[] vertices = new Vector2[localVertices.length];
 
           for (int i = 0; i < localVertices.length; i++) {
@@ -146,7 +146,7 @@ public class Polygon extends Shape {
 
 
      @Override
-     public Polygon rotateAround(Vector2 localCenter, float theta) {
+     protected Polygon rotateShapeAround(Vector2 localCenter, float theta) {
           Vector2[] vertices = new Vector2[localVertices.length];
 
           // Rotates all vertices

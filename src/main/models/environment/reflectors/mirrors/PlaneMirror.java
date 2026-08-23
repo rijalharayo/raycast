@@ -17,7 +17,7 @@ public class PlaneMirror extends Mirror {
           super(
                "Plane mirror",
                new Vector2(x, y),
-               new BoxCollider(new Vector2(x, y), width, height, rotation)
+               new BoxCollider(new Vector2(x, y), width, height)
           );
 
           // Sets sprite
@@ -26,7 +26,7 @@ public class PlaneMirror extends Mirror {
           // Sets the height & width of the sprite
           sprite.setWidth(width);
           sprite.setHeight(height);
-
+          // Also set's collider rotation
           this.setRotation(rotation);
      }
 

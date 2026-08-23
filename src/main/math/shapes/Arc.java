@@ -129,7 +129,7 @@ public class Arc extends Shape {
      }
 
      @Override
-     public Arc rotate(float theta) {
+     public Arc rotateShape(float theta) {
           return new Arc(
                radius,
                angle,
@@ -139,9 +139,8 @@ public class Arc extends Shape {
      }
 
      @Override
-     public Arc rotateAround(Vector2 center, float theta) {
-          approximatedPolygon.rotateAround(center, theta);
-          this.rotation += theta;
+     public Arc rotateShapeAround(Vector2 center, float theta) {
+          this.approximatedPolygon = (Polygon) approximatedPolygon.rotateAround(center, theta);
           return this;
      }
 

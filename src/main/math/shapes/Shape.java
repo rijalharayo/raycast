@@ -25,9 +25,23 @@ public abstract class Shape {
           this.rotation = r;
      }
 
+     public Shape rotate(float theta) {
+          Shape rotatedShape = this.rotateShape(theta);
+          rotatedShape.rotation = this.rotation + theta;
+          
+          return rotatedShape;
+     }
+
+     public Shape rotateAround(Vector2 center, float theta) {
+          Shape rotatedShape = this.rotateShapeAround(center, theta);
+          rotatedShape.rotation = this.rotation + theta;
+
+          return rotatedShape;
+     }
+
      // Abstract methods
-     public abstract Shape rotate(float theta);
-     public abstract Shape rotateAround(Vector2 center, float theta);
+     protected abstract Shape rotateShape(float theta);
+     protected abstract Shape rotateShapeAround(Vector2 center, float theta);
      public abstract Line[] getEdges();
      public abstract Line[] getWorldEdges(Vector2 parentPosition);
      public abstract IntersectionData intersects(Line line, Vector2 parentPosition);
