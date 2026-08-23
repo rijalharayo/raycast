@@ -20,7 +20,7 @@ public class Laser extends GameObject {
      private final String SPRITE_NAME = "laser-pointer.png";
 
      public Laser(float x, float y) {
-          super("Laser", x, y);
+          super("Laser", x, y, null);
           enabled = true;
           on = true;
 

@@ -11,34 +11,23 @@ import main.physics.rays.reflectors.RayInteractable;
 
 // Class representing optical objects that can alter light rays
 public abstract class OpticalObject extends GameObject implements RayInteractable {
-     private Collider collider;
      private final OpticalObjectType opticalObjectType;
 
      // Constructors
      public OpticalObject(Vector2 position, Collider collider, OpticalObjectType oType) {
-          super("", position);
-          this.collider = collider;
+          super("", position, collider);
           this.opticalObjectType = oType;
      }
 
      public OpticalObject(String name, Vector2 position, Collider collider, OpticalObjectType oType) {
-          super(name, position);
-          this.collider = collider;
+          super(name, position, collider);
           this.opticalObjectType = oType;
      }
 
      // Getters
-     public Collider getCollider() {
-          return this.collider;
-     }
 
      public OpticalObjectType getOpticType() {
           return opticalObjectType;
-     }
-
-     // Setters
-     protected void setCollider(Collider collider) {
-          this.collider = collider;
      }
 
      @Override

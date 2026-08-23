@@ -3,12 +3,14 @@ package main.models;
 import java.awt.Graphics2D;
 
 import main.math.algebra.Vector2;
+import main.physics.colliders.Collider;
 
 // Model representing the components that can exist within a scene
 public abstract class GameObject {
      protected Vector2 position = Vector2.ZERO;
      protected String name = "";
      protected Sprite sprite;
+     protected Collider collider;
 
      // Overloaded constructors
      public GameObject() {};
@@ -19,20 +21,22 @@ public abstract class GameObject {
                     : name;
      }
 
-     public GameObject(String name, Vector2 position) {
+     public GameObject(String name, Vector2 position, Collider collider) {
           this.name = (name == null || name.isBlank())
                     ? getClass().getSimpleName()
                     : name;
 
           this.position = position;
+          this.collider = collider;
      }
 
-     public GameObject(String name, float x, float y) {
+     public GameObject(String name, float x, float y, Collider collider) {
           this.name = (name == null || name.isBlank())
                     ? getClass().getSimpleName()
                     : name;
 
           this.position = new Vector2(x, y);
+          this.collider = collider;
      }
 
      // Main getters
@@ -46,6 +50,10 @@ public abstract class GameObject {
 
      public Sprite getSprite() {
           return sprite;
+     }
+
+     public Collider getCollider() {
+          return collider;
      }
 
      // Main setters

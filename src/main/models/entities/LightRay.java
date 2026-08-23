@@ -21,17 +21,17 @@ public class LightRay extends GameObject implements Ray {
 
      // Constructors
      public LightRay(Vector2 start, Vector2 end) {
-          super("", start);
+          super("", start, null);
           this.rayData = new RayData(start, end);
      }
 
      public LightRay(float x1, float y1, float x2, float y2) {
-          super("", new Vector2(x1, y1));
+          super("", new Vector2(x1, y1), null);
           this.rayData = new RayData(x1, y1, x2, y2);
      }
 
      public LightRay(Vector2 start, Vector2 end, Color color) {
-          super("", start);
+          super("", start, null);
           this.rayData = new RayData(start, end);
 
           if(color != null) {
@@ -41,12 +41,12 @@ public class LightRay extends GameObject implements Ray {
      }
 
      public LightRay(Vector2 start, float angle, float magnitude) {
-          super("", start);
+          super("", start, null);
           rayData = new RayData(start, (float) Math.toRadians(angle), magnitude);
      }
 
      public LightRay(RayData data) {
-          super("", data.getStart());
+          super("", data.getStart(), null);
           this.rayData = data;
      }
 
