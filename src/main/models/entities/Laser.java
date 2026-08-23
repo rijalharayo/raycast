@@ -131,7 +131,7 @@ public class Laser extends GameObject {
 
      @Override
      public void render(Graphics2D g) {
-          sprite.draw(g, position.getX(), position.getY());
+          super.render(g);
           // Render all the rays shot from the laser if its on
           if(on) {
                for(LightRay ray : lightRays) {

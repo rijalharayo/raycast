@@ -12,6 +12,8 @@ public abstract class GameObject {
      protected Sprite sprite;
      protected Collider collider;
 
+     private boolean displayCollider = false;
+
      // Overloaded constructors
      public GameObject() {};
 
@@ -103,9 +105,23 @@ public abstract class GameObject {
           }
      }
 
+     public void showCollider() {
+          this.displayCollider = true;
+     }
+
+     public void hideCollider() {
+          this.displayCollider = false;
+     }
+
+     public void render(Graphics2D g) {
+          // Renders the sprite
+          if(sprite != null) this.sprite.draw(g, position.getX(), position.getY());
+          // Draw collider if it's assigned
+          if(displayCollider && collider != null) collider.draw(g);
+     };
+
      // Abstract methods
      public abstract void update();
-     public abstract void render(Graphics2D g);
 
      @Override
      public String toString() {

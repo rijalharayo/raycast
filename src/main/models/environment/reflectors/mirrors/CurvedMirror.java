@@ -92,6 +92,8 @@ public class CurvedMirror extends Mirror {
      
      @Override
      public void render(Graphics2D g) {
+          super.render(g);
+
           // Get arc collider data
           ArcCollider collider = (ArcCollider) this.getCollider();
 
@@ -169,9 +171,5 @@ public class CurvedMirror extends Mirror {
           // Restore graphics state
           g.setTransform(oldTransform);
           g.setColor(oldColor);
-
-
-          // Draw collider outline
-          //this.getCollider().draw(g);
      }
 }

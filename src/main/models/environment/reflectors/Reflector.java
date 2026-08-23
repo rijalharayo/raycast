@@ -1,7 +1,5 @@
 package main.models.environment.reflectors;
 
-import java.awt.Graphics2D;
-
 import main.math.algebra.Vector2;
 import main.models.data.IntersectionData;
 import main.models.data.RayData;
@@ -29,12 +27,6 @@ public abstract class Reflector extends OpticalObject {
      @Override
      public void update() {
           // Code
-     }
-
-     @Override
-     public void render(Graphics2D g) {
-          // Renders the reflector
-          this.sprite.draw(g, position.getX(), position.getY());
      }
      
      // Abstract methods
