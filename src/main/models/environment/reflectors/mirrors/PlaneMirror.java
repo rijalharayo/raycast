@@ -1,5 +1,7 @@
 package main.models.environment.reflectors.mirrors;
 
+import java.awt.Graphics2D;
+
 import main.math.Line;
 import main.math.algebra.Vector2;
 import main.models.Sprite;
@@ -60,5 +62,11 @@ public class PlaneMirror extends Mirror {
           SurfaceData mirrorSurface = new SurfaceData(targetLine.getLineVector(), normal);
 
           return mirrorSurface;
+     }
+
+     @Override
+     public void render(Graphics2D g) {
+          super.render(g);
+          getCollider().draw(g);
      }
 }

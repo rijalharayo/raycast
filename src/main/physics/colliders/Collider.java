@@ -35,7 +35,7 @@ public abstract class Collider {
 
      // Updaters
      public void setRotation(float rotation) {
-          shape.rotateAround(getPosition(), rotation);
+          this.shape = shape.rotate(rotation);
      }
 
      public void translatePosition(Vector2 t) {

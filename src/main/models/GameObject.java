@@ -86,6 +86,10 @@ public abstract class GameObject {
                throw new NullPointerException("No sprite set");
           }
           sprite.setRotation(angle);
+
+          if(collider != null) {
+               collider.setRotation((float) Math.toRadians(angle));
+          }
      }
 
      public void rotate(float angle) {
