@@ -2,6 +2,7 @@ package main.game;
 
 import javax.swing.*;
 
+import main.input.KeyboardInput;
 import main.input.MouseInput;
 
 import java.awt.*;
@@ -19,6 +20,14 @@ public class Window {
           MouseInput mInput = new MouseInput();
           // Sets the listener
           canvas.addMouseMotionListener(mInput);
+          canvas.addMouseListener(mInput);
+
+          // Creates a new keyboard input handler
+          KeyboardInput kInput = new KeyboardInput();
+          // Sets the listener
+          canvas.addKeyListener(kInput);
+          canvas.setFocusable(true);
+          canvas.requestFocus();
 
           frame.setUndecorated(true);
           frame.setResizable(false);

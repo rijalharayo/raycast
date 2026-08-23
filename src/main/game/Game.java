@@ -2,6 +2,8 @@ package main.game;
 
 import java.awt.Toolkit;
 
+import main.input.KeyboardInput;
+import main.input.MouseInput;
 import main.math.algebra.Vector2;
 
 // Class to handle game rendering and loop
@@ -58,6 +60,9 @@ public class Game implements Runnable {
 
           if (scene != null)
                scene.update();
+
+          MouseInput.reset();
+          KeyboardInput.reset();
      }
 
      private void render() {
