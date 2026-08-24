@@ -54,6 +54,16 @@ public class Circle extends Shape {
      }
 
      @Override
+     public boolean containsPoint(Vector2 worldPosition, Vector2 parentPosition) {
+          Vector2 pointRelativeToCircle = parentPosition.subtract(worldPosition);
+          float distance = pointRelativeToCircle.getMagnitude();
+          
+          // A point is inside a circle if its distance from the center is less than the radius
+
+          return distance <= radius;
+     }
+
+     @Override
      public Line[] getEdges() {
           return approximatePolygon.getEdges();
      }

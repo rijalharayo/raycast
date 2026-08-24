@@ -3,6 +3,7 @@ package main.math.shapes.polygons;
 import java.util.List;
 import java.util.ArrayList;
 
+import main.game.Game;
 import main.math.Line;
 import main.math.algebra.Vector2;
 import main.math.shapes.Shape;
@@ -155,6 +156,37 @@ public class Polygon extends Shape {
           }
 
           return new Polygon(vertices);
+     }
+
+     @Override
+     public boolean containsPoint(Vector2 worldPosition, Vector2 parentPosition) {
+          // A really long test line
+          Line testLine = new Line(
+                                   worldPosition /* Start */,
+                                   Vector2.RIGHT.multiply(Game.WIDTH)
+                              );
+
+          Line[] worldEdges = getWorldEdges(parentPosition);
+
+          int intersections = 0;
+
+          /* 
+               Checks the test line against all world edges for intersections and tracks the number
+               of intersections
+          */
+          for(Line wEdge : worldEdges) {
+               boolean intersects = testLine.intersects(wEdge) != null;
+
+               if(intersects) {
+                    intersections++;
+               }
+          }
+
+          /* 
+               If the number of intersections is odd, the point is inside
+               else, its outside
+          */
+          return intersections % 2 != 0;
      }
 
 

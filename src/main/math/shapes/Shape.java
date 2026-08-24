@@ -42,6 +42,7 @@ public abstract class Shape {
      // Abstract methods
      protected abstract Shape rotateShape(float theta);
      protected abstract Shape rotateShapeAround(Vector2 center, float theta);
+     public abstract boolean containsPoint(Vector2 worldPosition, Vector2 parentPosition);
      public abstract Line[] getEdges();
      public abstract Line[] getWorldEdges(Vector2 parentPosition);
      public abstract IntersectionData intersects(Line line, Vector2 parentPosition);

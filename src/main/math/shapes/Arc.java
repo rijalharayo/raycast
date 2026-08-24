@@ -145,6 +145,11 @@ public class Arc extends Shape {
      }
 
      @Override
+     public boolean containsPoint(Vector2 worldPosition, Vector2 parentPosition) {
+          return approximatedPolygon.containsPoint(worldPosition, parentPosition);
+     }
+
+     @Override
      public Line[] getEdges() {
           return approximatedPolygon.getEdges();
      }
