@@ -73,6 +73,7 @@ public abstract class GameObject {
      
      public void setPosition(float x, float y) {
           this.position = new Vector2(x, y);
+          collider.setPosition(position);
      }
 
      public void setSprite(Sprite sprite) {
