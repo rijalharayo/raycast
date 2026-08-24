@@ -1,9 +1,12 @@
 package main.models.entities;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.ArrayList;
 
+import main.input.KeyboardInput;
 import main.input.MouseInput;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
@@ -120,6 +123,16 @@ public class Laser extends GameObject {
 
      @Override
      public void update() {
+          // Laser turns off on right click
+          if(MouseInput.isPressed(MouseEvent.BUTTON3) /* Right click */) {
+               on = !on;
+          }
+
+          // Disabled when 'E' is pressed
+          if(KeyboardInput.isPressed(KeyEvent.VK_E)) {
+               enabled = !enabled;
+          }
+ 
           if(enabled) {
                this.setRotation((float) Math.toDegrees(getAngleFromCursor()));
                // Update rays if the laser is turned on
