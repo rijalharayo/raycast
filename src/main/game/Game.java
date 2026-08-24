@@ -30,8 +30,8 @@ public class Game implements Runnable {
 
      @Override
      public void run() {
-          // Fixed update rate (60 FPS / UPS)
-          final double FPS = 60.0;
+          // Fixed update rate (100 FPS / UPS)
+          final double FPS = 100.0;
           final double nsPerUpdate = 1_000_000_000.0 / FPS;
 
           long lastTime = System.nanoTime();
