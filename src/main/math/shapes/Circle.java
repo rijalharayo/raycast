@@ -10,7 +10,7 @@ public class Circle extends Shape {
      private float radius;
      private Polygon approximatePolygon;
      // Change in angle while making approximated polygon (in radians)
-     private static final float DELTA_THETA = (float) Math.toRadians(20f);
+     private static final float DELTA_THETA = (float) Math.toRadians(15f);
 
      public Circle(float radius) {
           this.radius = radius;
