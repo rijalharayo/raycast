@@ -189,7 +189,6 @@ public class Polygon extends Shape {
           return intersections % 2 != 0;
      }
 
-
      @Override
      public Line[] getEdges() {
           // If the vertices have been modified, rebuild edges before returning

@@ -51,6 +51,10 @@ public abstract class Collider {
           return shape.intersects(rayLine, this.position);
      }
 
+     public boolean containsPoint(Vector2 point) {
+          return shape.containsPoint(point, position);
+     }
+
      // Draws the collider hitbox
      public void draw(Graphics2D g) {
           Line[] edges = shape.getWorldEdges(position);
