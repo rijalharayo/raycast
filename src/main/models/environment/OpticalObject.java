@@ -31,7 +31,7 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      }
 
      // Setters
-     public void setDraggabled(boolean v) {
+     public void setDraggable(boolean v) {
           this.isDraggable = v;
      }
 
