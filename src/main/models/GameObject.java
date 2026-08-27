@@ -69,6 +69,7 @@ public abstract class GameObject {
 
      public void setPosition(Vector2 pos) {
           this.position = pos;
+          collider.setPosition(pos);
      }
      
      public void setPosition(float x, float y) {
