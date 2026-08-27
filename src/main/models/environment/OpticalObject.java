@@ -1,5 +1,8 @@
 package main.models.environment;
 
+import java.awt.event.MouseEvent;
+
+import main.input.MouseInput;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.data.IntersectionData;
@@ -12,6 +15,9 @@ import main.physics.rays.reflectors.RayInteractable;
 // Class representing optical objects that can alter light rays
 public abstract class OpticalObject extends GameObject implements RayInteractable {
      private final OpticalObjectType opticalObjectType;
+     private boolean isDraggable = true;
+     private Vector2 dragOffset;
+     private boolean dragging = false;
 
      // Constructors
      public OpticalObject(Vector2 position, Collider collider, OpticalObjectType oType) {
@@ -22,6 +28,11 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      public OpticalObject(String name, Vector2 position, Collider collider, OpticalObjectType oType) {
           super(name, position, collider);
           this.opticalObjectType = oType;
+     }
+
+     // Setters
+     public void setDraggabled(boolean v) {
+          this.isDraggable = v;
      }
 
      // Getters
@@ -35,6 +46,47 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
           IntersectionData iData = collider.collideWithRay(ray);
           if(iData == null) return null;
           return this.interactWithRay(ray, iData);
+     }
+
+     @Override
+     public void update() {
+          Vector2 mousePosition = MouseInput.getMousePosition();
+          // Flag to check if the mouse is hovering over
+          boolean isHoveringOver = collider.containsPoint(mousePosition);
+
+          // Hover behaviour
+          if(isHoveringOver) {
+               showCollider();
+
+               if(MouseInput.isPressed(MouseEvent.BUTTON1) && isDraggable && !dragging) {
+                    dragOffset = mousePosition.subtract(position);
+                    dragging = true;
+               }
+          }
+          else {
+               hideCollider();
+          }
+
+          if(dragging) {
+               // Drag behaviour
+               if(MouseInput.isHeld(MouseEvent.BUTTON1) && dragOffset != null) {
+                    drag();
+               }
+
+               // Mouse release
+               if (MouseInput.isReleased(MouseEvent.BUTTON1)) {
+                    dragOffset = null;
+                    dragging = false;
+               }
+          }
+     }
+
+     // Drags optical object along mouse
+     private void drag() {
+          if(isDraggable) {
+               Vector2 targetPos = MouseInput.getMousePosition().subtract(dragOffset);
+               setPosition(position.lerp(targetPos, 0.15f));
+          }
      }
      
      // Abstract methods
