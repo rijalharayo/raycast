@@ -23,11 +23,6 @@ public abstract class Reflector extends OpticalObject {
      protected RayData interactWithRay(Ray ray, IntersectionData intersectionData) {
           return this.reflect(ray, intersectionData);
      }
-
-     @Override
-     public void update() {
-          // Code
-     }
      
      // Abstract methods
      protected abstract RayData reflect(Ray ray, IntersectionData intersectionData);
