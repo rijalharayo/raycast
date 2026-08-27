@@ -47,6 +47,14 @@ public class Vector2 {
           float h = x * x + y * y;
           return (float) Math.sqrt(h);
      }
+
+     // Linear interpolates the vector
+     public Vector2 lerp(Vector2 target, float t) {
+          return new Vector2(
+               x + (target.getX() - x) * t,
+               y + (target.getY() - y) * t
+          );
+     }
      
      // Adds the vector
      public Vector2 add(Vector2 v2) {
