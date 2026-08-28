@@ -34,4 +34,9 @@ public class Medium {
      public Color getColor() {
           return mediumColor;
      }
+
+     @Override
+     public String toString() {
+          return mediumName + "\n" + "Ref. Index: " + refractiveIndex;
+     }
 }
