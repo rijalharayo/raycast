@@ -39,6 +39,8 @@ public abstract class Refractor extends OpticalObject {
           return this.refract(ray, intersectionData);
      }
      
-     // Abstract methods
-     protected abstract RayData refract(LightRay ray, IntersectionData intersectionData);
+     protected RayData refract(LightRay ray, IntersectionData intersectionData) {
+          // Code
+          return null;
+     }
 }
