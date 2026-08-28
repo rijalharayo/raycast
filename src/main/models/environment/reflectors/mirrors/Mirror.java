@@ -4,9 +4,9 @@ import main.math.algebra.Vector2;
 import main.models.data.IntersectionData;
 import main.models.data.RayData;
 import main.models.data.SurfaceData;
+import main.models.entities.LightRay;
 import main.models.environment.reflectors.Reflector;
 import main.physics.colliders.Collider;
-import main.physics.rays.Ray;
 
 public abstract class Mirror extends Reflector {
      // Constructors
@@ -19,7 +19,7 @@ public abstract class Mirror extends Reflector {
      }
 
      @Override
-     protected RayData reflect(Ray ray, IntersectionData intersectionData) {
+     protected RayData reflect(LightRay ray, IntersectionData intersectionData) {
           // Calculates the mirror's relative surface data
           SurfaceData surfaceData = calculateSurfaceData(intersectionData);
 

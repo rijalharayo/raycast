@@ -3,11 +3,11 @@ package main.models.environment.refractors;
 import main.math.algebra.Vector2;
 import main.models.data.IntersectionData;
 import main.models.data.RayData;
+import main.models.entities.LightRay;
 import main.models.environment.OpticalObject;
 import main.physics.colliders.Collider;
 import main.physics.optics.Medium;
 import main.physics.optics.OpticalObjectType;
-import main.physics.rays.Ray;
 
 // Main refractor class
 public abstract class Refractor extends OpticalObject {
@@ -35,10 +35,10 @@ public abstract class Refractor extends OpticalObject {
      }
 
      @Override
-     protected RayData interactWithRay(Ray ray, IntersectionData intersectionData) {
+     protected RayData interactWithRay(LightRay ray, IntersectionData intersectionData) {
           return this.refract(ray, intersectionData);
      }
      
      // Abstract methods
-     protected abstract RayData refract(Ray ray, IntersectionData intersectionData);
+     protected abstract RayData refract(LightRay ray, IntersectionData intersectionData);
 }

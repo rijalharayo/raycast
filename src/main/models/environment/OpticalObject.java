@@ -7,11 +7,11 @@ import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.data.IntersectionData;
 import main.models.data.RayData;
+import main.models.entities.LightRay;
 import main.physics.colliders.Collider;
 import main.physics.colliders.CollisionData;
 import main.physics.optics.OpticalObjectType;
 import main.physics.optics.RayInteractable;
-import main.physics.rays.Ray;
 
 // Class representing optical objects that can alter light rays
 public abstract class OpticalObject extends GameObject implements RayInteractable {
@@ -43,7 +43,7 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      }
 
      @Override
-     public RayData interact(Ray ray, CollisionData collisionData) {
+     public RayData interact(LightRay ray, CollisionData collisionData) {
           if(collisionData == null) return null;
           return this.interactWithRay(ray, collisionData.getIntersectionData());
      }
@@ -92,5 +92,5 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      // Abstract methods
 
      // Interacts & returns data when a ray collides
-     protected abstract RayData interactWithRay(Ray ray, IntersectionData intersectionData);
+     protected abstract RayData interactWithRay(LightRay ray, IntersectionData intersectionData);
 }
