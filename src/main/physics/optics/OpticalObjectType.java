@@ -1,4 +1,4 @@
-package main.physics.rays.reflectors;
+package main.physics.optics;
 
 // Represents different types of reflector materials
 public enum OpticalObjectType {

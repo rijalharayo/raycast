@@ -5,8 +5,8 @@ import main.models.data.IntersectionData;
 import main.models.data.RayData;
 import main.models.environment.OpticalObject;
 import main.physics.colliders.Collider;
+import main.physics.optics.OpticalObjectType;
 import main.physics.rays.Ray;
-import main.physics.rays.reflectors.OpticalObjectType;
 
 public abstract class Reflector extends OpticalObject {
      // Constructors

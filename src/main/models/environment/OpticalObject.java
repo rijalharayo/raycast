@@ -8,9 +8,9 @@ import main.models.GameObject;
 import main.models.data.IntersectionData;
 import main.models.data.RayData;
 import main.physics.colliders.Collider;
+import main.physics.optics.OpticalObjectType;
+import main.physics.optics.RayInteractable;
 import main.physics.rays.Ray;
-import main.physics.rays.reflectors.OpticalObjectType;
-import main.physics.rays.reflectors.RayInteractable;
 
 // Class representing optical objects that can alter light rays
 public abstract class OpticalObject extends GameObject implements RayInteractable {

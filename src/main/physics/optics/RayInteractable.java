@@ -1,4 +1,4 @@
-package main.physics.rays.reflectors;
+package main.physics.optics;
 
 import main.models.data.RayData;
 import main.physics.rays.Ray;
