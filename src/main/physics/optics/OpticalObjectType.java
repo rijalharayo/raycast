@@ -4,6 +4,6 @@ package main.physics.optics;
 public enum OpticalObjectType {
      REFLECTOR,
      ABSORBER,
-     REFRACTORS,
+     REFRACTOR,
      UNIVERSAL
 }
