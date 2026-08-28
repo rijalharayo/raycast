@@ -18,6 +18,9 @@ public class Laser extends GameObject {
      private boolean enabled;
      private boolean on;
 
+     // Current pointing dir of the laser
+     private float firingAngle = 0f;
+
      private List<LightRay> lightRays = new ArrayList<>();
 
      private final String SPRITE_NAME = "laser-pointer.png";
@@ -33,7 +36,7 @@ public class Laser extends GameObject {
           
           // Adds a default ray
           addRay(
-               new LightRay(getRayOriginPoint(), (float) Math.toDegrees(getAngleFromCursor()), 50f)
+               new LightRay(getRayOriginPoint(), (float) Math.toDegrees(firingAngle), 50f)
           );
      }
 
@@ -82,7 +85,7 @@ public class Laser extends GameObject {
           // Gets the local tip of the vector
           Vector2 localTip = new Vector2(-widthOffset, 0);
 
-          Vector2 rotatedTip = localTip.rotate(getAngleFromCursor());
+          Vector2 rotatedTip = localTip.rotate(firingAngle);
           // Gets the world tip by rotating the localTip
           return position.add(rotatedTip);
      }
@@ -92,10 +95,10 @@ public class Laser extends GameObject {
           // Initial ray
           LightRay initialRay = lightRays.getFirst();
 
-          // Offsets by π / 180 as the ray faces away from the laser
+          // Offsets by π or 180 as the ray faces away from the laser
           initialRay.setFromDirection(
                getRayOriginPoint(),
-               getAngleFromCursor() + (float) Math.PI
+               firingAngle + (float) Math.PI
           );
 
           // Clears the current list and adds the intial ray
@@ -134,11 +137,13 @@ public class Laser extends GameObject {
           }
  
           if(enabled) {
-               this.setRotation((float) Math.toDegrees(getAngleFromCursor()));
-               // Update rays if the laser is turned on
-               if(on) {
-                    castRays();
-               }
+               firingAngle = getAngleFromCursor();
+               this.setRotation((float) Math.toDegrees(firingAngle));
+          }
+
+          // Update rays if the laser is turned on
+          if(on) {
+               castRays();
           }
      }
 
