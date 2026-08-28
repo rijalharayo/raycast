@@ -3,12 +3,14 @@ package main.physics.rays;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.data.RayData;
+import main.physics.colliders.CollisionData;
 import main.physics.colliders.CollisionType;
 
 // Stores the data after a ray collides with something
 public class RayHit {
      private boolean hit;
      private Vector2 collisionPoint;
+     private CollisionData collisionData;
      private CollisionType collisionType;
      private GameObject collisionObject;
      private RayData nextRayData;
@@ -28,6 +30,14 @@ public class RayHit {
           this.collisionObject = targetObject;
      }
 
+     public RayHit(boolean hit, CollisionData collisionData, GameObject targetObject, CollisionType collisionType) {
+          this.hit = hit;
+          this.collisionData = collisionData;
+          this.collisionPoint = collisionData.getCollisionPoint();
+          this.collisionType = collisionType;
+          this.collisionObject = targetObject;
+     }
+
      // Getters
      public boolean hasHit() {
           return hit;
@@ -41,6 +51,10 @@ public class RayHit {
 
      public CollisionType getCollisionType() {
           return hit ? collisionType : null;
+     }
+
+     public CollisionData getCollisionData() {
+          return hit ? collisionData : null;
      }
 
      public GameObject getTargetObject() {

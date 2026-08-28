@@ -119,7 +119,7 @@ public class VirtualRay implements Ray {
                CollisionData collisionData = opticalObject.getCollider().collideWithRay(this);
 
                if(collisionData != null) {
-                    RayHit rayHit = new RayHit(true, collisionData.getCollisionPoint(), opticalObject, CollisionType.OPTICAL_COLLISION);
+                    RayHit rayHit = new RayHit(true, collisionData, opticalObject, CollisionType.OPTICAL_COLLISION);
 
                     // The ray has hit something
                     return rayHit;

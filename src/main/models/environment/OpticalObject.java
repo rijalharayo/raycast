@@ -43,8 +43,7 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      }
 
      @Override
-     public RayData interact(Ray ray) {
-          CollisionData collisionData = collider.collideWithRay(ray);
+     public RayData interact(Ray ray, CollisionData collisionData) {
           if(collisionData == null) return null;
           return this.interactWithRay(ray, collisionData.getIntersectionData());
      }

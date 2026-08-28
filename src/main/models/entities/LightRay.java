@@ -73,7 +73,7 @@ public class LightRay extends GameObject implements Ray {
           if((rayHit != null) && rayHit.getCollisionType() == CollisionType.OPTICAL_COLLISION) {
                OpticalObject targetObject = (OpticalObject) rayHit.getTargetObject();
 
-               RayData nextRayData = targetObject.interact(vRay);
+               RayData nextRayData = targetObject.interact(this, rayHit.getCollisionData());
                rayHit.setNextRayData(nextRayData);
           }
 
