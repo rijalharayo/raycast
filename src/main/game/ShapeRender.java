@@ -11,11 +11,38 @@ import java.awt.geom.Rectangle2D;
 import main.math.algebra.Vector2;
 import main.math.shapes.Arc;
 import main.math.shapes.Circle;
+import main.math.shapes.Shape;
 import main.math.shapes.polygons.Polygon;
 import main.math.shapes.polygons.Rectangle;
 
 // Rendering utility for drawing shapes to the screen
 public class ShapeRender {
+
+     // For all shapes
+     public static void draw(
+          Graphics2D g,
+          Shape shape,
+          Vector2 position,
+          float rotation,
+          Color color
+     ) {
+
+          if (shape instanceof Circle circle) {
+               draw(g, circle, position, rotation, color);
+          }
+
+          else if (shape instanceof Rectangle rectangle) {
+               draw(g, rectangle, position, rotation, color);
+          }
+
+          else if (shape instanceof Arc arc) {
+               draw(g, arc, position, rotation, color);
+          }
+
+          else if (shape instanceof Polygon polygon) {
+               draw(g, polygon, position, rotation, color);
+          }
+     }
 
      // Draws a circle
      public static void draw(
