@@ -97,7 +97,8 @@ public class ShapeRender {
 
           g.setColor(color);
 
-          g.rotate(-rotation,
+          g.rotate(
+               -rotation,
                screenPosition.getX(),
                screenPosition.getY()
           );
