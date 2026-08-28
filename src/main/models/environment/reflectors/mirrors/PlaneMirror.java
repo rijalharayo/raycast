@@ -32,7 +32,7 @@ public class PlaneMirror extends Mirror {
           super(
                "Plane mirror",
                position,
-               new BoxCollider(position, width, height, rotation)
+               new BoxCollider(position, width, height)
           );
           // Sets sprite
           Sprite sprite = new Sprite("plane-mirror.png");
