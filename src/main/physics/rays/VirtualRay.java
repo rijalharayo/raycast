@@ -6,6 +6,7 @@ import main.game.SceneManager;
 import main.math.algebra.Vector2;
 import main.models.data.RayData;
 import main.models.environment.OpticalObject;
+import main.physics.colliders.CollisionData;
 import main.physics.colliders.CollisionType;
 
 // Virtual rays used for raycasting
@@ -45,19 +46,14 @@ public class VirtualRay implements Ray {
           // Run until it collides
           while(!collision) {
                boolean out = isOutOfBounds();
-               RayData newRayData = checkOpticalObjectCollision();
-               boolean hit = newRayData != null;
+               rayHit = checkOpticalObjectCollision();
+               boolean hit = rayHit != null;
 
                if(out || hit) {
                     collision = true;
 
                     if(out) {
-                         rayHit = new RayHit(true, currentPosition, CollisionType.BOUNDS_COLLISION);
-                    }
-                    
-                    if(hit) {
-                         rayHit = new RayHit(true, newRayData.getStart(), CollisionType.MIRROR_COLLISION);
-                         rayHit.setNextRayData(newRayData);
+                         rayHit = new RayHit(true, currentPosition, null, CollisionType.BOUNDS_COLLISION);
                     }
 
                     break;
@@ -105,7 +101,7 @@ public class VirtualRay implements Ray {
      }
 
      // Checks if the virtual ray has collided with a collider
-     public RayData checkOpticalObjectCollision() {
+     public RayHit checkOpticalObjectCollision() {
           // The ray hasn't moved yet
           if(currentPosition.equals(prevPosition)) {
                return null;
@@ -120,10 +116,13 @@ public class VirtualRay implements Ray {
 
           // Checks for collision between all optical objects
           for(OpticalObject opticalObject : opticalObjects) {
-               RayData newRayData = opticalObject.interact(this);
-               if(newRayData != null) {
+               CollisionData collisionData = opticalObject.getCollider().collideWithRay(this);
+
+               if(collisionData != null) {
+                    RayHit rayHit = new RayHit(true, collisionData.getCollisionPoint(), opticalObject, CollisionType.OPTICAL_COLLISION);
+
                     // The ray has hit something
-                    return newRayData;
+                    return rayHit;
                }
           }
           

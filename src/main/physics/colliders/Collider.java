@@ -46,9 +46,13 @@ public abstract class Collider {
           this.position = pos;
      }
 
-     public IntersectionData collideWithRay(Ray vRay) {
+     public CollisionData collideWithRay(Ray vRay) {
           Line rayLine = vRay.getRayData();
-          return shape.intersects(rayLine, this.position);
+          IntersectionData iData = shape.intersects(rayLine, this.position);
+
+          if(iData == null) return null;
+
+          return new CollisionData(iData.getIntersectionPoint(), null, iData);
      }
 
      public boolean containsPoint(Vector2 point) {

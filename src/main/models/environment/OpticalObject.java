@@ -8,6 +8,7 @@ import main.models.GameObject;
 import main.models.data.IntersectionData;
 import main.models.data.RayData;
 import main.physics.colliders.Collider;
+import main.physics.colliders.CollisionData;
 import main.physics.optics.OpticalObjectType;
 import main.physics.optics.RayInteractable;
 import main.physics.rays.Ray;
@@ -43,9 +44,9 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
 
      @Override
      public RayData interact(Ray ray) {
-          IntersectionData iData = collider.collideWithRay(ray);
-          if(iData == null) return null;
-          return this.interactWithRay(ray, iData);
+          CollisionData collisionData = collider.collideWithRay(ray);
+          if(collisionData == null) return null;
+          return this.interactWithRay(ray, collisionData.getIntersectionData());
      }
 
      @Override

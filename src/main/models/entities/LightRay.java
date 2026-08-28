@@ -8,6 +8,8 @@ import main.game.Scene;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.data.RayData;
+import main.models.environment.OpticalObject;
+import main.physics.colliders.CollisionType;
 import main.physics.rays.Ray;
 import main.physics.rays.RayHit;
 import main.physics.rays.VirtualRay;
@@ -67,6 +69,14 @@ public class LightRay extends GameObject implements Ray {
           VirtualRay vRay = new VirtualRay(prevPos, this.getRayData().getNormalizedDirection());
           // Gets the collision data
           RayHit rayHit = vRay.cast();
+
+          if((rayHit != null) && rayHit.getCollisionType() == CollisionType.OPTICAL_COLLISION) {
+               OpticalObject targetObject = (OpticalObject) rayHit.getTargetObject();
+
+               RayData nextRayData = targetObject.interact(vRay);
+               rayHit.setNextRayData(nextRayData);
+          }
+
           /* 
                Since the cast() method stops when it collides,
                the endpoint of the light ray is set as the collision point of the virtual ray

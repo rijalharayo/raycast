@@ -21,10 +21,11 @@ public class RayHit {
           this.collisionPoint = collisionPoint;
      }
 
-     public RayHit(boolean hit, Vector2 collisionPoint, CollisionType collisionType) {
+     public RayHit(boolean hit, Vector2 collisionPoint, GameObject targetObject, CollisionType collisionType) {
           this.hit = hit;
           this.collisionPoint = collisionPoint;
           this.collisionType = collisionType;
+          this.collisionObject = targetObject;
      }
 
      // Getters
