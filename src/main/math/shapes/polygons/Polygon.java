@@ -44,6 +44,8 @@ public class Polygon extends Shape {
           // Sets the local vertices again
           this.localVertices = newPolygon.localVertices;
 
+          this.setRotation(rotation);
+
           // Builds the edges
           rebuildEdges();
      }
