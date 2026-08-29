@@ -1,7 +1,8 @@
-package main.models.environment.refractors;
+package main.models.environment.refractors.glasses;
 
 import main.math.algebra.Vector2;
 import main.math.shapes.polygons.Rectangle;
+import main.models.environment.refractors.Refractor;
 import main.physics.colliders.BoxCollider;
 import main.physics.optics.Medium;
 
