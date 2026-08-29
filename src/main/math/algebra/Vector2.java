@@ -42,6 +42,19 @@ public class Vector2 {
           return (float) Math.atan2(y, x);
      }
 
+     // Returns the angle between two vectors
+     public float getAngleBetween(Vector2 v2) {
+          float dotProduct = this.dot(v2);
+          float magProduct = this.getMagnitude() * v2.getMagnitude();
+
+          // cosθ = (a • b) / |a||b|
+          float cosine = dotProduct / magProduct;
+          // Clamps the value between 0 & 1
+          cosine = Math.clamp(cosine, 0, 1f);
+
+          return (float) Math.acos(cosine);
+     }
+
      // Returns the magnitude of a vector
      public float getMagnitude() {
           float h = x * x + y * y;
