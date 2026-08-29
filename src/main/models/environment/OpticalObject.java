@@ -3,10 +3,12 @@ package main.models.environment;
 import java.awt.event.MouseEvent;
 
 import main.input.MouseInput;
+import main.math.Line;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.data.IntersectionData;
 import main.models.data.RayData;
+import main.models.data.SurfaceData;
 import main.models.entities.LightRay;
 import main.physics.colliders.Collider;
 import main.physics.colliders.CollisionData;
@@ -46,6 +48,24 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      public RayData interact(LightRay ray, CollisionData collisionData) {
           if(collisionData == null) return null;
           return this.interactWithRay(ray, collisionData.getIntersectionData());
+     }
+
+     @Override
+     public SurfaceData calculateSurfaceData(IntersectionData intersectionData) {
+          Line targetLine = intersectionData.getTargetLine();
+
+          Vector2 normal = targetLine.getNormal();
+          Vector2 incidentVector = intersectionData.getIncomningLine().getLineVector();
+
+          // If the incident ray & normal face the same direction, invert it
+          if(incidentVector.dot(normal) > 0) {
+               normal = normal.multiply(-1f);
+          }
+
+          // The object's surface is the collider's edge
+          SurfaceData objectSurface = new SurfaceData(targetLine.getLineVector(), normal);
+
+          return objectSurface;
      }
 
      @Override

@@ -41,9 +41,4 @@ public abstract class Mirror extends Reflector {
 
           return new RayData(reflectionTail, reflectionTip);
      }
-
-     // Abstract methods
-
-     // Calculates the surface data of the mirror based on intersection data
-     public abstract SurfaceData calculateSurfaceData(IntersectionData intersectionData);
 }
