@@ -54,7 +54,7 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      public SurfaceData calculateSurfaceData(IntersectionData intersectionData) {
           Line targetLine = intersectionData.getTargetLine();
 
-          Vector2 normal = targetLine.getNormal();
+          Vector2 normal = targetLine.getNormal().getNormalized();
           Vector2 incidentVector = intersectionData.getIncomningLine().getLineVector();
 
           // If the incident ray & normal face the same direction, invert it
@@ -63,7 +63,7 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
           }
 
           // The object's surface is the collider's edge
-          SurfaceData objectSurface = new SurfaceData(targetLine.getLineVector(), normal);
+          SurfaceData objectSurface = new SurfaceData(targetLine.getLineVector().getNormalized(), normal);
 
           return objectSurface;
      }
