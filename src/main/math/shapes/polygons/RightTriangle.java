@@ -3,7 +3,7 @@ package main.math.shapes.polygons;
 import main.math.algebra.Vector2;
 
 // A right angle triangle
-public class RightTriangle extends Polygon {
+public class RightTriangle extends Triangle {
      private final float perpendicular;
      private final float base;
 
