@@ -50,7 +50,7 @@ public class Vector2 {
           // cosθ = (a • b) / |a||b|
           float cosine = dotProduct / magProduct;
           // Clamps the value between 0 & 1
-          cosine = Math.clamp(cosine, 0, 1f);
+          cosine = Math.clamp(cosine, -1f, 1f);
 
           return (float) Math.acos(cosine);
      }
