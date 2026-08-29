@@ -12,9 +12,34 @@ import main.models.environment.OpticalObject;
 public abstract class Scene {
 
      protected final List<GameObject> gameObjects = new ArrayList<>();
+     protected final List<GameObject> objectsToAdd = new ArrayList<>();
+     protected final List<GameObject> objectsToRemove = new ArrayList<>();
      protected final List<OpticalObject> opticalObjects = new ArrayList<>();
 
      protected Sprite background;
+
+     // Updates queued objects state
+     private void updatedQueuedObjects() {
+          for(GameObject obj : objectsToAdd) {
+               gameObjects.add(obj);
+
+               if(obj instanceof OpticalObject) {
+                    opticalObjects.add((OpticalObject) obj);
+               }
+          }
+
+          for(GameObject obj : objectsToRemove) {
+               gameObjects.remove(obj);
+
+               // If the game object is an optical object, remove it from the optical objects list as well
+               if(obj instanceof OpticalObject) {
+                    opticalObjects.remove((OpticalObject) obj);
+               }
+          }
+
+          objectsToAdd.clear();
+          objectsToRemove.clear();
+     }
 
      // Adds object to the list
      public void add(GameObject gameObject) {
@@ -22,11 +47,7 @@ public abstract class Scene {
                throw new IllegalArgumentException("Object can't be null");
           }
 
-          gameObjects.add(gameObject);
-          // If the game object is an optical object, add it to the optical objects list as well
-          if(gameObject instanceof OpticalObject) {
-               opticalObjects.add((OpticalObject) gameObject);
-          }
+          objectsToAdd.add(gameObject);
      }
      
      // Removes object from the list
@@ -35,11 +56,7 @@ public abstract class Scene {
                throw new IllegalArgumentException("Object can't be null");
           }
 
-          gameObjects.remove(gameObject);
-          // If the game object is an optical object, remove it from the optical objects list as well
-          if(gameObject instanceof OpticalObject) {
-               opticalObjects.remove((OpticalObject) gameObject);
-          }
+          objectsToRemove.add(gameObject);
      }
 
      public OpticalObject[] getSceneOpticalObjects() {
@@ -52,6 +69,8 @@ public abstract class Scene {
           for(GameObject obj : gameObjects) {
                obj.update();
           }
+
+          updatedQueuedObjects();
      }
 
      // Draws the scene to the screen
