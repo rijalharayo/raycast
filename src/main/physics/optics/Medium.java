@@ -14,6 +14,7 @@ public class Medium {
      public static final Medium GLASS = new Medium("Glass", 1.50f, new Color(120, 240, 255, 45));
      public static final Medium FLINT_GLASS = new Medium("Flint glass", 1.62f, new Color(100, 200, 255, 50));
      public static final Medium DENSE_FLINT_GLASS = new Medium("Dense flint glass", 1.70f,  new Color(150, 170, 255, 55));
+     public static final Medium DENSE_GLASS = new Medium("Dense glass", 1.80f, new Color(155, 175, 255, 65));
      public static final Medium DIAMOND = new Medium("Diamond", 2.42f, new Color(180, 255, 255, 60));
      public static final Medium ACRYLIC = new Medium("Acrylic", 1.49f, new Color(80, 230, 255, 55));
      
