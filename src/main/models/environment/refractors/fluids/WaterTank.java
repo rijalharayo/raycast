@@ -83,8 +83,7 @@ public class WaterTank extends Refractor {
           float width = rectangle.getWidth();
           float height = rectangle.getHeight();
 
-          Vector2 screenPosition =
-               Scene.worldToScreen(getPosition());
+          Vector2 screenPosition = Scene.worldToScreen(getPosition());
 
           float cx = screenPosition.getX();
           float cy = screenPosition.getY();
