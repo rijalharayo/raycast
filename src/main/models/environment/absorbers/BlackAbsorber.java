@@ -13,7 +13,7 @@ public class BlackAbsorber extends Absorber {
      public BlackAbsorber(Vector2 position, int width, int height, float rotation) {
           super(
                position,
-               new BoxCollider(position, width, height, rotation),
+               new BoxCollider(position, width - 2, height - 2, rotation), // Reduced collider size to prevent collider overlap
                Material.BLACK,
                new Rectangle(width, height)
           );
@@ -24,7 +24,7 @@ public class BlackAbsorber extends Absorber {
 
           super(
                pos,
-               new BoxCollider(pos, width, height, rotation),
+               new BoxCollider(pos, width - 2, height - 2, rotation), // Reduced collider size to prevent collider overlap
                Material.BLACK,
                new Rectangle(width, height)
           );
