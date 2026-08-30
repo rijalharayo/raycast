@@ -11,7 +11,6 @@ import main.input.MouseInput;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.Sprite;
-import main.models.data.RayData;
 import main.physics.rays.RayHit;
 
 public class Laser extends GameObject {
@@ -112,12 +111,12 @@ public class Laser extends GameObject {
 
           while(currentRebounce <= maxRebounce) {
                RayHit hit = currentRay.trace(currentRay.getStart());
-               RayData next = hit.getNextRayData();
+               LightRay next = (LightRay) hit.getNextRay();
 
                if(next == null)
                     break;
 
-               currentRay = new LightRay(next);
+               currentRay = next;
                lightRays.add(currentRay);
 
                currentRebounce++;

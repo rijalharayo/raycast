@@ -2,7 +2,6 @@ package main.physics.rays;
 
 import main.math.algebra.Vector2;
 import main.models.GameObject;
-import main.models.data.RayData;
 import main.physics.colliders.CollisionData;
 import main.physics.colliders.CollisionType;
 
@@ -13,7 +12,7 @@ public class RayHit {
      private CollisionData collisionData;
      private CollisionType collisionType;
      private GameObject collisionObject;
-     private RayData nextRayData;
+     private Ray nextRay;
 
      // Constructors
      public RayHit() {};
@@ -61,14 +60,14 @@ public class RayHit {
           return hit ? collisionObject : null;
      }
 
-     public RayData getNextRayData() {
-          return hit ? nextRayData : null;
+     public Ray getNextRay() {
+          return hit ? nextRay : null;
      }
 
      // Setters
-     public void setNextRayData(RayData data) {
-          // Only set data if the ray has collided with something
-          if(hit) { this.nextRayData = data; return; }
+     public void setNextRay(Ray ray) {
+          // Only set ray if the ray has collided with something
+          if(hit) { this.nextRay = ray; return; }
           throw new IllegalStateException("Cannot set next ray when the ray didn't hit anything");
      }
 }
