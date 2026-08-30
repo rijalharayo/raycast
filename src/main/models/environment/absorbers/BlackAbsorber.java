@@ -3,7 +3,6 @@ package main.models.environment.absorbers;
 import main.math.algebra.Vector2;
 import main.math.shapes.polygons.Rectangle;
 import main.models.data.IntersectionData;
-import main.models.data.RayData;
 import main.models.entities.LightRay;
 import main.physics.colliders.BoxCollider;
 import main.physics.optics.Material;
@@ -32,7 +31,7 @@ public class BlackAbsorber extends Absorber {
      }
 
      @Override
-     protected RayData absorb(LightRay ray, IntersectionData intersectionData) {
+     protected LightRay absorb(LightRay ray, IntersectionData intersectionData) {
           // Completely absorbs light
           return null;
      }

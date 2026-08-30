@@ -19,7 +19,7 @@ public abstract class Mirror extends Reflector {
      }
 
      @Override
-     protected RayData reflect(LightRay ray, IntersectionData intersectionData) {
+     protected LightRay reflect(LightRay ray, IntersectionData intersectionData) {
           // Calculates the mirror's relative surface data
           SurfaceData surfaceData = calculateSurfaceData(intersectionData);
 
@@ -39,6 +39,6 @@ public abstract class Mirror extends Reflector {
           // The tail is offset by a tiny bit (to account for precision errros)
           Vector2 reflectionTail = intersectionData.getIntersectionPoint().add(reflectionVector.multiply(0.01f));
 
-          return new RayData(reflectionTail, reflectionTip);
+          return new LightRay(new RayData(reflectionTail, reflectionTip));
      }
 }

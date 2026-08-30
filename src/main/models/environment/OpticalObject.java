@@ -7,7 +7,6 @@ import main.math.Line;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.data.IntersectionData;
-import main.models.data.RayData;
 import main.models.data.SurfaceData;
 import main.models.entities.LightRay;
 import main.physics.colliders.Collider;
@@ -45,7 +44,7 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      }
 
      @Override
-     public RayData interact(LightRay ray, CollisionData collisionData) {
+     public LightRay interact(LightRay ray, CollisionData collisionData) {
           if(collisionData == null) return null;
           return this.interactWithRay(ray, collisionData.getIntersectionData());
      }
@@ -112,5 +111,5 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      // Abstract methods
 
      // Interacts & returns data when a ray collides
-     protected abstract RayData interactWithRay(LightRay ray, IntersectionData intersectionData);
+     protected abstract LightRay interactWithRay(LightRay ray, IntersectionData intersectionData);
 }

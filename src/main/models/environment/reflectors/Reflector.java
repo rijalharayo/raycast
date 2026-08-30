@@ -2,7 +2,6 @@ package main.models.environment.reflectors;
 
 import main.math.algebra.Vector2;
 import main.models.data.IntersectionData;
-import main.models.data.RayData;
 import main.models.entities.LightRay;
 import main.models.environment.OpticalObject;
 import main.physics.colliders.Collider;
@@ -20,10 +19,10 @@ public abstract class Reflector extends OpticalObject {
 
      // Getters
      @Override
-     protected RayData interactWithRay(LightRay ray, IntersectionData intersectionData) {
+     protected LightRay interactWithRay(LightRay ray, IntersectionData intersectionData) {
           return this.reflect(ray, intersectionData);
      }
      
      // Abstract methods
-     protected abstract RayData reflect(LightRay ray, IntersectionData intersectionData);
+     protected abstract LightRay reflect(LightRay ray, IntersectionData intersectionData);
 }

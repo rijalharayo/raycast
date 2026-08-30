@@ -6,7 +6,6 @@ import main.game.ShapeRender;
 import main.math.algebra.Vector2;
 import main.math.shapes.Shape;
 import main.models.data.IntersectionData;
-import main.models.data.RayData;
 import main.models.entities.LightRay;
 import main.models.environment.OpticalObject;
 import main.physics.colliders.Collider;
@@ -36,12 +35,12 @@ public abstract class Absorber extends OpticalObject {
      }
 
      @Override
-     protected RayData interactWithRay(LightRay ray, IntersectionData intersectionData) {
+     protected LightRay interactWithRay(LightRay ray, IntersectionData intersectionData) {
           return this.absorb(ray, intersectionData);
      }
 
      // Abstract methods
-     protected abstract RayData absorb(LightRay ray, IntersectionData intersectionData);
+     protected abstract LightRay absorb(LightRay ray, IntersectionData intersectionData);
 
      @Override
      public void render(Graphics2D g) {
