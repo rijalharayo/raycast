@@ -12,7 +12,12 @@ import main.physics.optics.Medium;
 // Represents an optical fibre wire
 public class OpticalFibre extends Refractor {
      private BlackAbsorber[] covers = new BlackAbsorber[2];
+     private Cladding[] claddings = new Cladding[2];
+
      private boolean inScene = false;
+
+     private static final int COVER_HEIGHT = 25;
+     private static final int CLADDING_HEIGHT = 20;
      
      // Constructors
      public OpticalFibre(Vector2 position, int width, int height, float rotation) {
@@ -24,6 +29,7 @@ public class OpticalFibre extends Refractor {
           );
 
           initializeCovers();
+          initializeCladdings();
      }
 
      public OpticalFibre(float x, float y, int width, int height, float rotation) {
@@ -37,6 +43,7 @@ public class OpticalFibre extends Refractor {
           );
 
           initializeCovers();
+          initializeCladdings();
      }
 
      // Initializes covers
@@ -48,14 +55,14 @@ public class OpticalFibre extends Refractor {
           covers[0] = new BlackAbsorber(
                getCoverPosition(1),
                (int) width,
-               25,
+               COVER_HEIGHT,
                (float) Math.toDegrees(getCollider().getRotation())
           );
 
           covers[1] = new BlackAbsorber(
                getCoverPosition(-1),
                (int) width,
-               25,
+               COVER_HEIGHT,
                (float) Math.toDegrees(getCollider().getRotation())
           );
 
@@ -63,12 +70,37 @@ public class OpticalFibre extends Refractor {
           covers[1].setDraggable(false);
      }
 
+     // Initializes claddings
+     private void initializeCladdings() {
+          Rectangle rectangle = (Rectangle) getShape();
+
+          float width = rectangle.getWidth();
+          float rotation = (float) Math.toDegrees(getCollider().getRotation());
+
+          claddings[0] = new Cladding(
+               getCladdingPosition(1),
+               (int) width,
+               CLADDING_HEIGHT,
+               rotation
+          );
+
+          claddings[1] = new Cladding(
+               getCladdingPosition(-1),
+               (int) width,
+               CLADDING_HEIGHT,
+               rotation
+          );
+
+          claddings[0].setDraggable(false);
+          claddings[1].setDraggable(false);
+     }
+
      // Gets the position of a cover
      private Vector2 getCoverPosition(float direction) {
           Rectangle rectangle = (Rectangle) getShape();
 
           float height = rectangle.getHeight();
-          float offset = height / 2f + 12.5f;
+          float offset = height / 2f + CLADDING_HEIGHT +  (COVER_HEIGHT / 2);
           float rotation = getCollider().getRotation();
 
           Vector2 offsetVector = new Vector2(
@@ -81,12 +113,37 @@ public class OpticalFibre extends Refractor {
           return getPosition().add(rotatedOffset);
      }
 
-     // Updates cover positions and rotations
-     private void updateCovers() {
+     // Gets the position of a cladding
+     private Vector2 getCladdingPosition(float direction) {
+          Rectangle rectangle = (Rectangle) getShape();
+
+          float height = rectangle.getHeight();
+          float offset = height / 2f + (CLADDING_HEIGHT / 2);
+          float rotation = getCollider().getRotation();
+
+          Vector2 offsetVector = new Vector2(
+               0,
+               offset * direction
+          );
+
+          Vector2 rotatedOffset = Matrix2x2.getRotationMatrix(rotation).transform(offsetVector);
+
+          return getPosition().add(rotatedOffset);
+     }
+
+     // Updates cover & cladding positions and rotations
+     private void updateComponents() {
           covers[0].setPosition(getCoverPosition(1));
-          covers[1].setPosition(getCoverPosition(-1));
+          covers[1].setPosition(getCoverPosition(-1)); 
+
+          claddings[0].setPosition(getCladdingPosition(1));
+          claddings[1].setPosition(getCladdingPosition(-1));
 
           if(SceneManager.getCurrentScene() != null && !inScene) {
+               for(Cladding cladding : claddings) {
+                    SceneManager.getCurrentScene().add(cladding);
+               }
+
                for(BlackAbsorber absorber : covers) {
                     SceneManager.getCurrentScene().add(absorber);
                }
@@ -98,6 +155,19 @@ public class OpticalFibre extends Refractor {
      @Override
      public void update() {
           super.update();
-          updateCovers();
+          updateComponents();
+     }
+}
+
+// Cladding of the optical fibre
+class Cladding extends Refractor {
+     // Constructors
+     public Cladding(Vector2 position, int width, int height, float rotation) {
+          super(
+               position,
+               new BoxCollider(position, width, height, rotation),
+               Medium.FLINT_GLASS,
+               new Rectangle(width, height)
+          );
      }
 }
