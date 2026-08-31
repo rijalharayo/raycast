@@ -10,6 +10,7 @@ import main.models.GameObject;
 import main.models.data.RayData;
 import main.models.environment.OpticalObject;
 import main.physics.colliders.CollisionType;
+import main.physics.optics.Medium;
 import main.physics.rays.Ray;
 import main.physics.rays.RayHit;
 import main.physics.rays.VirtualRay;
@@ -18,6 +19,8 @@ import main.physics.rays.VirtualRay;
 public class LightRay extends GameObject implements Ray {
      private Color rayColor = Color.GREEN;
      private static final int STROKE_WIDTH = 2;
+
+     private Medium currentMedium = Medium.AIR;
 
      private RayData rayData;
 
@@ -39,7 +42,6 @@ public class LightRay extends GameObject implements Ray {
           if(color != null) {
                this.rayColor = color;
           }
-
      }
 
      public LightRay(Vector2 start, float angle, float magnitude) {
@@ -57,10 +59,19 @@ public class LightRay extends GameObject implements Ray {
           return rayColor;
      }
 
+     public Medium getCurrentMedium() {
+          return currentMedium;
+     }
+
      // Setters
      public void setRayColor(Color color) {
           if(color == null) throw new IllegalArgumentException("Color can't be null");
           this.rayColor = color;
+     }
+
+     public void setCurrentMedium(Medium medium) {
+          if(medium == null) throw new IllegalArgumentException("Medium can't be null");
+          this.currentMedium = medium;
      }
 
      // Traces/Updates the light ray and returns data on collision
@@ -68,13 +79,13 @@ public class LightRay extends GameObject implements Ray {
           // Creates and casts a virtaul ray from the position of the light ray
           VirtualRay vRay = new VirtualRay(prevPos, this.getRayData().getNormalizedDirection());
           // Gets the collision data
-          RayHit rayHit = vRay.cast();
+          RayHit rayHit = vRay.castDiscrete();
 
           if((rayHit != null) && rayHit.getCollisionType() == CollisionType.OPTICAL_COLLISION) {
                OpticalObject targetObject = (OpticalObject) rayHit.getTargetObject();
 
-               RayData nextRayData = targetObject.interact(this, rayHit.getCollisionData());
-               rayHit.setNextRayData(nextRayData);
+               LightRay nextRay = targetObject.interact(this, rayHit.getCollisionData());
+               rayHit.setNextRay(nextRay);
           }
 
           /* 
