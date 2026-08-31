@@ -12,10 +12,14 @@ import main.physics.colliders.CollisionType;
 // Virtual rays used for raycasting
 public class VirtualRay implements Ray {
      private RayData rayData;
+     // For discrete casting
      public static final float LENGTH = 2f;
 
      private Vector2 currentPosition;
      private Vector2 prevPosition;
+
+     // For continuous casting
+     private float length = -1f;
      
      // Overloaded constructors
      public VirtualRay(Vector2 origin, Vector2 direction) {
@@ -32,13 +36,37 @@ public class VirtualRay implements Ray {
           this.prevPosition = origin;
      }
 
+     public VirtualRay(Vector2 origin, Vector2 direction, float length) {
+          if(length <= 0) {
+               throw new IllegalArgumentException("Length must be greater than 0");
+          }
+
+          rayData = new RayData();
+          rayData.setFromDirection(origin, direction.getAngle(), length);
+          this.currentPosition = origin;
+          this.prevPosition = origin;
+          this.length = length;
+     }
+
+     public VirtualRay(Vector2 origin, float angle, float length) {
+          if(length <= 0) {
+               throw new IllegalArgumentException("Length must be greater than 0");
+          }
+
+          rayData = new RayData();
+          rayData.setFromDirection(origin, angle, length);
+          this.currentPosition = origin;
+          this.prevPosition = origin;
+          this.length = length;
+     }
+
      // Getters
      public Vector2 getCurrentPosition() {
           return currentPosition;
      }
 
      // Casts the ray in the direction until collision
-     public RayHit cast() {
+     public RayHit castDiscrete() {
           boolean collision = false;
 
           RayHit rayHit = null;
@@ -69,7 +97,40 @@ public class VirtualRay implements Ray {
           return rayHit;
      }
 
-     // Checks if the virtual ray has gone out of bounds
+     // Cast a ray of some length and returns the closest collision
+     public RayHit cast() {
+          if(this.length <= 0f) {
+               throw new IllegalArgumentException("A valid length must be set");
+          }
+
+          Vector2 start = rayData.getStart();
+
+          RayHit closestHit = null;
+          float closestDistance = Float.MAX_VALUE;
+
+          for (OpticalObject opticalObject : SceneManager.getCurrentScene().getSceneOpticalObjects()) {
+               CollisionData collisionData = opticalObject.getCollider().collideWithRay(this);
+
+               // Continue if no collision
+               if (collisionData == null) {
+                    continue;
+               }
+
+               // Get the distance between the collision point and the origin of the ray
+               float distance = (float) collisionData.getCollisionPoint().subtract(start).getMagnitude();
+
+               // If it's closer, set it as the closest
+               if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestHit = new RayHit(true, collisionData, opticalObject, CollisionType.OPTICAL_COLLISION);
+               }
+          }
+
+          // The closest collision is the next collision
+          return closestHit;
+     }
+
+          // Checks if the virtual ray has gone out of bounds
      public boolean isOutOfBounds() {
           boolean outOfBounds = false;
 
