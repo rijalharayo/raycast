@@ -18,6 +18,9 @@ public class VirtualRay implements Ray {
      private Vector2 currentPosition;
      private Vector2 prevPosition;
 
+     // An object the ray must ignore when casted
+     private OpticalObject objectOfAvoidance = null;
+
      // For continuous casting
      private float length = -1f;
      
@@ -63,6 +66,11 @@ public class VirtualRay implements Ray {
      // Getters
      public Vector2 getCurrentPosition() {
           return currentPosition;
+     }
+
+     // Setters
+     public void ignoreObject(OpticalObject object) {
+          this.objectOfAvoidance = object;
      }
 
      // Casts the ray in the direction until collision
@@ -120,7 +128,7 @@ public class VirtualRay implements Ray {
                float distance = (float) collisionData.getCollisionPoint().subtract(start).getMagnitude();
 
                // If it's closer, set it as the closest
-               if (distance < closestDistance) {
+               if ((distance < closestDistance) && opticalObject != objectOfAvoidance) {
                     closestDistance = distance;
                     closestHit = new RayHit(true, collisionData, opticalObject, CollisionType.OPTICAL_COLLISION);
                }
@@ -179,7 +187,7 @@ public class VirtualRay implements Ray {
           for(OpticalObject opticalObject : opticalObjects) {
                CollisionData collisionData = opticalObject.getCollider().collideWithRay(this);
 
-               if(collisionData != null) {
+               if((collisionData != null) && (opticalObject != objectOfAvoidance)) {
                     RayHit rayHit = new RayHit(true, collisionData, opticalObject, CollisionType.OPTICAL_COLLISION);
 
                     // The ray has hit something

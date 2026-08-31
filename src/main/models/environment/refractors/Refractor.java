@@ -160,9 +160,11 @@ public abstract class Refractor extends OpticalObject {
      // Calculates the next medium of travel
      private Medium getNextMedium(Vector2 intersectionPoint, Vector2 normal) {
           // Starts a little back
-          Vector2 testStart = intersectionPoint.subtract(normal.multiply(0.001f));
+          Vector2 testStart = intersectionPoint.subtract(normal.multiply(0.1f));
           // Creates a new virtual ray of a small length
           VirtualRay vRay = new VirtualRay(testStart, normal, 0.5f);
+          vRay.ignoreObject(this);
+
           // Continuous cast
           RayHit hit = vRay.cast();
 
