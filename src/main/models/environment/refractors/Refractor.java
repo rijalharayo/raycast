@@ -106,6 +106,8 @@ public abstract class Refractor extends OpticalObject {
           
                RayData data = new RayData(reflectionTail, reflectionTip);
                newRay = new LightRay(data);
+               // Medium is unchanged
+               newRay.setCurrentMedium(medium);
 
                return newRay;
           }
