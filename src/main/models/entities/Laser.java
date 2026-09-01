@@ -147,6 +147,11 @@ public class Laser extends GameObject {
      }
 
      @Override
+     public void setRotation(float angle) {
+          sprite.setRotation(angle);
+     }
+
+     @Override
      public void render(Graphics2D g) {
           super.render(g);
           // Render all the rays shot from the laser if its on

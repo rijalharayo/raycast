@@ -86,25 +86,17 @@ public abstract class GameObject {
      }
 
      public void setRotation(float angle) {
-          if(sprite == null) {
-               throw new NullPointerException("No sprite set");
-          }
-          sprite.setRotation(angle);
-
-          if(collider != null) {
-               collider.setRotation((float) Math.toRadians(angle));
-          }
+          if(collider == null) throw new NullPointerException("No collider set");
+          else collider.setRotation((float) Math.toRadians(angle));
+          
+          if(sprite != null) sprite.setRotation(angle);
      }
 
      public void rotate(float angle) {
-          if(sprite == null) {
-               throw new NullPointerException("No sprite set");
-          }
-          sprite.rotate(angle);
-
-          if(collider != null) {
-               collider.setRotation(collider.getRotation() + (float) Math.toRadians(angle));
-          }
+          if(collider == null) throw new NullPointerException("No collider set");
+          else collider.setRotation(collider.getRotation() + (float) Math.toRadians(angle));
+          
+          if(sprite != null) sprite.rotate(angle);
      }
 
      public void showCollider() {
