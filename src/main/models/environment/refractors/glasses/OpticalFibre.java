@@ -153,6 +153,32 @@ public class OpticalFibre extends Refractor {
      }
 
      @Override
+     public void setRotation(float angle) {
+          super.setRotation(angle);
+
+          for(Cladding cladding : claddings) {
+               cladding.setRotation(angle);
+          }
+
+          for(BlackAbsorber cover : covers) {
+               cover.setRotation(angle);
+          }
+     }
+
+     @Override
+     public void rotate(float angle) {
+          super.rotate(angle);
+
+          for(Cladding cladding : claddings) {
+               cladding.rotate(angle);
+          }
+
+          for(BlackAbsorber cover : covers) {
+               cover.rotate(angle);
+          }
+     }
+
+     @Override
      public void update() {
           super.update();
           updateComponents();

@@ -194,4 +194,18 @@ public abstract class Refractor extends OpticalObject {
                medium.getColor()
           );
      }
+
+     @Override
+     public void rotate(float angle) {
+          if(collider != null) {
+               collider.setRotation(collider.getRotation() + (float) Math.toRadians(angle));
+          }
+     }
+
+     @Override
+     public void setRotation(float angle) {
+          if(collider != null) {
+               collider.setRotation((float) Math.toRadians(angle));
+          }
+     }
 }
