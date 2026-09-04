@@ -146,16 +146,22 @@ public class ShapeRender {
 
           g.setColor(color);
 
+          // Starts the outer arc half an angle before the midpoint
+          float outerStartAngle = (float) Math.toDegrees(arc.getRotation() - (angle / 2));
+
           Arc2D.Float outerArc =
                new Arc2D.Float(
                     cx - radius,
                     cy - radius,
                     radius * 2,
                     radius * 2,
-                    0,
+                    outerStartAngle,
                     (float) Math.toDegrees(angle),
                     Arc2D.OPEN
                );
+
+          // Starts the inner arc at the opposite endpoint
+          float innerStartAngle = (float) Math.toDegrees(arc.getRotation() + (angle / 2));
 
           Arc2D.Float innerArc =
                new Arc2D.Float(
@@ -163,7 +169,7 @@ public class ShapeRender {
                     cy - innerRadius,
                     innerRadius * 2,
                     innerRadius * 2,
-                    (float) Math.toDegrees(angle),
+                    innerStartAngle,
                     (float) Math.toDegrees(-angle),
                     Arc2D.OPEN
                );
@@ -173,12 +179,6 @@ public class ShapeRender {
           arcShape.append(outerArc, false);
           arcShape.append(innerArc, true);
           arcShape.closePath();
-
-          g.rotate(
-               -rotation,
-               cx,
-               cy
-          );
 
           g.fill(arcShape);
 
