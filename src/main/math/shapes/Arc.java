@@ -47,10 +47,22 @@ public class Arc extends Shape {
 
           float innerRadius = radius - thickness;
 
+          /*
+               The rotation represents the direction of the arc's midpoint,
+               rather than the direction of its starting endpoint.
+
+               Therefore, the arc must be offset by half of its total angle
+               so that it extends equally on both sides of the specified
+               rotation and keeps the rotation aligned with the arc's center.
+          */
+
+          // Starts the outer arc half an angle before the specified rotation
+          float startAngle = rotation - (angle / 2);
+
           // Outer arc
           for(int i = 0; i < arcVertexCount; i++) {
-               // Accounts for rotation
-               float theta = rotation + i * DELTA_THETA;
+               // Centers the arc around the specified rotation
+               float theta = startAngle + i * DELTA_THETA;
 
                localVertices[i] = new Vector2(
                     (float) (radius * Math.cos(theta)),
@@ -58,12 +70,15 @@ public class Arc extends Shape {
                );
           }
 
+          // Starts the inner arc at the opposite endpoint so it can be traversed backwards
+          startAngle = rotation + (angle / 2);
+
           // Only make inner arc if it has thickness
           if(thickness > 0) {
                // Inner arc backwards
                for(int i = 0; i < arcVertexCount; i++) {
-                    // Accounts for rotation
-                    float theta = rotation + angle - (i * DELTA_THETA);
+                    // Centers the arc around the specified rotation
+                    float theta = startAngle - (i * DELTA_THETA);
 
                     localVertices[i + arcVertexCount] = new Vector2(
                          (float) (innerRadius * Math.cos(theta)),
@@ -126,14 +141,12 @@ public class Arc extends Shape {
      }
 
      public Vector2 getLocalCenterOffset() {
-          float middleAngle = angle / 2;
-
           Vector2 surfaceOffset = new Vector2(
-               radius * (float) Math.cos(middleAngle),
-               radius * (float) Math.sin(middleAngle)
+               -radius,
+               0
           );
 
-          return surfaceOffset.multiply(-1f);
+          return surfaceOffset;
      }
 
      public Vector2 getWorldCenterOfCurvature(Vector2 parentPosition, float rotation) {
