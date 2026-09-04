@@ -19,6 +19,8 @@ public class Arc extends Shape {
 
      // Constructors
      public Arc(float radius, float angle, float thickness) {
+          if(thickness < 0) throw new IllegalArgumentException("Thickness can't be negative");
+
           this.radius = radius;
           this.angle = angle;
           this.thickness = thickness;
@@ -27,6 +29,8 @@ public class Arc extends Shape {
      }
 
      public Arc(float radius, float angle, float thickness, float rotation) {
+          if(thickness < 0) throw new IllegalArgumentException("Thickness can't be negative");
+
           this.radius = radius;
           this.angle = angle;
           this.thickness = thickness;
@@ -37,8 +41,9 @@ public class Arc extends Shape {
 
      public void apporximateArc() {
           int arcVertexCount = Math.round(angle / DELTA_THETA) + 1;
+          int actualVertexCount = thickness == 0 ? arcVertexCount : arcVertexCount * 2;
 
-          Vector2[] localVertices = new Vector2[arcVertexCount * 2];
+          Vector2[] localVertices = new Vector2[actualVertexCount];
 
           float innerRadius = radius - thickness;
 
@@ -53,32 +58,42 @@ public class Arc extends Shape {
                );
           }
 
-          // Inner arc backwards
-          for(int i = 0; i < arcVertexCount; i++) {
-               // Accounts for rotation
-               float theta = rotation + angle - (i * DELTA_THETA);
+          // Only make inner arc if it has thickness
+          if(thickness > 0) {
+               // Inner arc backwards
+               for(int i = 0; i < arcVertexCount; i++) {
+                    // Accounts for rotation
+                    float theta = rotation + angle - (i * DELTA_THETA);
 
-               localVertices[i + arcVertexCount] = new Vector2(
-                    (float) (innerRadius * Math.cos(theta)),
-                    (float) (innerRadius * Math.sin(theta))
+                    localVertices[i + arcVertexCount] = new Vector2(
+                         (float) (innerRadius * Math.cos(theta)),
+                         (float) (innerRadius * Math.sin(theta))
+                    );
+                    
+               }
+
+               // The two flat edges connecting the arcs
+               Line startFlat = new Line(
+                    localVertices[2 * arcVertexCount - 1],
+                    localVertices[0]
+               );
+
+               Line endFlat = new Line(
+                    localVertices[arcVertexCount - 1],
+                    localVertices[arcVertexCount]
+               );
+
+               this.flatEdges[0] = startFlat;
+               this.flatEdges[1] = endFlat;
+          }
+          else {
+               flatEdges[0] = new Line(
+                    localVertices[arcVertexCount - 1],
+                    localVertices[0]
                );
           }
 
           this.approximatedPolygon = new Polygon(localVertices);
-
-          // The two flat edges connecting the arcs
-          Line startFlat = new Line(
-               localVertices[2 * arcVertexCount - 1],
-               localVertices[0]
-          );
-
-          Line endFlat = new Line(
-               localVertices[arcVertexCount - 1],
-               localVertices[arcVertexCount]
-          );
-
-          this.flatEdges[0] = startFlat;
-          this.flatEdges[1] = endFlat;
      }
 
      // Getters
@@ -225,6 +240,10 @@ public class Arc extends Shape {
           );
 
           return approximatedPolygon.getWorldEdges(center);
+     }
+
+     public Polygon getApproximatedPolygon() {
+          return approximatedPolygon;
      }
 
      @Override
