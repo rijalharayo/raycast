@@ -15,26 +15,26 @@ import main.models.data.SurfaceData;
 // Converging lens
 public class ConvexLens extends Lens {
      // Constructors
-     public ConvexLens(Vector2 position, float radiusOfCurvature, float appertureThickness, float rotation) {
+     public ConvexLens(Vector2 position, float radiusOfCurvature, float centerThickness, float rotation) {
           super(
                position,
-               createShape(radiusOfCurvature, appertureThickness),
+               createShape(radiusOfCurvature, centerThickness),
                radiusOfCurvature,
-               appertureThickness,
-               calculateArcAngle(radiusOfCurvature, appertureThickness),
+               centerThickness,
+               calculateArcAngle(radiusOfCurvature, centerThickness),
                rotation
           );
      }
 
-     public ConvexLens(float x, float y, float radiusOfCurvature, float appertureThickness, float rotation) {
+     public ConvexLens(float x, float y, float radiusOfCurvature, float centerThickness, float rotation) {
           Vector2 position = new Vector2(x, y);
           
           super(
                position,
-               createShape(radiusOfCurvature, appertureThickness),
+               createShape(radiusOfCurvature, centerThickness),
                radiusOfCurvature,
-               appertureThickness,
-               calculateArcAngle(radiusOfCurvature, appertureThickness),
+               centerThickness,
+               calculateArcAngle(radiusOfCurvature, centerThickness),
                rotation
           );
      }
@@ -56,11 +56,11 @@ public class ConvexLens extends Lens {
      }
 
      // Hides parent static calculateArcAngle method
-     protected static float calculateArcAngle(float radiusOfCurvature, float appertureThickness) {
+     protected static float calculateArcAngle(float radiusOfCurvature, float centerThickness) {
           /**
                A convex lens can be constructed from the intersecting regions of two circles.
 
-               Assuming the lens has a radius of curvature 'r' and an aperture diameter 'w',
+               Assuming the lens has a radius of curvature 'r' and a center thickness 'w',
                the radius of each circle is:
 
                     R = r + (w / 2)
@@ -72,7 +72,7 @@ public class ConvexLens extends Lens {
           */
 
           float r = radiusOfCurvature;
-          float R = radiusOfCurvature + (appertureThickness / 2);
+          float R = radiusOfCurvature + (centerThickness / 2);
 
           // Ratio of the two radii
           float sinRatio = r / R;
@@ -86,12 +86,12 @@ public class ConvexLens extends Lens {
      }
 
      // Hides parent static createShape method
-     protected static Polygon createShape(float radiusOfCurvature, float appertureThickness) {
+     protected static Polygon createShape(float radiusOfCurvature, float centerThickness) {
           // Calculates the required angle
-          float theta = calculateArcAngle(radiusOfCurvature, appertureThickness);
+          float theta = calculateArcAngle(radiusOfCurvature, centerThickness);
 
           float r = radiusOfCurvature;
-          float R = radiusOfCurvature + (appertureThickness / 2);
+          float R = radiusOfCurvature + (centerThickness / 2);
 
           // Creates the two opposing lens surfaces
           Arc arc1 = new Arc(R, theta, 0f);
@@ -162,8 +162,8 @@ public class ConvexLens extends Lens {
      // Draws the shape to be rendered
      @Override
      protected void drawShape(Graphics2D g) {
-          float r = getRadiusOfCurvature();
-          float w = getAppertureThickness();
+          float r = radiusOfCurvature;
+          float w = centerThickness;
           float R = r + (w / 2);
           float theta = arcAngle;
           float rotation = collider.getRotation();
