@@ -184,7 +184,11 @@ public abstract class Refractor extends OpticalObject {
      @Override
      public void render(Graphics2D g) {
           super.render(g);
+          drawShape(g);
+     }
 
+     // Draws the shape to be rendered
+     protected void drawShape(Graphics2D g) {
           // Draws the shape to the screen
           ShapeRender.draw(
                g,
