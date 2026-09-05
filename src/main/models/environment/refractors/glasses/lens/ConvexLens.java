@@ -40,12 +40,15 @@ public class ConvexLens extends Lens {
      }
 
      // Getters
+
+     @Override
      public Vector2 getLeftFaceCenterOfCurvature() {
           float r = getRadiusOfCurvature();
           float rotation = collider.getRotation();
           return position.add(new Vector2(r, 0).rotate(rotation));
      }
 
+     @Override 
      public Vector2 getRightFaceCenterOfCurvature() {
           float r = getRadiusOfCurvature();
           float rotation = collider.getRotation();

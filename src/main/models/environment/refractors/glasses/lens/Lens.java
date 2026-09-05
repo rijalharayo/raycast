@@ -65,6 +65,9 @@ public abstract class Lens extends Refractor {
           return this.appertureThickness;
      }
 
+     public abstract Vector2 getLeftFaceCenterOfCurvature();
+     public abstract Vector2 getRightFaceCenterOfCurvature();
+
      /**
           Creates the required lens shape.
           
