@@ -61,6 +61,12 @@ public class Vector2 {
           return (float) Math.sqrt(h);
      }
 
+     // Returns the distance between two points
+     public float distance(Vector2 other) {
+          Vector2 relativeVector = other.subtract(this);
+          return relativeVector.getMagnitude();
+     }
+
      // Linear interpolates the vector
      public Vector2 lerp(Vector2 target, float t) {
           return new Vector2(
