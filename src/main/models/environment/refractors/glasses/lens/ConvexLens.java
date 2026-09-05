@@ -21,6 +21,7 @@ public class ConvexLens extends Lens {
                createShape(radiusOfCurvature, centerThickness),
                radiusOfCurvature,
                centerThickness,
+               calculateApertureDiameter(radiusOfCurvature, centerThickness),
                calculateArcAngle(radiusOfCurvature, centerThickness),
                rotation
           );
@@ -34,6 +35,7 @@ public class ConvexLens extends Lens {
                createShape(radiusOfCurvature, centerThickness),
                radiusOfCurvature,
                centerThickness,
+               calculateApertureDiameter(radiusOfCurvature, centerThickness),
                calculateArcAngle(radiusOfCurvature, centerThickness),
                rotation
           );
@@ -53,6 +55,15 @@ public class ConvexLens extends Lens {
           float r = getRadiusOfCurvature();
           float rotation = collider.getRotation();
           return position.add(new Vector2(-r, 0).rotate(rotation));
+     }
+
+     // Calculates the aperture diameter of the lens from the radius of curvature and thickness
+     private static float calculateApertureDiameter(float radiusOfCurvature, float centerThickness) {
+          float r = radiusOfCurvature;
+          float w = centerThickness;
+          float R = r + (w / 2);
+
+          return 2 * (float) Math.sqrt((R * R) - (r * r));
      }
 
      // Hides parent static calculateArcAngle method
