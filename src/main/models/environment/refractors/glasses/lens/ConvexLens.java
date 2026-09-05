@@ -101,8 +101,8 @@ public class ConvexLens extends Lens {
           Vector2[] localVertices2 = arc2.getApproximatedPolygon().getLocalVertices();
 
           // Positions each circle center relative to the optical center
-          Vector2 center1Offset = new Vector2(-r, 0);
-          Vector2 center2Offset = new Vector2(r, 0);
+          Vector2 center1Offset = Vector2.LEFT.multiply(r); // (-r, 0)
+          Vector2 center2Offset = Vector2.RIGHT.multiply(r); // (r, 0)
 
           // Combines both arcs while removing their two shared vertices
           Vector2[] vertices = new Vector2[localVertices1.length + localVertices2.length - 2];

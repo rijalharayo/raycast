@@ -75,13 +75,17 @@ public abstract class Lens extends Refractor {
      public Vector2 getLeftFaceCenterOfCurvature() {
           float r = getRadiusOfCurvature();
           float rotation = collider.getRotation();
-          return position.add(new Vector2(r, 0).rotate(rotation));
+          
+          Vector2 offset = Vector2.LEFT.multiply(r); // (-r, 0)
+          return position.add(offset.rotate(rotation));
      };
 
      public Vector2 getRightFaceCenterOfCurvature() {
           float r = getRadiusOfCurvature();
           float rotation = collider.getRotation();
-          return position.add(new Vector2(-r, 0).rotate(rotation));
+
+          Vector2 offset = Vector2.RIGHT.multiply(r); // (r, 0)
+          return position.add(offset.rotate(rotation));
      };
 
      /**
