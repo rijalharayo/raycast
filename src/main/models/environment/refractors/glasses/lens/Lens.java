@@ -72,8 +72,17 @@ public abstract class Lens extends Refractor {
           return this.apertureDiameter;
      }
 
-     public abstract Vector2 getLeftFaceCenterOfCurvature();
-     public abstract Vector2 getRightFaceCenterOfCurvature();
+     public Vector2 getLeftFaceCenterOfCurvature() {
+          float r = getRadiusOfCurvature();
+          float rotation = collider.getRotation();
+          return position.add(new Vector2(r, 0).rotate(rotation));
+     };
+
+     public Vector2 getRightFaceCenterOfCurvature() {
+          float r = getRadiusOfCurvature();
+          float rotation = collider.getRotation();
+          return position.add(new Vector2(-r, 0).rotate(rotation));
+     };
 
      /**
           Creates the required lens shape.
