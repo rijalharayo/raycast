@@ -80,9 +80,10 @@ public abstract class Lens extends Refractor {
           
           @param radiusOfCurvature the radius of curvature of the lens
           @param centerThickness the thickness of the lens
+          @param apertureDiameter the aperture diameter of the lens
           @return the Polygon representing the lens shape
      */
-     protected static Polygon createShape(float radiusOfCurvature, float centerThickness) {
+     protected static Polygon createShape(float radiusOfCurvature, float centerThickness, float apertureDiameter) {
           throw new UnsupportedOperationException(
                "Lens subclass must define its own static createShape() method."
           );
@@ -93,9 +94,10 @@ public abstract class Lens extends Refractor {
           
           @param radiusOfCurvature the radius of curvature of the lens
           @param centerThickness the thickness of the lens
+          @param apertureDiameter the aperture diameter of the lens
           @return The angle of the arc (minor angle)
      */
-     protected static float calculateArcAngle(float radiusOfCurvature, float centerThickness) {
+     protected static float calculateArcAngle(float radiusOfCurvature, float centerThickness, float apertureDiameter) {
           throw new UnsupportedOperationException(
                "Lens subclass must define its own static calculateArcAngle() method."
           );

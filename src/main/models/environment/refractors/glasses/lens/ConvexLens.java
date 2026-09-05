@@ -18,11 +18,11 @@ public class ConvexLens extends Lens {
      public ConvexLens(Vector2 position, float radiusOfCurvature, float centerThickness, float rotation) {
           super(
                position,
-               createShape(radiusOfCurvature, centerThickness),
+               createShape(radiusOfCurvature, centerThickness, 0f), // Aperture diameter is not required
                radiusOfCurvature,
                centerThickness,
                calculateApertureDiameter(radiusOfCurvature, centerThickness),
-               calculateArcAngle(radiusOfCurvature, centerThickness),
+               calculateArcAngle(radiusOfCurvature, centerThickness, 0f), // Aperture diameter is not required
                rotation
           );
      }
@@ -32,11 +32,11 @@ public class ConvexLens extends Lens {
           
           super(
                position,
-               createShape(radiusOfCurvature, centerThickness),
+               createShape(radiusOfCurvature, centerThickness, 0f), // Aperture diameter is not required
                radiusOfCurvature,
                centerThickness,
                calculateApertureDiameter(radiusOfCurvature, centerThickness),
-               calculateArcAngle(radiusOfCurvature, centerThickness),
+               calculateArcAngle(radiusOfCurvature, centerThickness, 0f), // Aperture diameter is not required
                rotation
           );
      }
@@ -67,7 +67,8 @@ public class ConvexLens extends Lens {
      }
 
      // Hides parent static calculateArcAngle method
-     protected static float calculateArcAngle(float radiusOfCurvature, float centerThickness) {
+     // Aperture diameter is only included here to properly hide the parent's static method
+     protected static float calculateArcAngle(float radiusOfCurvature, float centerThickness, float apertureDiameter) {
           /**
                A convex lens can be constructed from the intersecting regions of two circles.
 
@@ -80,6 +81,8 @@ public class ConvexLens extends Lens {
                the geometry of the intersecting circles:
 
                     θ = π - 2sin⁻¹(r / R)
+
+               The aperture diameter is useless here.
           */
 
           float r = radiusOfCurvature;
@@ -97,9 +100,10 @@ public class ConvexLens extends Lens {
      }
 
      // Hides parent static createShape method
-     protected static Polygon createShape(float radiusOfCurvature, float centerThickness) {
+     // Aperture diameter is only included here to properly hide the parent's static method
+     protected static Polygon createShape(float radiusOfCurvature, float centerThickness, float appertureDiameter) {
           // Calculates the required angle
-          float theta = calculateArcAngle(radiusOfCurvature, centerThickness);
+          float theta = calculateArcAngle(radiusOfCurvature, centerThickness, 0f); // Aperture diameter is not required for convex lens
 
           float r = radiusOfCurvature;
           float R = radiusOfCurvature + (centerThickness / 2);
