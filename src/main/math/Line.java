@@ -20,6 +20,11 @@ public class Line {
           this.start = start;
           this.end = end;
      }
+
+     public Line(Line other) {
+          this.start = other.getStart();
+          this.end = other.getEnd();
+     }
      
      // Getters
      public Vector2 getStart() {
