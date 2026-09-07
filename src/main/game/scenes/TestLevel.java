@@ -8,6 +8,7 @@ import main.models.environment.refractors.glasses.GlassBlock;
 import main.models.environment.refractors.glasses.GlassDisc;
 import main.models.environment.refractors.glasses.OpticalFibre;
 import main.models.environment.refractors.glasses.Prism;
+import main.models.environment.refractors.glasses.lens.ConcaveLens;
 import main.models.environment.refractors.glasses.lens.ConvexLens;
 
 public class TestLevel extends LevelScene {
@@ -31,5 +32,6 @@ public class TestLevel extends LevelScene {
           add(new OpticalFibre(-400, 200, 500, 100, 0f));
 
           add(new ConvexLens(0f, 0f, 200f, 90f, 0f));
+          add(new ConcaveLens(100f, 0f, 200f, 90f, 200f, 0f));
      }
 }
