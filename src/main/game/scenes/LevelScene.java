@@ -1,7 +1,9 @@
-package main.game;
+package main.game.scenes;
 
 import java.awt.Graphics2D;
 
+import main.game.Game;
+import main.game.Scene;
 import main.models.Sprite;
 
 public abstract class LevelScene extends Scene {

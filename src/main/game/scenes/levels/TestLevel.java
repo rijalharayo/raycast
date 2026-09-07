@@ -1,6 +1,6 @@
-package main.game.scenes;
+package main.game.scenes.levels;
 
-import main.game.LevelScene;
+import main.game.scenes.LevelScene;
 import main.models.Sprite;
 import main.models.entities.Laser;
 import main.models.environment.refractors.fluids.WaterTank;

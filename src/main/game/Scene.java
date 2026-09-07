@@ -8,6 +8,7 @@ import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.Sprite;
 import main.models.environment.OpticalObject;
+import main.ui.UIComponent;
 
 public abstract class Scene {
 
@@ -15,6 +16,7 @@ public abstract class Scene {
      protected final List<GameObject> objectsToAdd = new ArrayList<>();
      protected final List<GameObject> objectsToRemove = new ArrayList<>();
      protected final List<OpticalObject> opticalObjects = new ArrayList<>();
+     protected final List<UIComponent> uiComponents = new ArrayList<>();
 
      protected Sprite background;
 
@@ -59,6 +61,15 @@ public abstract class Scene {
           objectsToRemove.add(gameObject);
      }
 
+     // Adds ui component to the list
+     public void add(UIComponent uiComponent) {
+          if(uiComponent == null) {
+               throw new IllegalArgumentException("UI Component can't be null");
+          }
+
+          uiComponents.add(uiComponent);
+     }
+
      public OpticalObject[] getSceneOpticalObjects() {
           return opticalObjects.toArray(new OpticalObject[0]);
      }
@@ -77,6 +88,10 @@ public abstract class Scene {
      public void render(Graphics2D g) {
           for(GameObject obj : gameObjects) {
                obj.render(g);
+          }
+
+          for(UIComponent uiComponent : uiComponents) {
+               uiComponent.render(g);
           }
      }
 
