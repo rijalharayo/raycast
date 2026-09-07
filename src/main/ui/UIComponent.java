@@ -41,4 +41,6 @@ public abstract class UIComponent {
      }
 
      public abstract void render(Graphics2D g);
+     // Renders at some other position
+     public abstract void render(Graphics2D g, Vector2 position);
 }

@@ -44,6 +44,14 @@ public class UIText extends UIComponent {
           this.fontColor = color;
      }
 
+     public void setSize(float size) {
+          this.fontSize = size;
+     }
+
+     public void setText(String textString) {
+          this.text = textString;
+     }
+
      @Override
      public void render(Graphics2D g) {
           Font font = DEFAULT_FONT.deriveFont(fontSize);
@@ -57,7 +65,25 @@ public class UIText extends UIComponent {
 
           // Positions by center
           float x = screenPos.getX() - metrics.stringWidth(text) / 2f;
-          float y = screenPos.getY() - (metrics.getAscent() - metrics.getDescent()) / 2f;
+          float y = screenPos.getY() + (metrics.getAscent() - metrics.getDescent()) / 2f;
+
+          g.drawString(text, x, y);
+     }
+
+     @Override
+     public void render(Graphics2D g, Vector2 position) {
+          Font font = DEFAULT_FONT.deriveFont(fontSize);
+
+          g.setFont(font);
+          g.setColor(fontColor);
+
+          Vector2 screenPos = Scene.worldToScreen(position);
+
+          FontMetrics metrics = g.getFontMetrics();
+
+          // Positions by center
+          float x = screenPos.getX() - metrics.stringWidth(text) / 2f;
+          float y = screenPos.getY() + (metrics.getAscent() - metrics.getDescent()) / 2f;
 
           g.drawString(text, x, y);
      }
