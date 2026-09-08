@@ -6,22 +6,20 @@ import java.util.List;
 
 import main.game.Game;
 import main.game.Scene;
+import main.game.scenes.menus.LevelSelectionMenu;
+import main.game.scenes.menus.MainMenu;
 import main.models.Sprite;
 import main.ui.UIComponent;
 import main.ui.UILayout;
 
 // Represents general ui menu scenes
 public abstract class MenuScene extends Scene {
+     // Two default menu's
+     private static MainMenu MAIN_MENU;
+     private static LevelSelectionMenu LEVEL_MENU;
+
      private String menuName;
      private final List<UILayout> layouts = new ArrayList<>();
-
-     // Help in positioning components relative to screen borders
-
-     public static final float SCREEN_LEFT = -Game.WIDTH / 2f;
-     public static final float SCREEN_RIGHT = Game.WIDTH / 2f;
-
-     public static final float SCREEN_TOP = Game.HEIGHT / 2f;
-     public static final float SCREEN_BOTTOM = -Game.HEIGHT / 2f;
 
      // Overloaded constructors
      public MenuScene(String menuName) {
@@ -74,8 +72,39 @@ public abstract class MenuScene extends Scene {
           super.render(g);
      }
 
+     public static void initailize() {
+          MenuScene.LEVEL_MENU = new LevelSelectionMenu();
+          MenuScene.MAIN_MENU = new MainMenu();
+     }
+
      @Override
      public String toString() {
           return menuName;
+     }
+
+     // Help in positioning components relative to screen borders
+
+     public static float SCREEN_LEFT() {
+          return -Game.WIDTH / 2f;
+     }
+
+     public static float SCREEN_RIGHT() {
+          return Game.WIDTH / 2f;
+     }
+
+     public static float SCREEN_TOP() {
+          return Game.HEIGHT / 2f;
+     }
+
+     public static float SCREEN_BOTTOM() {
+          return -Game.HEIGHT / 2f;
+     }
+
+     public static MainMenu MAIN_MENU() {
+          return MAIN_MENU;
+     }
+
+     public static LevelSelectionMenu LEVEL_MENU() {
+          return LEVEL_MENU;
      }
 }

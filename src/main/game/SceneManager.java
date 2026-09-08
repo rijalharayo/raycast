@@ -11,5 +11,4 @@ public class SceneManager {
      public static Scene getCurrentScene() {
           return currentScene;
      }
-
 }

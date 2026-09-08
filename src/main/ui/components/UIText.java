@@ -15,7 +15,7 @@ public class UIText extends UIComponent {
      public static final Font DEFAULT_FONT = Fonts.loadFont();
      private float fontSize = 20f;
      private String text;
-     private Color fontColor;
+     private Color fontColor = Color.WHITE;
 
      // Constructor
      public UIText(String text) {

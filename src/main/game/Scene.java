@@ -4,9 +4,6 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.game.scenes.MenuScene;
-import main.game.scenes.menus.LevelSelectionMenu;
-import main.game.scenes.menus.MainMenu;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.Sprite;
@@ -14,9 +11,6 @@ import main.models.environment.OpticalObject;
 import main.ui.UIComponent;
 
 public abstract class Scene {
-     public static final MenuScene MAIN_MENU = new MainMenu();
-     public static final MenuScene LEVEL_MENU = new LevelSelectionMenu();
-
      protected final List<GameObject> gameObjects = new ArrayList<>();
      protected final List<GameObject> objectsToAdd = new ArrayList<>();
      protected final List<GameObject> objectsToRemove = new ArrayList<>();
@@ -103,6 +97,9 @@ public abstract class Scene {
                uiComponent.render(g);
           }
      }
+
+     // Initialization method of Scenes
+     public static void initailize() {};
 
      // Converts world coordinates to screen coordinates
      public static Vector2 worldToScreen(Vector2 worldCoordinate) {

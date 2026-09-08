@@ -2,6 +2,7 @@ package main.game;
 
 import java.awt.Toolkit;
 
+import main.game.scenes.MenuScene;
 import main.input.KeyboardInput;
 import main.input.MouseInput;
 import main.math.algebra.Vector2;
@@ -26,6 +27,8 @@ public class Game implements Runnable {
 
           // Initialize all levels
           LevelManager.initializeLevels();
+          // Initalize the menu's
+          MenuScene.initailize();
 
           // Run the game loop on a separate thread
           new Thread(this).start();
