@@ -24,6 +24,9 @@ public class Game implements Runnable {
           window = new Window(TITLE, WIDTH, HEIGHT);
           running = true;
 
+          // Initialize all levels
+          LevelManager.initializeLevels();
+
           // Run the game loop on a separate thread
           new Thread(this).start();
      }
