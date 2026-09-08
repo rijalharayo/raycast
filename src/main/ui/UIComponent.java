@@ -31,12 +31,16 @@ public abstract class UIComponent {
      }
 
      // Getters
-     protected int width() {
+     public int width() {
           return dimensionShape.getWidth();
      }
 
-     protected int height() {
+     public int height() {
           return dimensionShape.getHeight();
+     }
+
+     public Vector2 getPosition() {
+          return this.position;
      }
 
      // Setters

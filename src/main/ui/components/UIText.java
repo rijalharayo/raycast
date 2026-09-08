@@ -39,6 +39,11 @@ public class UIText extends UIComponent {
           this.fontSize = size;
      }
 
+     // Getters
+     public String getText() {
+          return text;
+     }
+
      // Setters
      public void setColor(Color color) {
           this.fontColor = color;

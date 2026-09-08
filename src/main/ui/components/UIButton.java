@@ -34,6 +34,11 @@ public class UIButton extends UIComponent {
           uiText.setColor(Color.WHITE);
      }
 
+     // Getters
+     public String getText() {
+          return uiText.getText();
+     }
+
      // Setters
 
      public void setText(String txt) {
