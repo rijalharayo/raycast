@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import main.game.scenes.LevelScene;
 import main.game.scenes.levels.Level1;
+import main.game.scenes.levels.Level2;
 
 // Manages all the levels
 public class LevelManager {
@@ -30,6 +31,7 @@ public class LevelManager {
           // Sets the list of levels
 
           addLevel(new Level1());
+          addLevel(new Level2());
      }
 
      // Sets the current level
@@ -62,7 +64,7 @@ public class LevelManager {
      }
 
      // Returns the list of all levels
-     public Collection<LevelScene> getAllLevels() {
+     public static Collection<LevelScene> getAllLevels() {
           return levels.values();
      }
 }

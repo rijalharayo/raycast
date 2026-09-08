@@ -1,5 +1,6 @@
 package main.ui;
 
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,4 +34,18 @@ public abstract class UILayout {
      }
 
      public abstract void layout();
+
+     // Updates it's components
+     public void update() {
+          for (UIComponent component : components) {
+               component.update();
+          }
+     }
+
+     // Renders the components
+     public void render(Graphics2D g) {
+          for (UIComponent component : components) {
+               component.render(g);
+          }
+     }
 }
