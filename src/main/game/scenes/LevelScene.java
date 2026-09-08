@@ -14,7 +14,7 @@ public abstract class LevelScene extends Scene {
      public LevelScene(String levelName, int levelIndex) {
           this.levelName = levelName;
           this.levelIndex = levelIndex;
-          this.background = new Sprite("background1.png");
+          this.background = Sprite.DEFAULT_BACKGROUND;
 
           loadObjects();
      }

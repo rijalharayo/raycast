@@ -14,6 +14,8 @@ import main.math.algebra.Vector2;
 public class Sprite {
      private BufferedImage image;
      private static final String IMAGE_FOLDER = "resources/images/";
+     
+     public static final Sprite DEFAULT_BACKGROUND = new Sprite("background1.png");
 
      private float rotation = 0;
      private float scale = 1f;

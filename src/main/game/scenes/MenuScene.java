@@ -24,7 +24,7 @@ public abstract class MenuScene extends Scene {
      // Overloaded constructors
      public MenuScene(String menuName) {
           this.menuName = menuName;
-          this.background = new Sprite("background1.png");
+          this.background = Sprite.DEFAULT_BACKGROUND;
           loadUI();
      }
 
