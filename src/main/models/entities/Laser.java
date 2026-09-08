@@ -16,6 +16,10 @@ import main.physics.rays.RayHit;
 public class Laser extends GameObject {
      private boolean enabled;
      private boolean on;
+     // Flag to check if the laser is moving or not
+     private boolean isMoving = false;
+     // Tracks time between laser updates
+     private float timeSinceLastMovement = 0f;
 
      // Current pointing dir of the laser
      private float firingAngle = 0f;
@@ -133,15 +137,39 @@ public class Laser extends GameObject {
           // Disabled when 'E' is pressed
           if(KeyboardInput.isPressed(KeyEvent.VK_E)) {
                enabled = !enabled;
-          }
- 
-          if(enabled) {
-               firingAngle = getAngleFromCursor();
-               this.setRotation((float) Math.toDegrees(firingAngle));
+               // Set it to not moving when the laser is disabled
+               isMoving = false; 
+               timeSinceLastMovement = 0f;
           }
 
-          // Update rays if the laser is turned on
-          if(on) {
+          boolean dirtyEnvironment = this.getObjectLevelScene().isEnvironmentDirty();
+
+          if(enabled) {
+               float currentAngle = getAngleFromCursor();
+               // Checks if the firing angle has changed
+               if(Math.abs(currentAngle - firingAngle) > 0.01f) {
+                    isMoving = true;
+                    timeSinceLastMovement = 0f;
+               }
+               else {
+                    // Increase time by a tiny amount
+                    timeSinceLastMovement += 0.01f;
+               }
+
+               // If enough time has passed, consider it stop moving
+               if (timeSinceLastMovement >= 0.2f) {
+                    isMoving = false;
+               }
+
+               // Only update if its moving or if the environment has changed/is changing
+               if(isMoving || dirtyEnvironment) {
+                    firingAngle = currentAngle;
+                    this.setRotation((float) Math.toDegrees(firingAngle));
+               }
+          }
+
+          // Update rays if the laser is turned on, is moving or is in an modified environment
+          if(on && (isMoving || dirtyEnvironment)) {
                castRays();
           }
      }

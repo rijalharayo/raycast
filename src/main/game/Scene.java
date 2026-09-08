@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.game.scenes.LevelScene;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.Sprite;
@@ -48,6 +49,11 @@ public abstract class Scene {
                throw new IllegalArgumentException("Object can't be null");
           }
 
+          // If it's in a level, set its scene
+          if (this instanceof LevelScene levelScene) {
+               gameObject.setLevelScene(levelScene);
+          }
+
           objectsToAdd.add(gameObject);
      }
      
@@ -57,6 +63,10 @@ public abstract class Scene {
                throw new IllegalArgumentException("Object can't be null");
           }
 
+          // If it was in some level, remove it's scene
+          if (this instanceof LevelScene) {
+               gameObject.setLevelScene(null);
+          }
           objectsToRemove.add(gameObject);
      }
 

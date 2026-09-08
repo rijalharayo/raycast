@@ -2,6 +2,7 @@ package main.models;
 
 import java.awt.Graphics2D;
 
+import main.game.scenes.LevelScene;
 import main.math.algebra.Vector2;
 import main.physics.colliders.Collider;
 
@@ -13,6 +14,8 @@ public abstract class GameObject {
      protected Collider collider;
 
      private boolean displayCollider = false;
+
+     private LevelScene objectLevelScene = null;
 
      // Overloaded constructors
      public GameObject() {};
@@ -58,7 +61,15 @@ public abstract class GameObject {
           return collider;
      }
 
+     public LevelScene getObjectLevelScene() {
+          return objectLevelScene;
+     }
+
      // Main setters
+     public void setLevelScene(LevelScene levelScene) {
+          this.objectLevelScene = levelScene;
+     }
+
      public void setName(String name) {
           if(name == null) {
                throw new IllegalArgumentException("GameObject name can't be null");

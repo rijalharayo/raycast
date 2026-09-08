@@ -11,6 +11,8 @@ import main.ui.components.UIButton;
 public abstract class LevelScene extends Scene {
      private String levelName;
      private int levelIndex;
+     // Flag to check if the environment has been modified or not
+     private boolean dirtyEnvironment = false;
 
      // Overloaded constructors
      public LevelScene(String levelName, int levelIndex) {
@@ -40,11 +42,20 @@ public abstract class LevelScene extends Scene {
           return levelIndex;
      }
 
+     public boolean isEnvironmentDirty() {
+          return dirtyEnvironment;
+     }
+
+     // Setters
+     public void setDirtyEnvironment(boolean isDirty) {
+          this.dirtyEnvironment = isDirty;
+     }
+
      public abstract void loadObjects();
      // Adding ui is optional for levels
      public void loadUI() {
           // A default back button
-          UIButton backButton = new UIButton("Back", 230, 100);
+          UIButton backButton = new UIButton("Back", 150, 80);
           backButton.setTextSize(30f);
           backButton.setOnClick(() -> SceneManager.setScene(MenuScene.LEVEL_MENU()));
           backButton.setPosition(MenuScene.SCREEN_RIGHT() - 200f, MenuScene.SCREEN_TOP() - 80f);

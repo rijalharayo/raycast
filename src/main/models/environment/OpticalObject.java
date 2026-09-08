@@ -2,6 +2,7 @@ package main.models.environment;
 
 import java.awt.event.MouseEvent;
 
+import main.game.scenes.LevelScene;
 import main.input.MouseInput;
 import main.math.Line;
 import main.math.algebra.Vector2;
@@ -96,6 +97,8 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
                if (MouseInput.isReleased(MouseEvent.BUTTON1)) {
                     dragOffset = null;
                     dragging = false;
+                    // Set dirty to false
+                    this.getObjectLevelScene().setDirtyEnvironment(false);
                }
           }
      }
@@ -103,6 +106,11 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      // Drags optical object along mouse
      private void drag() {
           if(isDraggable) {
+               LevelScene currentLevelScene = this.getObjectLevelScene();
+               if(!currentLevelScene.isEnvironmentDirty()) {
+                    currentLevelScene.setDirtyEnvironment(true);
+               }
+
                Vector2 targetPos = MouseInput.getMousePosition().subtract(dragOffset);
                setPosition(position.lerp(targetPos, 0.15f));
           }
