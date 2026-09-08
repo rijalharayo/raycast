@@ -2,6 +2,7 @@ package main.game.scenes.menus;
 
 import java.awt.Color;
 
+import main.game.Game;
 import main.game.SceneManager;
 import main.game.scenes.MenuScene;
 import main.ui.components.UIButton;
@@ -31,6 +32,7 @@ public class MainMenu extends MenuScene {
           UIButton quitBtn = new UIButton("Quit", 250, 100);
           quitBtn.setPosition(0, SCREEN_TOP() - 430);
           quitBtn.setTextSize(40f);
+          quitBtn.setOnClick(() -> Game.CURRENT_GAME().stop());
           add(quitBtn);
      }
 }

@@ -62,4 +62,11 @@ public class Window {
 
           Toolkit.getDefaultToolkit().sync();
      }
+
+     // Closes the window
+     public void close() {
+          if (frame != null) {
+               frame.dispose();
+          }
+     }
 }

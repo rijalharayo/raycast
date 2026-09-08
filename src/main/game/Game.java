@@ -19,6 +19,8 @@ public class Game implements Runnable {
      private Window window;
      private boolean running;
 
+     private static Game currentGame;
+
      public void start() {
 
           // Create the game window
@@ -29,6 +31,8 @@ public class Game implements Runnable {
           LevelManager.initializeLevels();
           // Initalize the menu's
           MenuScene.initailize();
+
+          currentGame = this;
 
           // Run the game loop on a separate thread
           new Thread(this).start();
@@ -60,6 +64,17 @@ public class Game implements Runnable {
           }
      }
 
+     // Stops the game
+     public void stop() {
+          running = false;
+
+          if (window != null) {
+               window.close();
+          }
+
+          System.exit(0);
+     }
+
      private void update() {
           // Update the active scene
           Scene scene = SceneManager.getCurrentScene();
@@ -77,5 +92,10 @@ public class Game implements Runnable {
 
           if (scene != null)
                window.render(scene);
+     }
+
+     // Returns the current game
+     public static Game CURRENT_GAME() {
+          return currentGame;
      }
 }
