@@ -81,6 +81,10 @@ public abstract class Scene {
                obj.update();
           }
 
+          for(UIComponent uiComponent : uiComponents) {
+               uiComponent.update();
+          }
+
           updatedQueuedObjects();
      }
 
