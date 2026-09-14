@@ -5,5 +5,6 @@ public enum OpticalObjectType {
      REFLECTOR,
      ABSORBER,
      REFRACTOR,
-     UNIVERSAL
+     UNIVERSAL,
+     SUPER_NATURAL
 }
