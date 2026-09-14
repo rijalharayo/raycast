@@ -1,5 +1,7 @@
 package main.math.algebra;
 
+import main.math.Line;
+
 // Represents a standard 2x2 matrix
 public class Matrix2x2 {
      // Internal version of the matrix
@@ -267,6 +269,38 @@ public class Matrix2x2 {
 
           float m_01 = (float) -Math.sin(thetaRads);
           float m_11 = (float) Math.cos(thetaRads);
+
+          return new Matrix2x2(m_00, m_01, m_10, m_11);
+     }
+
+     // Returns the standard reflection matrix across a line of some slope (in radians)
+     public static Matrix2x2 getReflectionMatrix(Line line) {
+          float x = line.getLineVector().getX();
+          float y = line.getLineVector().getY();
+
+          /*
+               The line vector <x, y> gives the direction of the reflection axis.
+
+               Instead of calculating the axis angle θ using atan2(), the
+               double-angle terms can be calculated directly from the vector:
+
+                    cos(2θ) = (x² - y²) / (x² + y²)
+                    sin(2θ) = 2xy / (x² + y²)
+          */
+
+          float cos2θ = (x * x - y * y) / (x * x + y * y);
+          float sin2θ = (2 * x * y) / (x * x + y * y);
+
+          /* 
+               The standard 2D reflection matrx is:
+                    F(θ) = [cos(2θ)   sin(2θ)]
+                           [sin(2θ)  -cos(2θ)]
+          */
+
+          float m_00 = cos2θ;
+          float m_10 = sin2θ;
+          float m_01 = sin2θ;
+          float m_11 = (float) -cos2θ;
 
           return new Matrix2x2(m_00, m_01, m_10, m_11);
      }
