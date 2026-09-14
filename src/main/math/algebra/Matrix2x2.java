@@ -300,7 +300,7 @@ public class Matrix2x2 {
           float m_00 = cos2θ;
           float m_10 = sin2θ;
           float m_01 = sin2θ;
-          float m_11 = (float) -cos2θ;
+          float m_11 = -cos2θ;
 
           return new Matrix2x2(m_00, m_01, m_10, m_11);
      }
