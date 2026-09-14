@@ -21,6 +21,18 @@ public class Matrix2x2 {
                                                        1, 0
                                                   );
 
+     // Represents a standard reflection across the X-axis
+     public static final Matrix2x2 REFLECT_ON_X = new Matrix2x2(
+                                                       1, 0,
+                                                       0, -1
+                                                  );
+
+     // Represents a standard reflection across the Y-axis
+     public static final Matrix2x2 REFLECT_ON_Y = new Matrix2x2(
+                                                       -1, 0,
+                                                       0, 1
+                                                  );
+
      // Represents the inverse of the 2x2 matrix
      private Matrix2x2 inverseMatrix;
      // Represents the transpose of the 2x2 matrix
