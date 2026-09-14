@@ -18,6 +18,13 @@ public class Matrix2x2 {
                                                        0, -1,
                                                        1, 0
                                                   );
+
+     // Represents the inverse of the 2x2 matrix
+     private Matrix2x2 inverseMatrix;
+     // Represents the transpose of the 2x2 matrix
+     private Matrix2x2 transposeMatrix;
+     // Represents the adjoint of the 2x2 matrix
+     private Matrix2x2 adjointMatrix;
      
      // Constructors
      public Matrix2x2(Vector2 column1, Vector2 column2) {
@@ -89,6 +96,58 @@ public class Matrix2x2 {
           return new Vector2[] { getColumn(1), getColumn(2) };
      }
 
+     // Calculates the inverse and stores it
+     private void calculateInverse() {
+          /* 
+               Given a matrix A, it's inverse will be:
+
+                    A⁻¹ = |A|⁻¹ * A
+               Where, |A|⁻¹ = 1 / |A|
+          */
+
+          float detA = this.getDeterminant();
+          Matrix2x2 adjoint = this.getAdjoint();
+          this.inverseMatrix = adjoint.multiply(1 / detA);
+     }
+
+     // Calculates the transpose and stores it
+     private void calculateTranspose() {
+          /* 
+               Given a matrix A = [a  b]
+                                  [c  d],
+
+               Aᵀ = [a  c]
+                    [b  d]
+          */
+          
+          // Sets transposed elements
+          float m_00 = getElement(1, 1);
+          float m_01 = getElement(2, 1);
+          float m_10 = getElement(1, 2);
+          float m_11 = getElement(2, 2);
+
+          this.transposeMatrix = new Matrix2x2(m_00, m_01, m_10, m_11);
+     }
+
+     // Calculates the adjoint and stores it
+     private void calculateAdjoint() {
+          /*
+               Given a matrix A = [a  b]
+                                  [c  d],
+
+               adj(A) = [d  -b]
+                        [-c  a]
+          */
+
+          // Sets the adjoint matrix's elements
+          float m_00 = getElement(2, 2);
+          float m_01 = -getElement(2, 1);
+          float m_10 = -getElement(1, 2);
+          float m_11 = getElement(1, 1);
+
+          this.adjointMatrix = new Matrix2x2(m_00, m_01, m_10, m_11);
+     }
+
      // Gets the determinant of the matrix
      public float getDeterminant() {
           /* 
@@ -102,15 +161,28 @@ public class Matrix2x2 {
           return (float) (c1 - c2);
      }
 
+     // Returns the inverse
+     public Matrix2x2 getInverse() {
+          // Caches data
+          if(inverseMatrix == null) calculateInverse();
+
+          return inverseMatrix;
+     }
+
      // Returns the transpose of a matrix
      public Matrix2x2 getTranspose() {
-          // Sets transposed elements
-          float m_00 = getElement(1, 1);
-          float m_01 = getElement(2, 1);
-          float m_10 = getElement(1, 2);
-          float m_11 = getElement(2, 2);
+          // Caches data
+          if(transposeMatrix == null) calculateTranspose();
 
-          return new Matrix2x2(m_00, m_01, m_10, m_11);
+          return transposeMatrix;
+     }
+
+     // Returns the adjoint of a matrix
+     public Matrix2x2 getAdjoint() {
+          // Caches data
+          if(adjointMatrix == null) calculateAdjoint();
+
+          return adjointMatrix;
      }
 
      // Scales the matrix by a scalar
