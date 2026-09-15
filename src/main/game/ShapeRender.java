@@ -17,7 +17,6 @@ import main.math.shapes.polygons.Rectangle;
 
 // Rendering utility for drawing shapes to the screen
 public class ShapeRender {
-
      // For all shapes
      public static void draw(
           Graphics2D g,
