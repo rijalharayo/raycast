@@ -17,7 +17,7 @@ public class Level1 extends LevelScene {
           add(new Laser(0, 0));
 
           Portal portal1 = new Portal(100, 100, 200, 20, 0f);
-          Portal portal2 = new Portal(200, 300, 200, 20, 90f);
+          Portal portal2 = new Portal(200, 300, 200, 20, 0f);
           portal1.setLinkedPortal(portal2);
 
           add(portal1);

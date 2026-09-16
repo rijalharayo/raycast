@@ -38,6 +38,11 @@ public class Portal extends OpticalObject {
      private static final Stroke GLOW_STROKE_2 = new BasicStroke(8f);
      private static final Stroke GLOW_STROKE_3 = new BasicStroke(14f);
 
+     // Stores the cached reflection matrix
+     private Matrix2x2 cachedReflectionMatrix;
+     // Stores the previous tangent
+     private Line prevTangent;
+
      // Constructors
      public Portal(Vector2 position, int width, int height, float rotation) {
           super(
@@ -169,9 +174,16 @@ public class Portal extends OpticalObject {
                     D = M₂M₁⁻¹
           */
 
-          Line tangent = intersectionData.getTargetLine();    
-          // Reflection matrix (Fᵣ)
-          Matrix2x2 reflectionMatrix = Matrix2x2.getReflectionMatrix(tangent);
+          Line tangent = intersectionData.getTargetLine();
+          // Stores the current tangent if it has changed
+          if(prevTangent == null || !tangent.isSameSegment(prevTangent)) {
+               prevTangent = tangent;
+               // Reflection matrix (Fᵣ)
+               cachedReflectionMatrix = Matrix2x2.getReflectionMatrix(tangent);
+          };
+
+          // Uses the cached reflection matrix
+          Matrix2x2 reflectionMatrix = cachedReflectionMatrix;
 
           // Inverse of the portal matrix (M₁⁻¹)
           Matrix2x2 portalInverse = this.portalMatrix.getInverse();
@@ -189,10 +201,10 @@ public class Portal extends OpticalObject {
           newRayDirection = newRayDirection.getNormalized();
 
           // Offset ray start to prevent precision errors
-          worldEmergentPoint = worldEmergentPoint.add(newRayDirection.multiply(0.1f));
+          worldEmergentPoint = worldEmergentPoint.add(newRayDirection.multiply(0.01f));
 
           // Calculates a temporary endpoint
-          Vector2 rayEnd = worldEmergentPoint.add(newRayDirection);
+          Vector2 rayEnd = worldEmergentPoint.add(newRayDirection.multiply(2f));
           
           // Returns the new light ray
           return new LightRay(worldEmergentPoint, rayEnd);

@@ -155,8 +155,8 @@ public class Matrix2x2 {
 
           // Sets the adjoint matrix's elements
           float m_00 = getElement(2, 2);
-          float m_01 = -getElement(2, 1);
-          float m_10 = -getElement(1, 2);
+          float m_01 = -getElement(1, 2);
+          float m_10 = -getElement(2, 1);
           float m_11 = getElement(1, 1);
 
           this.adjointMatrix = new Matrix2x2(m_00, m_01, m_10, m_11);
