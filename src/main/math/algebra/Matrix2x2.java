@@ -239,6 +239,15 @@ public class Matrix2x2 {
           return new Vector2(x, y);
      }
 
+     // Applies the linear transformation to a line
+     public Line transform(Line line) {
+          // Transfomring a line just means to transform its endpoints
+          Vector2 startTransfrom = this.transform(line.getStart());
+          Vector2 endTransfrom = this.transform(line.getEnd())
+;
+          return new Line(startTransfrom, endTransfrom);
+     }
+
      // Multiplies two matrices
      public Matrix2x2 multiply(Matrix2x2 m2) {
           /* 
@@ -315,5 +324,15 @@ public class Matrix2x2 {
           float m_11 = -cos2θ;
 
           return new Matrix2x2(m_00, m_01, m_10, m_11);
+     }
+
+     @Override
+     public String toString() {
+          return String.format(
+               "[ %8.3f  %8.3f ]%n" +
+               "[ %8.3f  %8.3f ]",
+               internalMatrix[0][0], internalMatrix[0][1],
+               internalMatrix[1][0], internalMatrix[1][1]
+          );
      }
 }
