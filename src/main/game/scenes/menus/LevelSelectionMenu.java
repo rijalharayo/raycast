@@ -2,7 +2,6 @@ package main.game.scenes.menus;
 
 import main.game.LevelManager;
 import main.game.SceneManager;
-import main.game.scenes.LevelScene;
 import main.game.scenes.MenuScene;
 import main.ui.components.UIButton;
 import main.ui.components.UIText;
@@ -31,15 +30,15 @@ public class LevelSelectionMenu extends MenuScene {
           UIWrapLayout levelLayout = new UIWrapLayout(900f, 20f);
           levelLayout.setPosition(0, SCREEN_TOP() - 200);
 
-          for (LevelScene level : LevelManager.getAllLevels()) {
+          for (int levelIndex : LevelManager.getAllLevelIndices()) {
                UIButton button = new UIButton(
-                    String.valueOf(level.getLevelIndex()),
+                    String.valueOf(levelIndex),
                     150,
                     100
                );
 
                button.setOnClick(() -> {
-                    LevelManager.setCurrentLevel(level.getLevelIndex());
+                    LevelManager.setCurrentLevel(levelIndex);
                });
 
                levelLayout.addUIComponent(button);

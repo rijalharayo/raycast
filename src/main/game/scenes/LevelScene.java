@@ -11,6 +11,7 @@ import main.ui.components.UIButton;
 public abstract class LevelScene extends Scene {
      private String levelName;
      private int levelIndex;
+     
      // Flag to check if the environment has been modified or not
      private boolean dirtyEnvironment = false;
 
