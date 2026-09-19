@@ -5,7 +5,9 @@ import java.awt.Graphics2D;
 import main.game.Game;
 import main.game.Scene;
 import main.game.SceneManager;
+import main.models.GameObject;
 import main.models.Sprite;
+import main.models.environment.TargetEnergyOrb;
 import main.ui.components.UIButton;
 
 public abstract class LevelScene extends Scene {
@@ -14,6 +16,8 @@ public abstract class LevelScene extends Scene {
      
      // Flag to check if the environment has been modified or not
      private boolean dirtyEnvironment = false;
+
+     private TargetEnergyOrb mainTarget;
 
      // Overloaded constructors
      public LevelScene(String levelName, int levelIndex) {
@@ -45,6 +49,16 @@ public abstract class LevelScene extends Scene {
 
      public boolean isEnvironmentDirty() {
           return dirtyEnvironment;
+     }
+
+     @Override
+     public void add(GameObject gameObject) {
+          super.add(gameObject);
+
+          if((gameObject instanceof TargetEnergyOrb orb)) {
+               if(mainTarget == null) this.mainTarget = orb;
+               else throw new IllegalArgumentException("A level can only have one target orb!");
+          }
      }
 
      // Setters
