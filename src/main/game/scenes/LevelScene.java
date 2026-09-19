@@ -6,8 +6,8 @@ import main.game.Game;
 import main.game.Scene;
 import main.game.SceneManager;
 import main.models.GameObject;
-import main.models.Sprite;
 import main.models.environment.TargetEnergyOrb;
+import main.sprites.Sprite;
 import main.ui.components.UIButton;
 
 public abstract class LevelScene extends Scene {

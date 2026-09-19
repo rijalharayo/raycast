@@ -10,8 +10,8 @@ import main.input.KeyboardInput;
 import main.input.MouseInput;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
-import main.models.Sprite;
 import main.physics.rays.RayHit;
+import main.sprites.Sprite;
 
 public class Laser extends GameObject {
      private boolean enabled;

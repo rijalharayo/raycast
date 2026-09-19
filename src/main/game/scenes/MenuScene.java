@@ -8,7 +8,7 @@ import main.game.Game;
 import main.game.Scene;
 import main.game.scenes.menus.LevelSelectionMenu;
 import main.game.scenes.menus.MainMenu;
-import main.models.Sprite;
+import main.sprites.Sprite;
 import main.ui.UIComponent;
 import main.ui.UILayout;
 

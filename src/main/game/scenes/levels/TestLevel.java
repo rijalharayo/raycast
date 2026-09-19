@@ -1,7 +1,6 @@
 package main.game.scenes.levels;
 
 import main.game.scenes.LevelScene;
-import main.models.Sprite;
 import main.models.entities.Laser;
 import main.models.environment.refractors.fluids.WaterTank;
 import main.models.environment.refractors.glasses.GlassBlock;
@@ -10,6 +9,7 @@ import main.models.environment.refractors.glasses.OpticalFibre;
 import main.models.environment.refractors.glasses.Prism;
 import main.models.environment.refractors.glasses.lens.ConcaveLens;
 import main.models.environment.refractors.glasses.lens.ConvexLens;
+import main.sprites.Sprite;
 
 public class TestLevel extends LevelScene {
 

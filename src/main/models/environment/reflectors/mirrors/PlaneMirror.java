@@ -1,8 +1,8 @@
 package main.models.environment.reflectors.mirrors;
 
 import main.math.algebra.Vector2;
-import main.models.Sprite;
 import main.physics.colliders.BoxCollider;
+import main.sprites.Sprite;
 
 // Represents a Plane reflective mirror
 public class PlaneMirror extends Mirror {

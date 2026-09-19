@@ -7,8 +7,8 @@ import java.util.List;
 import main.game.scenes.LevelScene;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
-import main.models.Sprite;
 import main.physics.optics.RayInteractable;
+import main.sprites.Sprite;
 import main.ui.UIComponent;
 
 public abstract class Scene {

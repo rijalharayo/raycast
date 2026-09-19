@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import main.game.scenes.LevelScene;
 import main.math.algebra.Vector2;
 import main.physics.colliders.Collider;
+import main.sprites.Sprite;
 
 // Model representing the components that can exist within a scene
 public abstract class GameObject {
