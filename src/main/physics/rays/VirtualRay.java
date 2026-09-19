@@ -4,10 +4,11 @@ import main.game.Game;
 import main.game.Scene;
 import main.game.SceneManager;
 import main.math.algebra.Vector2;
+import main.models.GameObject;
 import main.models.data.RayData;
-import main.models.environment.OpticalObject;
 import main.physics.colliders.CollisionData;
 import main.physics.colliders.CollisionType;
+import main.physics.optics.RayInteractable;
 
 // Virtual rays used for raycasting
 public class VirtualRay implements Ray {
@@ -19,7 +20,7 @@ public class VirtualRay implements Ray {
      private Vector2 prevPosition;
 
      // An object the ray must ignore when casted
-     private OpticalObject objectOfAvoidance = null;
+     private GameObject objectOfAvoidance = null;
 
      // For continuous casting
      private float length = -1f;
@@ -69,7 +70,7 @@ public class VirtualRay implements Ray {
      }
 
      // Setters
-     public void ignoreObject(OpticalObject object) {
+     public void ignoreObject(GameObject object) {
           this.objectOfAvoidance = object;
      }
 
@@ -82,7 +83,7 @@ public class VirtualRay implements Ray {
           // Run until it collides
           while(!collision) {
                boolean out = isOutOfBounds();
-               rayHit = checkOpticalObjectCollision();
+               rayHit = checkRayInteractableCollision();
                boolean hit = rayHit != null;
 
                if(out || hit) {
@@ -116,8 +117,8 @@ public class VirtualRay implements Ray {
           RayHit closestHit = null;
           float closestDistance = Float.MAX_VALUE;
 
-          for (OpticalObject opticalObject : SceneManager.getCurrentScene().getSceneOpticalObjects()) {
-               CollisionData collisionData = opticalObject.getCollider().collideWithRay(this);
+          for (RayInteractable rayInteractable : SceneManager.getCurrentScene().getSceneRayInteractables()) {
+               CollisionData collisionData = ((GameObject) rayInteractable).getCollider().collideWithRay(this);
 
                // Continue if no collision
                if (collisionData == null) {
@@ -128,9 +129,9 @@ public class VirtualRay implements Ray {
                float distance = (float) collisionData.getCollisionPoint().subtract(start).getMagnitude();
 
                // If it's closer, set it as the closest
-               if ((distance < closestDistance) && opticalObject != objectOfAvoidance) {
+               if ((distance < closestDistance) && rayInteractable != objectOfAvoidance) {
                     closestDistance = distance;
-                    closestHit = new RayHit(true, collisionData, opticalObject, CollisionType.OPTICAL_COLLISION);
+                    closestHit = new RayHit(true, collisionData, (GameObject) rayInteractable, CollisionType.OPTICAL_COLLISION);
                }
           }
 
@@ -170,7 +171,7 @@ public class VirtualRay implements Ray {
      }
 
      // Checks if the virtual ray has collided with a collider
-     public RayHit checkOpticalObjectCollision() {
+     public RayHit checkRayInteractableCollision() {
           // The ray hasn't moved yet
           if(currentPosition.equals(prevPosition)) {
                return null;
@@ -178,17 +179,17 @@ public class VirtualRay implements Ray {
 
           Scene currentScene = SceneManager.getCurrentScene();
           // Gets the list of optical objects in that scene
-          OpticalObject[] opticalObjects = currentScene.getSceneOpticalObjects();
+          RayInteractable[] rayInteractables = currentScene.getSceneRayInteractables();
 
           RayData currentRayData = new RayData(prevPosition, currentPosition);
           this.rayData = currentRayData;
 
           // Checks for collision between all optical objects
-          for(OpticalObject opticalObject : opticalObjects) {
-               CollisionData collisionData = opticalObject.getCollider().collideWithRay(this);
+          for(RayInteractable rayInteractablObject : rayInteractables) {
+               CollisionData collisionData = ((GameObject) rayInteractablObject).getCollider().collideWithRay(this);
 
-               if((collisionData != null) && (opticalObject != objectOfAvoidance)) {
-                    RayHit rayHit = new RayHit(true, collisionData, opticalObject, CollisionType.OPTICAL_COLLISION);
+               if((collisionData != null) && (rayInteractablObject != objectOfAvoidance)) {
+                    RayHit rayHit = new RayHit(true, collisionData, (GameObject) rayInteractablObject, CollisionType.OPTICAL_COLLISION);
 
                     // The ray has hit something
                     return rayHit;
