@@ -8,9 +8,9 @@ import main.game.Scene;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.models.data.RayData;
-import main.models.environment.OpticalObject;
 import main.physics.colliders.CollisionType;
 import main.physics.optics.Medium;
+import main.physics.optics.RayInteractable;
 import main.physics.rays.Ray;
 import main.physics.rays.RayHit;
 import main.physics.rays.VirtualRay;
@@ -82,7 +82,7 @@ public class LightRay extends GameObject implements Ray {
           RayHit rayHit = vRay.castDiscrete();
 
           if((rayHit != null) && rayHit.getCollisionType() == CollisionType.OPTICAL_COLLISION) {
-               OpticalObject targetObject = (OpticalObject) rayHit.getTargetObject();
+               RayInteractable targetObject = (RayInteractable) rayHit.getTargetObject();
 
                LightRay nextRay = targetObject.interact(this, rayHit.getCollisionData());
                rayHit.setNextRay(nextRay);
