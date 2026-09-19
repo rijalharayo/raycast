@@ -6,6 +6,7 @@ import java.awt.Font;
 
 import java.awt.Graphics2D;
 
+import main.audio.SoundEffect;
 import main.game.Scene;
 import main.math.algebra.Vector2;
 import main.ui.Fonts;
@@ -25,6 +26,10 @@ public class UIButton extends UIComponent {
      private Color clickColor = new Color(31, 31, 31); // A little darker than hover color
 
      private Runnable onClick;
+
+     // Default button sound effects
+     public static final SoundEffect BUTTON_CLICK = new SoundEffect("button-click.wav");
+     public static final SoundEffect BUTTON_HOVER = new SoundEffect("button-hover.wav");
 
      // Constructors
      public UIButton(String text, int width, int height) {
@@ -61,12 +66,15 @@ public class UIButton extends UIComponent {
      @Override
      protected void onHover() {
           if(!buttonColor.equals(hoverColor)) {
+               BUTTON_HOVER.play();
                buttonColor = hoverColor;
           }
      }
 
      @Override
      protected void onClick() {
+          BUTTON_CLICK.play();
+
           // Flicker the click color when clicked
           if(!buttonColor.equals(clickColor)) {
                buttonColor = clickColor;

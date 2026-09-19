@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.ArrayList;
 
+import main.audio.SoundEffect;
 import main.input.KeyboardInput;
 import main.input.MouseInput;
 import main.math.algebra.Vector2;
@@ -27,6 +28,11 @@ public class Laser extends GameObject {
      private List<LightRay> lightRays = new ArrayList<>();
 
      private final String SPRITE_NAME = "laser-pointer.png";
+
+     // Default laser sound effects
+     public static final SoundEffect LIGHT_ON = new SoundEffect("light-on.wav");
+     public static final SoundEffect LIGHT_OFF = new SoundEffect("light-off.wav");
+     public static final SoundEffect LASER_ENABLE_DISABLE = new SoundEffect("laser-enable-disable.wav");
 
      public Laser(float x, float y) {
           super("Laser", x, y, null);
@@ -62,10 +68,12 @@ public class Laser extends GameObject {
      }
 
      public void turnOff() {
+          LIGHT_OFF.play();
           this.on = false;
      }
 
      public void turnOn() {
+          LIGHT_ON.play();
           this.on = true;
      }
 
@@ -132,10 +140,19 @@ public class Laser extends GameObject {
           // Laser turns off on right click
           if(MouseInput.isPressed(MouseEvent.BUTTON3) /* Right click */) {
                on = !on;
+               // Play sound effects
+               if(on) {
+                    LIGHT_ON.play();
+               }
+               else {
+                    LIGHT_OFF.play();
+               }
           }
 
           // Disabled when 'E' is pressed
           if(KeyboardInput.isPressed(KeyEvent.VK_E)) {
+               LASER_ENABLE_DISABLE.play();
+
                enabled = !enabled;
                // Set it to not moving when the laser is disabled
                isMoving = false; 
