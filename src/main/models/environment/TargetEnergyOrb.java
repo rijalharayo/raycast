@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Random;
 
+import main.audio.SoundEffect;
 import main.game.LevelManager;
 import main.game.ShapeRender;
 import main.math.algebra.Vector2;
@@ -108,6 +109,9 @@ public class TargetEnergyOrb extends GameObject implements RayInteractable {
 
      @Override
      public LightRay interact(LightRay ray, CollisionData collisionData) {
+          // Plays sound effect
+          SoundEffect.LEVEL_COMPLETE.play();
+
           // Advance to next level
           int currentLevelIndex = LevelManager.getCurrentLevelIndex();
           LevelManager.setCurrentLevel(currentLevelIndex + 1);
