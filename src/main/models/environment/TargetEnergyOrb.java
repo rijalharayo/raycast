@@ -49,14 +49,21 @@ public class TargetEnergyOrb extends GameObject implements RayInteractable {
      private static final int PARTICLE_COUNT = 10;
      // Array of all glow particles
      private final GlowParticle[] glowParticles = new GlowParticle[PARTICLE_COUNT];
+     // Original radius of orb
+     private float radius;
+     // Original shape of orb
+     private Circle originalShape;
 
      // Constructors
      public TargetEnergyOrb(Vector2 position, float radius) {
           super(
                "Target orb",
                position,
-               new CircleCollider(position, radius)
+               new CircleCollider(position, radius * 0.7f) // Reduces hitbox radius by 30%
           );
+
+          this.radius = radius;
+          this.originalShape = new Circle(radius);
 
           initializeGlowParticles();
           initializeGlowCircles();
@@ -68,8 +75,11 @@ public class TargetEnergyOrb extends GameObject implements RayInteractable {
           super(
                "Target orb",
                position,
-               new CircleCollider(position, radius)
+               new CircleCollider(position, radius * 0.7f) // Reduces hitbox radius by 30%
           );
+
+          this.radius = radius;
+          this.originalShape = new Circle(radius);
 
           initializeGlowParticles();
           initializeGlowCircles();
@@ -79,21 +89,15 @@ public class TargetEnergyOrb extends GameObject implements RayInteractable {
      private void initializeGlowCircles() {
           // Difference in radii
           float deltaRadius = 1.5f;
-          
-          Circle orbCircle = (Circle) collider.getShape();
-          float radius = orbCircle.getRadius();
 
           for(int i = 1; i < cachedGlowCirlces.length + 1; i++) {
                // Each cirlce will be a little bigger
-               cachedGlowCirlces[i - 1] = new Circle(radius + (i * deltaRadius));
+               cachedGlowCirlces[i - 1] = new Circle(this.radius + (i * deltaRadius));
           }
      }
 
      // Initializes all glow particles
      private void initializeGlowParticles() {
-          Circle orbCircle = (Circle) collider.getShape();
-          float radius = orbCircle.getRadius();
-
           for (int i = 0; i < glowParticles.length; i++) {
                glowParticles[i] = new GlowParticle(
                     position,
@@ -142,7 +146,7 @@ public class TargetEnergyOrb extends GameObject implements RayInteractable {
 
           ShapeRender.draw(
                g,
-               collider.getShape(),
+               originalShape,
                position,
                0f,
                MAIN_ORB_COLOR
