@@ -1,10 +1,13 @@
 package main.game;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import main.game.scenes.LevelScene;
+import main.input.KeyboardInput;
+import main.input.MouseInput;
 import main.math.algebra.Vector2;
 import main.models.GameObject;
 import main.physics.optics.RayInteractable;
@@ -105,6 +108,12 @@ public abstract class Scene {
           // Update all ui components
           for(UIComponent uiComponent : uiComponents) {
                uiComponent.update();
+          }
+
+          // Print the current mouse world position if 'P' is pressed
+          if(KeyboardInput.isPressed(KeyEvent.VK_P)) {
+               Vector2 mouseWorld = MouseInput.getMousePosition();
+               System.out.println("Mouse position: " + mouseWorld);
           }
 
           updatedQueuedObjects();
