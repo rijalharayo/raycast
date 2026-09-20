@@ -9,6 +9,7 @@ import main.models.GameObject;
 import main.models.environment.TargetEnergyOrb;
 import main.sprites.Sprite;
 import main.ui.components.UIButton;
+import main.ui.components.UIText;
 
 public abstract class LevelScene extends Scene {
      private String levelName;
@@ -69,6 +70,12 @@ public abstract class LevelScene extends Scene {
      public abstract void loadObjects();
      // Adding ui is optional for levels
      public void loadUI() {
+          // Level text
+          UIText levelLabel = new UIText("Level " + this.levelIndex);
+          levelLabel.setSize(40f);
+          levelLabel.setPosition(MenuScene.SCREEN_LEFT() + 150f, MenuScene.SCREEN_TOP() - 50f);
+          add(levelLabel);
+
           // A default back button
           UIButton backButton = new UIButton("Back", 150, 80);
           backButton.setTextSize(30f);
