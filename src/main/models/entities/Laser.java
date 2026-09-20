@@ -149,8 +149,8 @@ public class Laser extends GameObject {
                }
           }
 
-          // Disabled when 'E' is pressed
-          if(KeyboardInput.isPressed(KeyEvent.VK_E)) {
+          // Disabled when 'D' is pressed
+          if(KeyboardInput.isPressed(KeyEvent.VK_R)) {
                LASER_ENABLE_DISABLE.play();
 
                enabled = !enabled;
