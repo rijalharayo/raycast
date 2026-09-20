@@ -6,6 +6,7 @@ import main.game.Game;
 import main.game.Scene;
 import main.game.SceneManager;
 import main.models.GameObject;
+import main.models.entities.Laser;
 import main.models.environment.TargetEnergyOrb;
 import main.sprites.Sprite;
 import main.ui.components.UIButton;
@@ -19,6 +20,7 @@ public abstract class LevelScene extends Scene {
      private boolean dirtyEnvironment = false;
 
      private TargetEnergyOrb mainTarget;
+     private Laser levelLaser;
 
      // Overloaded constructors
      public LevelScene(String levelName, int levelIndex) {
@@ -60,11 +62,21 @@ public abstract class LevelScene extends Scene {
                if(mainTarget == null) this.mainTarget = orb;
                else throw new IllegalArgumentException("A level can only have one target orb!");
           }
+
+          if((gameObject instanceof Laser laser)) {
+               if(mainTarget == null) this.levelLaser = laser;
+               else throw new IllegalArgumentException("A level can only have one laser!");
+          }
      }
 
      // Setters
      public void setDirtyEnvironment(boolean isDirty) {
           this.dirtyEnvironment = isDirty;
+     }
+
+     // Getters
+     public Laser getLevelLaser() {
+          return levelLaser;
      }
 
      public abstract void loadObjects();

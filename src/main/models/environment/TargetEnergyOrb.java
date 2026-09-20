@@ -55,6 +55,12 @@ public class TargetEnergyOrb extends GameObject implements RayInteractable {
      // Original shape of orb
      private Circle originalShape;
 
+     // Used for delays between level switches
+     private static final float LEVEL_COMPLETE_DELAY = 0.5f;
+
+     private boolean completing = false;
+     private float completionTimer = 0f;
+
      // Constructors
      public TargetEnergyOrb(Vector2 position, float radius) {
           super(
@@ -112,9 +118,15 @@ public class TargetEnergyOrb extends GameObject implements RayInteractable {
           // Plays sound effect
           SoundEffect.LEVEL_COMPLETE.play();
 
-          // Advance to next level
-          int currentLevelIndex = LevelManager.getCurrentLevelIndex();
-          LevelManager.setCurrentLevel(currentLevelIndex + 1);
+          // Do nothing if already completed
+          if (completing) {
+               return null;
+          }
+
+          // The player has passed this level
+          completing = true;
+          // Disable the laser
+          this.getObjectLevelScene().getLevelLaser().disable();
 
           return null;
      }
@@ -130,6 +142,16 @@ public class TargetEnergyOrb extends GameObject implements RayInteractable {
           // Update particles every frame
           for (GlowParticle particle : glowParticles) {
                particle.update();
+          }
+
+          // If the player has passed this level, advacne to the next one after delay
+          if (completing) {
+               completionTimer += 1f / 100f;
+
+               if (completionTimer >= LEVEL_COMPLETE_DELAY) {
+                    int currentLevelIndex = LevelManager.getCurrentLevelIndex();
+                    LevelManager.setCurrentLevel(currentLevelIndex + 1);
+               }
           }
      }
 

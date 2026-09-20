@@ -3,6 +3,8 @@ package main.game.scenes.levels;
 import main.game.scenes.LevelScene;
 import main.models.entities.Laser;
 import main.models.environment.TargetEnergyOrb;
+import main.models.environment.absorbers.BlackAbsorber;
+import main.models.environment.reflectors.mirrors.PlaneMirror;
 
 public class Level1 extends LevelScene {
      public Level1() {
@@ -14,8 +16,16 @@ public class Level1 extends LevelScene {
 
      @Override
      public void loadObjects() {
-          add(new Laser(300, 0));
+          add(new Laser(100, -300));
 
-          add(new TargetEnergyOrb(0, 0, 40f));
+          // Seperates laser and orb
+          BlackAbsorber absorber1 = new BlackAbsorber(0, -150f, 20, 550, 0f);
+          absorber1.setDraggable(false);
+          add(absorber1);
+
+          // Can be used to reflect across
+          add(new PlaneMirror(0, 300f, 300, 20, 0f));
+
+          add(new TargetEnergyOrb(-150f, -300f, 30f));
      }
 }
