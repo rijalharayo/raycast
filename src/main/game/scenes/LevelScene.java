@@ -55,6 +55,17 @@ public abstract class LevelScene extends Scene {
      }
 
      @Override
+     public void update() {
+          super.update();
+          // If the environment was modified, update the laser
+          if(dirtyEnvironment) {
+               levelLaser.update();
+          }
+          // Resets environment change flag for the next frame
+          dirtyEnvironment = false;
+     }
+
+     @Override
      public void add(GameObject gameObject) {
           super.add(gameObject);
 

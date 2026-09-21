@@ -1,8 +1,9 @@
 package main.models.environment;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-import main.game.scenes.LevelScene;
+import main.input.KeyboardInput;
 import main.input.MouseInput;
 import main.math.Line;
 import main.math.algebra.Vector2;
@@ -19,8 +20,10 @@ import main.physics.optics.RayInteractable;
 public abstract class OpticalObject extends GameObject implements RayInteractable {
      private final OpticalObjectType opticalObjectType;
      private boolean isDraggable = true;
+     private boolean isRotatable = true;
      private Vector2 dragOffset;
      private boolean dragging = false;
+     private boolean rotating = false;
 
      // Constructors
      public OpticalObject(Vector2 position, Collider collider, OpticalObjectType oType) {
@@ -36,6 +39,10 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
      // Setters
      public void setDraggable(boolean v) {
           this.isDraggable = v;
+     }
+
+     public void setRotatable(boolean v) {
+          this.isRotatable = v;
      }
 
      // Getters
@@ -77,8 +84,9 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
           // Hover behaviour
           if(isHoveringOver) {
                showCollider();
-
-               if(MouseInput.isPressed(MouseEvent.BUTTON1) && isDraggable && !dragging) {
+               
+               // Dragging & rotation can't be done at the same time
+               if(MouseInput.isPressed(MouseEvent.BUTTON1) && isDraggable && !dragging && !rotating) {
                     dragOffset = mousePosition.subtract(position);
                     dragging = true;
                }
@@ -97,22 +105,46 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
                if (MouseInput.isReleased(MouseEvent.BUTTON1)) {
                     dragOffset = null;
                     dragging = false;
-                    // Set dirty to false
-                    this.getObjectLevelScene().setDirtyEnvironment(false);
                }
+          }
+
+          // Rotate only if it's being hovered over & not dragged
+          if(isHoveringOver && !dragging && isRotatable) {
+               boolean rotatingAntiClockwise = KeyboardInput.isHeld(KeyEvent.VK_Q);
+               boolean rotatingClockwise = KeyboardInput.isHeld(KeyEvent.VK_E);
+               rotating = rotatingAntiClockwise || rotatingClockwise;
+
+               if(rotatingClockwise) {
+                    rotateOpticalObject(1f);
+               }
+
+               if(rotatingAntiClockwise) {
+                    rotateOpticalObject(-1f);
+               }
+          }
+          else {
+               rotating = false;
           }
      }
 
      // Drags optical object along mouse
      private void drag() {
           if(isDraggable) {
-               LevelScene currentLevelScene = this.getObjectLevelScene();
-               if(!currentLevelScene.isEnvironmentDirty()) {
-                    currentLevelScene.setDirtyEnvironment(true);
-               }
+               // The environment has been modified
+               this.getObjectLevelScene().setDirtyEnvironment(true);
 
                Vector2 targetPos = MouseInput.getMousePosition().subtract(dragOffset);
                setPosition(position.lerp(targetPos, 0.15f));
+          }
+     }
+
+     // Rotates the optical object
+     private void rotateOpticalObject(float sign) {
+          if(isRotatable) {
+               // The environment has been modified
+               this.getObjectLevelScene().setDirtyEnvironment(true);
+
+               rotate(Math.signum(sign) * 1.15f);
           }
      }
      
