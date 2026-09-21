@@ -18,6 +18,7 @@ public class Level2 extends LevelScene {
           // Mirror 1
           PlaneMirror mirror1 = new PlaneMirror(-634.5f, 305f, 200, 20, 45f);
           mirror1.setDraggable(false);
+          mirror1.setRotatable(false);
           add(mirror1);
 
           // Mirror 2 (movable)
@@ -25,6 +26,7 @@ public class Level2 extends LevelScene {
 
           BlackAbsorber absorber = new BlackAbsorber(-200f, -150f, 20, 600, 0f);
           absorber.setDraggable(false);
+          absorber.setRotatable(false);
           add(absorber);
 
           add(new TargetEnergyOrb(-300, -300, 30f));
