@@ -6,6 +6,7 @@ import java.util.Set;
 import main.game.scenes.LevelScene;
 import main.game.scenes.levels.Level1;
 import main.game.scenes.levels.Level2;
+import main.game.scenes.levels.Level3;
 
 // Manages all the levels
 public class LevelManager {
@@ -32,6 +33,7 @@ public class LevelManager {
 
           addLevel(1, Level1.class);
           addLevel(2, Level2.class);
+          addLevel(3, Level3.class);
      }
 
      // Creates the level instance to be used as a scene
