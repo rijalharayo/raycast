@@ -84,6 +84,11 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
           // Hover behaviour
           if(isHoveringOver) {
                showCollider();
+
+               // Print the current postion if ';' is pressed while hovering
+               if(KeyboardInput.isPressed(KeyEvent.VK_F3)) {
+                    System.out.println(name + " position: " + this.position);
+               }
                
                // Dragging & rotation can't be done at the same time
                if(MouseInput.isPressed(MouseEvent.BUTTON1) && isDraggable && !dragging && !rotating) {
