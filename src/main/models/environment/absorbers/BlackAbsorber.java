@@ -17,6 +17,9 @@ public class BlackAbsorber extends Absorber {
                Material.BLACK,
                new Rectangle(width, height)
           );
+
+          this.setDraggable(false);
+          this.setRotatable(false);
      }
 
      public BlackAbsorber(float x, float y, int width, int height, float rotation) {
@@ -28,6 +31,9 @@ public class BlackAbsorber extends Absorber {
                Material.BLACK,
                new Rectangle(width, height)
           );
+
+          this.setDraggable(false);
+          this.setRotatable(false);
      }
 
      @Override

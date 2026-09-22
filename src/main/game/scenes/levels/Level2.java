@@ -23,11 +23,8 @@ public class Level2 extends LevelScene {
 
           // Mirror 2 (movable)
           add(new PlaneMirror(100, 100, 200, 20, -45f));
-
-          BlackAbsorber absorber = new BlackAbsorber(-200f, -150f, 20, 600, 0f);
-          absorber.setDraggable(false);
-          absorber.setRotatable(false);
-          add(absorber);
+          // Seperator
+          add(new BlackAbsorber(-200f, -150f, 20, 600, 0f));
 
           add(new TargetEnergyOrb(-300, -300, 30f));
      }

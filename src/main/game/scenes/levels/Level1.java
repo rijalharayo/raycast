@@ -19,10 +19,7 @@ public class Level1 extends LevelScene {
           add(new Laser(100, -300));
 
           // Seperates laser and orb
-          BlackAbsorber absorber1 = new BlackAbsorber(0, -150f, 20, 550, 0f);
-          absorber1.setDraggable(false);
-          absorber1.setRotatable(false);
-          add(absorber1);
+          add(new BlackAbsorber(0, -150f, 20, 550, 0f));
 
           // Can be used to reflect across
           add(new PlaneMirror(0, 300f, 300, 20, 0f));
