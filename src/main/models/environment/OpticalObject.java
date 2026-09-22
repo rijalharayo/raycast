@@ -45,6 +45,11 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
           this.isRotatable = v;
      }
 
+     public void setModifiable(boolean v) {
+          this.isDraggable = v;
+          this.isRotatable = v;
+     }
+
      // Getters
 
      public OpticalObjectType getOpticType() {
