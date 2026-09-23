@@ -42,6 +42,8 @@ public class Arc extends Shape {
      public void apporximateArc() {
           int arcVertexCount = Math.round(angle / DELTA_THETA) + 1;
           int actualVertexCount = thickness == 0 ? arcVertexCount : arcVertexCount * 2;
+          // Adjusts the angle step so the approximated arc spans the exact angle
+          float deltaTheta = angle / (arcVertexCount - 1);
 
           Vector2[] localVertices = new Vector2[actualVertexCount];
 
@@ -62,7 +64,7 @@ public class Arc extends Shape {
           // Outer arc
           for(int i = 0; i < arcVertexCount; i++) {
                // Centers the arc around the specified rotation
-               float theta = startAngle + i * DELTA_THETA;
+               float theta = startAngle + i * deltaTheta;
 
                localVertices[i] = new Vector2(
                     (float) (radius * Math.cos(theta)),
@@ -78,7 +80,7 @@ public class Arc extends Shape {
                // Inner arc backwards
                for(int i = 0; i < arcVertexCount; i++) {
                     // Centers the arc around the specified rotation
-                    float theta = startAngle - (i * DELTA_THETA);
+                    float theta = startAngle - (i * deltaTheta);
 
                     localVertices[i + arcVertexCount] = new Vector2(
                          (float) (innerRadius * Math.cos(theta)),
