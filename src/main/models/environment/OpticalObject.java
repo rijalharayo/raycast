@@ -93,6 +93,7 @@ public abstract class OpticalObject extends GameObject implements RayInteractabl
                // Print the current postion if ';' is pressed while hovering
                if(KeyboardInput.isPressed(KeyEvent.VK_F3)) {
                     System.out.println(name + " position: " + this.position);
+                    System.out.println("Rotation: " + Math.toDegrees(this.collider.getRotation()));
                }
                
                // Dragging & rotation can't be done at the same time
