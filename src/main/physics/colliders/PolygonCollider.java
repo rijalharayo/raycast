@@ -12,6 +12,6 @@ public class PolygonCollider extends Collider {
 
      public PolygonCollider(Vector2 position, Polygon polygon, float rotation) {
           super(position, polygon);
-          this.setRotation(rotation);
+          this.setRotation((float) Math.toRadians(rotation));
      }
 }
