@@ -56,7 +56,7 @@ public class TargetEnergyOrb extends GameObject implements RayInteractable {
      private Circle originalShape;
 
      // Used for delays between level switches
-     private static final float LEVEL_COMPLETE_DELAY = 0.5f;
+     private static final float LEVEL_COMPLETE_DELAY = 1.5f;
 
      private boolean completing = false;
      private float completionTimer = 0f;
