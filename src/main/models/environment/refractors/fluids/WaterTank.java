@@ -79,7 +79,7 @@ public class WaterTank extends Refractor {
      public void render(Graphics2D g) {
           super.render(g);
 
-          Rectangle rectangle = (Rectangle) getCollider().getShape();
+          Rectangle rectangle = (Rectangle) getShape();
           float width = rectangle.getWidth();
           float height = rectangle.getHeight();
 
