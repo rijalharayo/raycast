@@ -8,6 +8,7 @@ import main.game.scenes.levels.Level1;
 import main.game.scenes.levels.Level2;
 import main.game.scenes.levels.Level3;
 import main.game.scenes.levels.Level4;
+import main.game.scenes.levels.Level5;
 
 // Manages all the levels
 public class LevelManager {
@@ -36,6 +37,8 @@ public class LevelManager {
           addLevel(2, Level2.class);
           addLevel(3, Level3.class);
           addLevel(4, Level4.class);
+          addLevel(5, Level5.class);
+     
      }
 
      // Creates the level instance to be used as a scene
