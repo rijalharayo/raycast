@@ -20,9 +20,9 @@ public class Level5 extends LevelScene {
           add(new Laser(679.5f, 64f));
 
           // Refractors
-          add(new WaterTank(247.45557f, 238.28352f, 200, 50, 0f));
+          add(new WaterTank(247.45557f, 238.28352f, 230, 50, 0f));
           add(new GlassBlock(-71.84265f, 323.33344f, 200, 70, 0f));
-          add(new ConcaveLens(-222.95778f, -385.39508f, 280f, 85f, 150f, 0f));
+          add(new ConcaveLens(-222.95778f, -355.39508f, 130f, 50f, 150f, 0f));
           add(new ConvexLens(749.42944f, -301.82065f, 180f, 65f, 0f));
 
           // Reflectors
