@@ -27,7 +27,7 @@ public class LevelSelectionMenu extends MenuScene {
           backButton.setOnClick(() -> SceneManager.setScene(MenuScene.MAIN_MENU()));
           add(backButton);
 
-          UIWrapLayout levelLayout = new UIWrapLayout(900f, 20f);
+          UIWrapLayout levelLayout = new UIWrapLayout(1100f, 20f);
           levelLayout.setPosition(0, SCREEN_TOP() - 200);
 
           for (int levelIndex : LevelManager.getAllLevelIndices()) {
