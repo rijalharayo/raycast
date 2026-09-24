@@ -158,6 +158,23 @@ public class ConcaveLens extends Lens {
           float R = r - (w / 2);
           float rA = apertureDiameter / 2; // Aperture radius
 
+          /* 
+               These constraints must be followed:
+                    R = r - (w/2) > 0
+                    rₐ <= R
+          */
+          if(R <= 0) {
+               throw new IllegalArgumentException(
+                    "Center thickness must be less than twice the radius of curvature"
+               );
+          }
+
+          if(rA > R) {
+               throw new IllegalArgumentException(
+                    "Aperture radius cannot be greater than the construction circle radius"
+               );
+          }
+
           // The cosine ratio of the related triangle
           float cosRatio = rA / R;
           // Clamps the value between -1 & +1

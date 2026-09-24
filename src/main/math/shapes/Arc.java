@@ -40,7 +40,7 @@ public class Arc extends Shape {
      }
 
      public void apporximateArc() {
-          int arcVertexCount = Math.round(angle / DELTA_THETA) + 1;
+          int arcVertexCount = Math.round(Math.abs(angle) / DELTA_THETA) + 1;
           int actualVertexCount = thickness == 0 ? arcVertexCount : arcVertexCount * 2;
           // Adjusts the angle step so the approximated arc spans the exact angle
           float deltaTheta = angle / (arcVertexCount - 1);

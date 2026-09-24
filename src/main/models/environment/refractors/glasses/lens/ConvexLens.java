@@ -43,6 +43,18 @@ public class ConvexLens extends Lens {
 
      // Calculates the aperture diameter of the lens from the radius of curvature and thickness
      private static float calculateApertureDiameter(float radiusOfCurvature, float centerThickness) {
+          if(radiusOfCurvature <= 0) {
+               throw new IllegalArgumentException(
+                    "Radius of curvature must be positive"
+               );
+          }
+
+          if(centerThickness < 0) {
+               throw new IllegalArgumentException(
+                    "Center thickness cannot be negative"
+               );
+          }
+
           float r = radiusOfCurvature;
           float w = centerThickness;
           float R = r + (w / 2);
