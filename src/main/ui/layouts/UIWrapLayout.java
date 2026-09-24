@@ -54,7 +54,7 @@ public class UIWrapLayout extends UILayout {
                // Starts a new row when the component does not fit
                if (x + componentWidth > startX + width) {
                     x = startX;
-                    y += rowHeight + gap;
+                    y -= rowHeight + gap;
                     rowHeight = 0;
                }
 
