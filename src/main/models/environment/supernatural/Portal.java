@@ -214,14 +214,14 @@ public class Portal extends OpticalObject {
      public void rotate(float angle) {
           super.rotate(angle);
           // Rotate the portal matrix too if the portal is rotated
-          Matrix2x2 rotationMatrix = Matrix2x2.getRotationMatrix(angle);
+          Matrix2x2 rotationMatrix = Matrix2x2.getRotationMatrix((float) Math.toRadians(angle));
           portalMatrix = rotationMatrix.multiply(portalMatrix);
      }
 
      @Override
      public void setRotation(float angle) {
           // Set the rotation
-          Matrix2x2 rotationMatrix = Matrix2x2.getRotationMatrix(angle - collider.getRotation());
+          Matrix2x2 rotationMatrix = Matrix2x2.getRotationMatrix((float) Math.toRadians(angle) - collider.getRotation());
           portalMatrix = rotationMatrix.multiply(portalMatrix);
 
           super.setRotation(angle);
