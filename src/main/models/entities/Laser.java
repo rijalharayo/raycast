@@ -118,7 +118,7 @@ public class Laser extends GameObject {
 
           LightRay currentRay = initialRay;
 
-          int maxRebounce = 20;
+          int maxRebounce = 70;
           int currentRebounce = 0;
 
           while(currentRebounce <= maxRebounce) {
