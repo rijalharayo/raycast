@@ -10,6 +10,7 @@ import main.game.scenes.levels.Level3;
 import main.game.scenes.levels.Level4;
 import main.game.scenes.levels.Level5;
 import main.game.scenes.levels.Level6;
+import main.game.scenes.levels.Level7;
 
 // Manages all the levels
 public class LevelManager {
@@ -40,6 +41,7 @@ public class LevelManager {
           addLevel(4, Level4.class);
           addLevel(5, Level5.class);
           addLevel(6, Level6.class);
+          addLevel(7, Level7.class);
      }
 
      // Creates the level instance to be used as a scene
@@ -60,7 +62,8 @@ public class LevelManager {
      // Sets the current level
      public static void setCurrentLevel(int levelIndex) {
           if(!levels.containsKey(levelIndex)) {
-               throw new IllegalArgumentException("Level " + levelIndex + " doesn't exist!");
+               System.out.println("Level " + levelIndex + " doesn't exist!");
+               return;
           }
 
           // Creates the level scene
