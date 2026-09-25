@@ -19,7 +19,7 @@ public class Game implements Runnable {
 
      public static final String TITLE = "Ray Shooter";
 
-     public static final Vector2 WORLD_CENTER = new Vector2((float) WIDTH / 2, (float) HEIGHT / 2);
+     public static final Vector2 WORLD_CENTER = new Vector2((float) WORLD_WIDTH / 2, (float) WORLD_HEIGHT / 2);
 
      private Window window;
      private boolean running;

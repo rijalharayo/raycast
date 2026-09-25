@@ -48,6 +48,8 @@ public abstract class MenuScene extends Scene {
 
      @Override
      public void update() {
+          super.update();
+
           for(UIComponent uiComponent : uiComponents) {
                uiComponent.update();
           }
@@ -60,16 +62,11 @@ public abstract class MenuScene extends Scene {
 
      @Override
      public void render(Graphics2D g) {
-          // Renders the background
-          if (background != null) {
-               background.draw(g, 0, 0, Game.WIDTH, Game.HEIGHT);
-          }
+          super.render(g);
 
           for (UILayout layout : layouts) {
                layout.render(g);
           }
-
-          super.render(g);
      }
 
      public static void initailize() {

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 
+import main.game.Game;
 import main.game.Scene;
 import main.math.algebra.Vector2;
 import main.ui.Fonts;
@@ -59,7 +60,7 @@ public class UIText extends UIComponent {
 
      @Override
      public void render(Graphics2D g) {
-          Font font = DEFAULT_FONT.deriveFont(fontSize);
+          Font font = DEFAULT_FONT.deriveFont(fontSize * Game.getWorldScale());
 
           g.setFont(font);
           g.setColor(fontColor);
@@ -77,7 +78,7 @@ public class UIText extends UIComponent {
 
      @Override
      public void render(Graphics2D g, Vector2 position) {
-          Font font = DEFAULT_FONT.deriveFont(fontSize);
+          Font font = DEFAULT_FONT.deriveFont(fontSize * Game.getWorldScale());
 
           g.setFont(font);
           g.setColor(fontColor);

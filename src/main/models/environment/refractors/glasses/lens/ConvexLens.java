@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Path2D;
 
+import main.game.Game;
 import main.game.Scene;
 import main.math.algebra.Vector2;
 import main.math.shapes.Arc;
@@ -178,9 +179,9 @@ public class ConvexLens extends Lens {
           float R = r + (w / 2);
           float theta = arcAngle;
           float rotation = collider.getRotation();
+          float scale = Game.getWorldScale();
 
           Color oldColor = g.getColor();
-          
           g.setColor(getMedium().getColor());
 
           // Calculate the two circle centers
@@ -193,9 +194,10 @@ public class ConvexLens extends Lens {
 
           float leftCx = (float) leftScreenCenter.getX();
           float leftCy = (float) leftScreenCenter.getY();
-
           float rightCx = (float) rightScreenCenter.getX();
           float rightCy = (float) rightScreenCenter.getY();
+
+          float screenR = R * scale;
 
           // Starts the left surface at the upper endpoint
           // The left surface lies on the opposite side of its circle, so its angle is offset by PI
@@ -214,10 +216,10 @@ public class ConvexLens extends Lens {
           // Left convex surface
           Arc2D.Float leftSurface =
                new Arc2D.Float(
-                    leftCx - R,
-                    leftCy - R,
-                    R * 2,
-                    R * 2,
+                    leftCx - screenR,
+                    leftCy - screenR,
+                    screenR * 2,
+                    screenR * 2,
                     leftStartAngle,
                     (float) Math.toDegrees(theta),
                     Arc2D.OPEN
@@ -226,10 +228,10 @@ public class ConvexLens extends Lens {
           // Right convex surface
           Arc2D.Float rightSurface =
                new Arc2D.Float(
-                    rightCx - R,
-                    rightCy - R,
-                    R * 2,
-                    R * 2,
+                    rightCx - screenR,
+                    rightCy - screenR,
+                    screenR * 2,
+                    screenR * 2,
                     rightStartAngle,
                     (float) Math.toDegrees(theta),
                     Arc2D.OPEN

@@ -121,6 +121,11 @@ public abstract class Scene {
 
      // Draws the scene to the screen
      public void render(Graphics2D g) {
+          // Renders the background
+          if (background != null) {
+               background.drawBackground(g);;
+          }
+
           for(GameObject obj : gameObjects) {
                obj.render(g);
           }

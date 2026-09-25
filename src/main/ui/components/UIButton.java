@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 import main.audio.SoundEffect;
+import main.game.Game;
 import main.game.Scene;
 import main.math.algebra.Vector2;
 import main.ui.Fonts;
@@ -101,13 +102,18 @@ public class UIButton extends UIComponent {
      @Override
      public void render(Graphics2D g) {
           Vector2 screenPos = Scene.worldToScreen(position);
+          float scale = Game.getWorldScale();
 
-          float x = screenPos.getX() - (width() / 2f);
-          float y = screenPos.getY() - (height() / 2f);
+          float width = width() * scale;
+          float height = height() * scale;
+          float borderWidth = this.borderWidth * scale;
+
+          float x = screenPos.getX() - (width / 2f);
+          float y = screenPos.getY() - (height / 2f);
 
           // Button
           g.setColor(buttonColor);
-          g.fillRect((int) x, (int) y, width(), height());
+          g.fillRect((int) x, (int) y, (int) width, (int) height);
 
           // Border
           g.setColor(borderColor);
@@ -118,8 +124,8 @@ public class UIButton extends UIComponent {
           g.drawRect(
                (int) (x + borderOffset),
                (int) (y + borderOffset),
-               (int) (width() - borderWidth),
-               (int) (height() - borderWidth)
+               (int) (width - borderWidth),
+               (int) (height - borderWidth)
           );
 
           // Text

@@ -17,18 +17,18 @@ public class LevelSelectionMenu extends MenuScene {
      public void loadUI() {
           UIText title = new UIText("Level selector");
           title.setSize(80f);
-          title.setPosition(SCREEN_LEFT() + 400, SCREEN_TOP() - 100);
+          title.setPosition(-387.5f, 333f);
           add(title);
 
           // Go back
           UIButton backButton = new UIButton("Back", 200, 100);
           backButton.setTextSize(40f);
-          backButton.setPosition(SCREEN_RIGHT() - 200, SCREEN_TOP() - 100);
+          backButton.setPosition(643.5f, 333f);
           backButton.setOnClick(() -> SceneManager.setScene(MenuScene.MAIN_MENU()));
           add(backButton);
 
-          UIWrapLayout levelLayout = new UIWrapLayout(1100f, 20f);
-          levelLayout.setPosition(0, SCREEN_TOP() - 200);
+          UIWrapLayout levelLayout = new UIWrapLayout(1200f, 20f);
+          levelLayout.setPosition(0, 240f);
 
           for (int levelIndex : LevelManager.getAllLevelIndices()) {
                UIButton button = new UIButton(

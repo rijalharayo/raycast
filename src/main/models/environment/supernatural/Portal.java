@@ -1,12 +1,8 @@
 package main.models.environment.supernatural;
 
 import java.awt.Graphics2D;
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Stroke;
-import java.awt.geom.AffineTransform;
 
-import main.game.Scene;
 import main.game.ShapeRender;
 import main.math.Line;
 import main.math.algebra.Matrix2x2;
@@ -27,6 +23,11 @@ public class Portal extends OpticalObject {
      // The matrix representing the portal coordinates
      private Matrix2x2 portalMatrix;
 
+     // Stores the cached reflection matrix
+     private Matrix2x2 cachedReflectionMatrix;
+     // Stores the previous tangent
+     private Line prevTangent;
+
      // Portal colors (for rendering)
      private static final Color PORTAL_COLOR = new Color(23, 22, 22);
 
@@ -34,14 +35,10 @@ public class Portal extends OpticalObject {
      private static final Color GLOW_COLOR_2 = new Color(100, 200, 255, 35);
      private static final Color GLOW_COLOR_3 = new Color(100, 200, 255, 15);
 
-     private static final Stroke GLOW_STROKE_1 = new BasicStroke(4f);
-     private static final Stroke GLOW_STROKE_2 = new BasicStroke(8f);
-     private static final Stroke GLOW_STROKE_3 = new BasicStroke(14f);
-
-     // Stores the cached reflection matrix
-     private Matrix2x2 cachedReflectionMatrix;
-     // Stores the previous tangent
-     private Line prevTangent;
+     // Cached glow effect shapes
+     private Rectangle glowShape1;
+     private Rectangle glowShape2;
+     private Rectangle glowShape3;
 
      // Constructors
      public Portal(Vector2 position, int width, int height, float rotation) {
@@ -52,6 +49,23 @@ public class Portal extends OpticalObject {
           );
 
           this.portalShape = (Rectangle) this.collider.getShape();
+
+          // Initialize glow shapes
+          this.glowShape1 = new Rectangle(
+               portalShape.getWidth() + 8,
+               portalShape.getHeight() + 8
+          );
+
+          this.glowShape2 = new Rectangle(
+               portalShape.getWidth() + 16,
+               portalShape.getHeight() + 16
+          );
+
+          this.glowShape3 = new Rectangle(
+               portalShape.getWidth() + 28,
+               portalShape.getHeight() + 28
+          );
+
           initializePortalMatrix();
      }
 
@@ -65,6 +79,23 @@ public class Portal extends OpticalObject {
           );
 
           this.portalShape = (Rectangle) this.collider.getShape();
+
+          // Initialize glow shapes
+          this.glowShape1 = new Rectangle(
+               portalShape.getWidth() + 8,
+               portalShape.getHeight() + 8
+          );
+
+          this.glowShape2 = new Rectangle(
+               portalShape.getWidth() + 16,
+               portalShape.getHeight() + 16
+          );
+
+          this.glowShape3 = new Rectangle(
+               portalShape.getWidth() + 28,
+               portalShape.getHeight() + 28
+          );
+
           initializePortalMatrix();
      }
 
@@ -229,60 +260,39 @@ public class Portal extends OpticalObject {
 
      @Override
      public void render(Graphics2D g) {
-          Vector2 screenPosition = Scene.worldToScreen(getPosition());
-          float rotation = getCollider().getRotation();
-
-          AffineTransform oldTransform = g.getTransform();
-          Color oldColor = g.getColor();
-          Stroke oldStroke = g.getStroke();
-
           // Draws the portal glow
-          g.rotate(
-               -rotation,
-               screenPosition.getX(),
-               screenPosition.getY()
+          ShapeRender.draw(
+               g,
+               glowShape3,
+               getPosition(),
+               getCollider().getRotation(),
+               GLOW_COLOR_3
           );
 
-          g.setColor(GLOW_COLOR_3);
-          g.setStroke(GLOW_STROKE_3);
-          g.drawRect(
-               (int) (screenPosition.getX() - portalShape.getWidth() / 2f),
-               (int) (screenPosition.getY() - portalShape.getHeight() / 2f),
-               portalShape.getWidth(),
-               portalShape.getHeight()
+          ShapeRender.draw(
+               g,
+               glowShape2,
+               getPosition(),
+               getCollider().getRotation(),
+               GLOW_COLOR_2
           );
 
-          g.setColor(GLOW_COLOR_2);
-          g.setStroke(GLOW_STROKE_2);
-          g.drawRect(
-               (int) (screenPosition.getX() - portalShape.getWidth() / 2f),
-               (int) (screenPosition.getY() - portalShape.getHeight() / 2f),
-               portalShape.getWidth(),
-               portalShape.getHeight()
+          ShapeRender.draw(
+               g,
+               glowShape1,
+               getPosition(),
+               getCollider().getRotation(),
+               GLOW_COLOR_1
           );
-
-          g.setColor(GLOW_COLOR_1);
-          g.setStroke(GLOW_STROKE_1);
-          g.drawRect(
-               (int) (screenPosition.getX() - portalShape.getWidth() / 2f),
-               (int) (screenPosition.getY() - portalShape.getHeight() / 2f),
-               portalShape.getWidth(),
-               portalShape.getHeight()
-          );
-
-          g.setTransform(oldTransform);
 
           // Draws the portal body
           ShapeRender.draw(
                g,
                portalShape,
                getPosition(),
-               rotation,
+               getCollider().getRotation(),
                PORTAL_COLOR
           );
-
-          g.setColor(oldColor);
-          g.setStroke(oldStroke);
 
           super.render(g);
      }

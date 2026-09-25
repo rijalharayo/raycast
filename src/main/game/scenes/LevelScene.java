@@ -1,8 +1,5 @@
 package main.game.scenes;
 
-import java.awt.Graphics2D;
-
-import main.game.Game;
 import main.game.Scene;
 import main.game.SceneManager;
 import main.models.GameObject;
@@ -96,26 +93,16 @@ public abstract class LevelScene extends Scene {
           // Level text
           UIText levelLabel = new UIText("Level " + this.levelIndex);
           levelLabel.setSize(40f);
-          levelLabel.setPosition(MenuScene.SCREEN_LEFT() + 150f, MenuScene.SCREEN_TOP() - 50f);
+          levelLabel.setPosition(-648.5f, 397f);
           add(levelLabel);
 
           // A default back button
           UIButton backButton = new UIButton("Back", 150, 80);
           backButton.setTextSize(30f);
           backButton.setOnClick(() -> SceneManager.setScene(MenuScene.LEVEL_MENU()));
-          backButton.setPosition(MenuScene.SCREEN_RIGHT() - 200f, MenuScene.SCREEN_TOP() - 80f);
+          backButton.setPosition(686.5f, 397f);
           add(backButton);
      };
-
-     @Override
-     public void render(Graphics2D g) {
-          // Renders the background
-          if(background != null) {
-               background.draw(g, 0, 0, Game.WIDTH, Game.HEIGHT);
-          }
-
-          super.render(g);
-     }
 
      @Override
      public String toString() {

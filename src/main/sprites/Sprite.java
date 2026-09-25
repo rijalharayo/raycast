@@ -136,6 +136,18 @@ public class Sprite {
           g.setTransform(old);
      }
 
+     // Draws sprite as the entire background
+     public void drawBackground(Graphics2D g) {
+          g.drawImage(
+               image,
+               0,
+               0,
+               Game.WIDTH,
+               Game.HEIGHT,
+               null
+          );
+     }
+
      // Rotates the sprite (in radians)
      public void rotate(float angle) {
           this.rotation += angle;
