@@ -1,5 +1,6 @@
 package main.math.shapes;
 
+import main.game.Game;
 import main.math.Line;
 import main.math.algebra.Vector2;
 import main.math.shapes.polygons.Polygon;
@@ -44,6 +45,10 @@ public class Circle extends Shape {
      // Getters
      public float getRadius() {
           return radius;
+     }
+
+     public float getRenderRadius() {
+          return radius * Game.getWorldScale();
      }
 
      @Override

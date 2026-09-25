@@ -135,17 +135,31 @@ public abstract class Scene {
 
      // Converts world coordinates to screen coordinates
      public static Vector2 worldToScreen(Vector2 worldCoordinate) {
+          float scale = Game.getWorldScale();
+          float offsetX = Game.getWorldOffsetX();
+          float offsetY = Game.getWorldOffsetY();
+
+          float virtualX = worldCoordinate.getX() + Game.WORLD_CENTER.getX();
+          float virtualY = Game.WORLD_CENTER.getY() - worldCoordinate.getY();
+
           return new Vector2(
-               worldCoordinate.getX() + Game.WORLD_CENTER.getX(),
-               Game.WORLD_CENTER.getY() - worldCoordinate.getY()
+               virtualX * scale + offsetX,
+               virtualY * scale + offsetY
           );
      }
 
      // Converts screen coordinates to world coordinates
      public static Vector2 screenToWorld(Vector2 screenCoordinate) {
+          float scale = Game.getWorldScale();
+          float offsetX = Game.getWorldOffsetX();
+          float offsetY = Game.getWorldOffsetY();
+
+          float virtualX = (screenCoordinate.getX() - offsetX) / scale;
+          float virtualY = (screenCoordinate.getY() - offsetY) / scale;
+
           return new Vector2(
-               screenCoordinate.getX() - Game.WORLD_CENTER.getX(),
-               Game.WORLD_CENTER.getY() - screenCoordinate.getY()
+               virtualX - Game.WORLD_CENTER.getX(),
+               Game.WORLD_CENTER.getY() - virtualY
           );
      }
 

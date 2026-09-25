@@ -54,7 +54,7 @@ public class ShapeRender {
 
           Vector2 screenPosition = Scene.worldToScreen(worldPosition);
 
-          float radius = circle.getRadius();
+          float radius = circle.getRenderRadius();
 
           AffineTransform oldTransform = g.getTransform();
           Color oldColor = g.getColor();
@@ -88,8 +88,8 @@ public class ShapeRender {
 
           Vector2 screenPosition = Scene.worldToScreen(worldPosition);
 
-          float width = rectangle.getWidth();
-          float height = rectangle.getHeight();
+          float width = rectangle.getWidth() * Game.getWorldScale();
+          float height = rectangle.getHeight() * Game.getWorldScale();
 
           AffineTransform oldTransform = g.getTransform();
           Color oldColor = g.getColor();
@@ -122,8 +122,8 @@ public class ShapeRender {
           Color color
      ) {
 
-          float radius = arc.getRadius();
-          float thickness = arc.getThickness();
+          float radius = arc.getRenderRadius();
+          float thickness = arc.getRenderThickness();
           float angle = arc.getAngle();
 
           float innerRadius = radius - thickness;

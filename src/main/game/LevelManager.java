@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import main.game.scenes.LevelScene;
+import main.game.scenes.MenuScene;
 import main.game.scenes.levels.Level1;
 import main.game.scenes.levels.Level2;
 import main.game.scenes.levels.Level3;
@@ -63,6 +64,7 @@ public class LevelManager {
      public static void setCurrentLevel(int levelIndex) {
           if(!levels.containsKey(levelIndex)) {
                System.out.println("Level " + levelIndex + " doesn't exist!");
+               SceneManager.setScene(MenuScene.LEVEL_MENU());
                return;
           }
 

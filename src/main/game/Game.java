@@ -12,6 +12,11 @@ public class Game implements Runnable {
      
      public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
      public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+
+     // All positions & scaling are based on this
+     public static final int WORLD_WIDTH = 1603;
+     public static final int WORLD_HEIGHT = 902;
+
      public static final String TITLE = "Ray Shooter";
 
      public static final Vector2 WORLD_CENTER = new Vector2((float) WIDTH / 2, (float) HEIGHT / 2);
@@ -22,7 +27,6 @@ public class Game implements Runnable {
      private static Game currentGame;
 
      public void start() {
-
           // Create the game window
           window = new Window(TITLE, WIDTH, HEIGHT);
           running = true;
@@ -97,5 +101,25 @@ public class Game implements Runnable {
      // Returns the current game
      public static Game CURRENT_GAME() {
           return currentGame;
+     }
+
+     // Scale of the world based on screen size
+     public static float getWorldScale() {
+          float scaleX = (float) WIDTH / WORLD_WIDTH;
+          float scaleY = (float) HEIGHT / WORLD_HEIGHT;
+
+          return Math.min(scaleX, scaleY);
+     }
+
+     public static float getWorldOffsetX() {
+          float scale = getWorldScale();
+
+          return (WIDTH - WORLD_WIDTH * scale) / 2f;
+     }
+
+     public static float getWorldOffsetY() {
+          float scale = getWorldScale();
+
+          return (HEIGHT - WORLD_HEIGHT * scale) / 2f;
      }
 }

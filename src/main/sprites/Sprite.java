@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.game.Game;
 import main.game.Scene;
 import main.math.algebra.Vector2;
 
@@ -96,7 +97,12 @@ public class Sprite {
           // Gets the screen position
           Vector2 screenPos = Scene.worldToScreen(worldPos);
 
-          g.drawImage(image, (int) screenPos.getX(), (int) screenPos.getY(), width, height, null);
+          float worldScale = Game.getWorldScale();
+
+          int screenWidth = (int) (width * worldScale);
+          int screenHeight = (int) (height * worldScale);
+
+          g.drawImage(image, (int) screenPos.getX(), (int) screenPos.getY(), screenWidth, screenHeight, null);
           g.setTransform(old);
      }
 
@@ -121,7 +127,12 @@ public class Sprite {
           // Gets the screen position
           Vector2 screenPos = Scene.worldToScreen(worldPos);
 
-          g.drawImage(image, (int) screenPos.getX(), (int) screenPos.getY(), width, height, null);
+          float worldScale = Game.getWorldScale();
+
+          int screenWidth = (int) (width * worldScale);
+          int screenHeight = (int) (height * worldScale);
+
+          g.drawImage(image, (int) screenPos.getX(), (int) screenPos.getY(), screenWidth, screenHeight, null);
           g.setTransform(old);
      }
 

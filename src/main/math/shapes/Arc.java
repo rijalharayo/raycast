@@ -1,5 +1,6 @@
 package main.math.shapes;
 
+import main.game.Game;
 import main.math.Line;
 import main.math.algebra.Vector2;
 import main.math.shapes.polygons.Polygon;
@@ -118,12 +119,20 @@ public class Arc extends Shape {
           return radius;
      }
 
+     public float getRenderRadius() {
+          return radius * Game.getWorldScale();
+     }
+
      public float getAngle() {
           return angle;
      }
 
      public float getThickness() {
           return thickness;
+     }
+
+     public float getRenderThickness() {
+          return thickness * Game.getWorldScale();
      }
 
      public Line[] getFlatEdges() {
