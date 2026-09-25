@@ -203,6 +203,49 @@ The implementation uses systems such as **Cramer's rule** for solving line-inter
 
 ---
 
+# 📚 Mathematical Documentation
+
+The mathematical systems used by Ray Shooter are documented separately in the `docs/` directory.
+
+The documentation explains not only **what formulas are used**, but also **how they are derived and how they relate to the implementation**.
+
+```text
+docs/
+└── mathematics/
+    ├── lines.md
+    ├── reflection.md
+    ├── refractors.md
+    └── portals.md
+```
+
+### 📐 Mathematics
+
+| Document        | Covers                                                                                                 |
+| --------------- | ------------------------------------------------------------------------------------------------------ |
+| `lines.md`      | Line representation, direction vectors, normals, parallelism, Cramer's rule, and segment intersections |
+| `reflection.md` | Vector projection, normal/tangent decomposition, and reflection                                        |
+| `refractors.md` | Snell's Law, refraction, critical angle, and total internal reflection                                 |
+| `portals.md`    | Coordinate transformations, rotation matrices, reflection, and linked-portal transformations           |
+
+These documents provide the mathematical reasoning behind the systems implemented in the engine.
+
+For example, the reflection system is derived from vector decomposition:
+
+$$
+I=I_N+I_T
+$$
+
+followed by reversing the normal component:
+
+$$
+R=I_T-I_N
+$$
+
+The implementation then applies this mathematical model to actual ray interactions.
+
+The goal of these documents is to make the engine's mathematical foundations **traceable from derivation → formula → implementation**.
+
+
 # 🔬 Physics & Optics
 
 The optical system is one of the main parts of Ray Shooter.
@@ -937,6 +980,7 @@ resources/sounds/
 ```
 
 This keeps source code and game assets separated while allowing the engine to load resources independently.
+
 
 The exact package structure may evolve as development continues.
 
