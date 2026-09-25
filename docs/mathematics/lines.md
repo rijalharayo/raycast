@@ -38,9 +38,7 @@ The line can therefore be represented mathematically by its two endpoints.
 The direction of a line is obtained by subtracting its starting point from its ending point:
 
 $$
-\boxed{
-\vec{AB}=B-A
-}
+\boxed{\vec{AB}=B-A}
 $$
 
 Therefore:
@@ -79,7 +77,7 @@ y_2-y_1
 \end{bmatrix}
 $$
 
-the length is
+the length is:
 
 $$
 \boxed{
@@ -108,7 +106,7 @@ For a direction vector \(v\):
 
 $$
 \boxed{
-\hat v=\frac{v}{|v|}
+\hat{v}=\frac{v}{|v|}
 }
 $$
 
@@ -138,7 +136,7 @@ $$
 B=(x_2,y_2)
 $$
 
-the slope is
+the slope is:
 
 $$
 \boxed{
@@ -169,14 +167,14 @@ A normal vector is perpendicular to the line.
 If the normalized direction of the line is
 
 $$
-\hat v=
+\hat{v}=
 \begin{bmatrix}
 x\\
 y
 \end{bmatrix}
 $$
 
-then rotating it \(90^\circ\) counter-clockwise gives
+then rotating it \(90^\circ\) counter-clockwise gives:
 
 $$
 \boxed{
@@ -188,7 +186,7 @@ x
 }
 $$
 
-This is because the \(90^\circ\) counter-clockwise rotation matrix is
+This is because the \(90^\circ\) counter-clockwise rotation matrix is:
 
 $$
 R_{90}=
@@ -198,7 +196,7 @@ R_{90}=
 \end{bmatrix}
 $$
 
-and
+and:
 
 $$
 R_{90}
@@ -230,30 +228,30 @@ Because the direction vector is normalized first, the resulting normal is also a
 
 Two normalized direction vectors are parallel when they point in either the same or opposite directions.
 
-Let the normalized directions be
+Let the normalized directions be:
 
 $$
-\hat v_1
+\hat{v}_1
 $$
 
 and
 
 $$
-\hat v_2
+\hat{v}_2
 $$
 
-Their dot product is
+Their dot product is:
 
 $$
-\hat v_1\cdot\hat v_2
+\hat{v}_1\cdot\hat{v}_2
 =
-|\hat v_1||\hat v_2|\cos\theta
+|\hat{v}_1||\hat{v}_2|\cos\theta
 $$
 
 Since both vectors have magnitude \(1\):
 
 $$
-\hat v_1\cdot\hat v_2=\cos\theta
+\hat{v}_1\cdot\hat{v}_2=\cos\theta
 $$
 
 For parallel lines:
@@ -272,7 +270,7 @@ Therefore:
 
 $$
 \boxed{
-\hat v_1\cdot\hat v_2=\pm1
+\hat{v}_1\cdot\hat{v}_2=\pm1
 }
 $$
 
@@ -295,7 +293,7 @@ The epsilon accounts for floating-point precision errors.
 
 ---
 
-# 8. Standard Form of a Line
+## 8. Standard Form of a Line
 
 For two points
 
@@ -327,7 +325,7 @@ $$
 B=x_2-x_1
 $$
 
-and
+and:
 
 $$
 C=Ax_1+By_1
@@ -336,28 +334,22 @@ $$
 Therefore:
 
 $$
-\boxed{
-A=(y_1-y_2)
-}
+A=y_1-y_2
 $$
 
 $$
-\boxed{
-B=(x_2-x_1)
-}
+B=x_2-x_1
 $$
 
 $$
-\boxed{
 C=(y_1-y_2)x_1+(x_2-x_1)y_1
-}
 $$
 
 These are the values calculated by `findIntersection()`.
 
 ---
 
-# 9. Intersection of Two Infinite Lines
+## 9. Intersection of Two Infinite Lines
 
 Suppose two lines are represented by:
 
@@ -365,7 +357,7 @@ $$
 A_1x+B_1y=C_1
 $$
 
-and
+and:
 
 $$
 A_2x+B_2y=C_2
@@ -407,7 +399,7 @@ $$
 }
 $$
 
-If
+If:
 
 $$
 \det(M)=0
@@ -417,7 +409,7 @@ then the lines are parallel or coincident and there is no unique intersection.
 
 ---
 
-# 10. Cramer's Rule
+## 10. Cramer's Rule
 
 To solve the system, Cramer's Rule replaces one column of the coefficient matrix with the constants.
 
@@ -493,7 +485,7 @@ Therefore, `findIntersection()` calculates the intersection of the **infinite li
 
 ---
 
-# 11. Determinant and Parallel Lines
+## 11. Determinant and Parallel Lines
 
 The determinant also provides a mathematical test for parallelism.
 
@@ -507,7 +499,7 @@ A_2&B_2
 \end{bmatrix}
 $$
 
-if
+if:
 
 $$
 \det(M)=0
@@ -533,7 +525,7 @@ The determinant is therefore considered zero when it falls within the chosen num
 
 ---
 
-# 12. Infinite Lines vs Line Segments
+## 12. Infinite Lines vs Line Segments
 
 Finding the intersection of two infinite lines is not enough for the engine.
 
@@ -552,21 +544,9 @@ Therefore, the engine performs an additional check to determine whether the inte
 
 ---
 
-# 13. Determining Whether a Point Lies Between Two Points
+## 13. Determining Whether a Point Lies Between Two Points
 
-Suppose:
-
-$$
-A
-$$
-
-and
-
-$$
-B
-$$
-
-are the endpoints of a segment and \(P\) is a candidate point.
+Suppose \(A\) and \(B\) are the endpoints of a segment and \(P\) is a candidate point.
 
 Define:
 
@@ -624,7 +604,7 @@ This works because the two dot products have opposite signs when the point lies 
 
 ---
 
-# 14. Segment Intersection
+## 14. Segment Intersection
 
 Two non-parallel line segments intersect if their infinite lines intersect at a point that lies within both segments.
 
@@ -634,7 +614,7 @@ $$
 AB
 $$
 
-and
+and:
 
 $$
 CD
@@ -654,7 +634,7 @@ P\in AB
 }
 $$
 
-and
+and:
 
 $$
 \boxed{
@@ -670,9 +650,7 @@ boolean onThisSegment =
 
 boolean onLine2Segment =
      liesBetween(
-          line2.getStart(),
-          line2.getEnd(),
-          intersection
+          line2.getStart(), line2.getEnd(), intersection
      );
 ```
 
@@ -680,7 +658,7 @@ Only when both are true is the intersection considered a valid segment intersect
 
 ---
 
-# 15. Early Intersection Test
+## 15. Early Intersection Test
 
 Before calculating the actual intersection, the implementation checks whether the endpoints of either segment lie within the other segment's projection.
 
@@ -736,7 +714,7 @@ This avoids performing the more expensive intersection calculation when the segm
 
 ---
 
-# 16. Identical Segments
+## 16. Identical Segments
 
 Two line segments are geometrically identical when they have the same endpoints, regardless of endpoint ordering.
 
@@ -746,7 +724,7 @@ $$
 A\rightarrow B
 $$
 
-and
+and:
 
 $$
 B\rightarrow A
@@ -756,25 +734,25 @@ represent the same geometric segment.
 
 Therefore, two cases are checked.
 
-### Same direction
+### Same Direction
 
 $$
 A=A'
 $$
 
-and
+and:
 
 $$
 B=B'
 $$
 
-### Opposite direction
+### Opposite Direction
 
 $$
 A=B'
 $$
 
-and
+and:
 
 $$
 B=A'
@@ -806,11 +784,11 @@ $$
 
 ---
 
-# 17. Translation
+## 17. Translation
 
 A line can be translated by adding the same displacement vector to both endpoints.
 
-For an offset
+For an offset:
 
 $$
 T=
@@ -851,7 +829,7 @@ Translation changes the position of the line but does not change its direction o
 
 ---
 
-# 18. Rotation
+## 18. Rotation
 
 A line can be rotated by rotating both of its endpoints.
 
@@ -894,7 +872,7 @@ The `rotateAround()` operation first treats the selected point as the rotation c
 
 ---
 
-# 19. Mathematical Role of the Line Class
+## 19. Mathematical Role of the Line Class
 
 The `Line` class acts as a basic geometric primitive for the rest of the engine.
 
@@ -914,7 +892,7 @@ For example, a reflector can obtain a surface normal from a line:
 
 $$
 \boxed{
-N=R_{90}(\hat v)
+N=R_{90}(\hat{v})
 }
 $$
 
@@ -924,7 +902,7 @@ Similarly, refractors can use the line's tangent and normal as the basis for the
 
 ---
 
-# 20. Summary
+## 20. Summary
 
 The main mathematical operations of the `Line` class are:
 
@@ -959,15 +937,15 @@ $$
 
 for a normalized direction \((x,y)\).
 
-### Parallel detection
+### Parallel Detection
 
 $$
 \boxed{
-\hat v_1\cdot\hat v_2\approx\pm1
+\hat{v}_1\cdot\hat{v}_2\approx\pm1
 }
 $$
 
-### Infinite-line intersection
+### Infinite-Line Intersection
 
 $$
 \boxed{
@@ -983,7 +961,7 @@ $$
 
 using Cramer's Rule.
 
-### Point-between-segment test
+### Point-Between-Segment Test
 
 $$
 \boxed{
@@ -992,7 +970,7 @@ $$
 }
 $$
 
-### Segment intersection
+### Segment Intersection
 
 $$
 \boxed{
@@ -1002,7 +980,7 @@ P\in CD
 }
 $$
 
-### Identical segments
+### Identical Segments
 
 $$
 \boxed{

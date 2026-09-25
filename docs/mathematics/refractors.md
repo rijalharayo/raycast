@@ -38,18 +38,18 @@ $$
 where:
 
 $$
-I_N=\operatorname{proj}_N(I)
+I_N=\mathrm{proj}_N(I)
 $$
 
-and
+and:
 
 $$
-I_T=\operatorname{proj}_T(I)
+I_T=\mathrm{proj}_T(I)
 $$
 
 The implementation performs this directly using vector projections:
 
-```java id="49317a"
+```java
 Vector2 incidentAlongNormal =
      incidentVector.projectOnto(normal);
 
@@ -77,7 +77,7 @@ $$
 
 The implementation obtains it using:
 
-```java id="x3zqv4"
+```java
 float angleOfIncidence =
      incidentVector.getAngleBetween(normal);
 
@@ -123,7 +123,7 @@ $$
 
 The implementation calculates this using:
 
-```java id="oy9e4m"
+```java
 float sinRefracted =
      (n1 * sinIncident) / n2;
 
@@ -258,7 +258,7 @@ $$
 
 The implementation uses:
 
-```java id="3w9h1d"
+```java
 Vector2 reflectionVector =
      incidentAlongTangent.add(
           incidentAlongNormal.multiply(-1f)
@@ -327,7 +327,7 @@ $$
 
 The normalized incident components are used as the basis directions:
 
-```java id="x31k9m"
+```java
 Vector2 normalizedIncidentAlongNormal =
      incidentAlongNormal.getNormalized();
 
@@ -337,7 +337,7 @@ Vector2 normalizedIncidentAlongTangent =
 
 The refracted components are then constructed:
 
-```java id="8yq3sa"
+```java
 Vector2 refractedAlongNormal =
      normalizedIncidentAlongNormal.multiply(
           (float) Math.cos(angleOfRefraction)
@@ -351,7 +351,7 @@ Vector2 refractedAlongTangent =
 
 Finally:
 
-```java id="y6v1pe"
+```java
 Vector2 refractedVector =
      refractedAlongNormal.add(
           refractedAlongTangent
@@ -478,13 +478,7 @@ $$
 }
 $$
 
-provided that
-
-$$
-n_1>n_2
-$$
-
-does not produce total internal reflection.
+provided that the transition does not produce total internal reflection.
 
 ---
 
@@ -548,7 +542,7 @@ $$
 
 the calculated value is clamped before calling `asin()`:
 
-```java id="u8w2qk"
+```java
 sinRefracted =
      Math.clamp(sinRefracted, -1f, 1f);
 ```
@@ -561,7 +555,7 @@ This prevents numerical errors from producing an invalid result.
 
 The refractor is based on three main ideas:
 
-### Vector decomposition
+### Vector Decomposition
 
 $$
 \boxed{
