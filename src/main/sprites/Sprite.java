@@ -60,11 +60,11 @@ public class Sprite {
      }
 
      public int getWidth() {
-          return width;
+          return (int) (width * scale);
      }
 
      public int getHeight() {
-          return height;
+          return (int) (height * scale);
      }
 
      // Setters
@@ -90,8 +90,8 @@ public class Sprite {
           );
 
           // Converts the center position to the top-left coordinate required for drawing
-          int newX = (int) (x - width/2);
-          int newY = (int) (y + height/2);
+          int newX = (int) (x - (width * scale) /2);
+          int newY = (int) (y + (height * scale) /2);
 
           Vector2 worldPos = new Vector2(newX, newY);
           // Gets the screen position
@@ -99,8 +99,8 @@ public class Sprite {
 
           float worldScale = Game.getWorldScale();
 
-          int screenWidth = (int) (width * worldScale);
-          int screenHeight = (int) (height * worldScale);
+          int screenWidth = (int) (width * worldScale * scale);
+          int screenHeight = (int) (height * worldScale * scale);
 
           g.drawImage(image, (int) screenPos.getX(), (int) screenPos.getY(), screenWidth, screenHeight, null);
           g.setTransform(old);
@@ -120,8 +120,8 @@ public class Sprite {
           );
 
           // Converts the center position to the top-left coordinate required for drawing
-          int newX = (int) (x - width / 2);
-          int newY = (int) (y + height / 2);
+          int newX = (int) (x - (width * scale) / 2);
+          int newY = (int) (y + (height * scale) / 2);
 
           Vector2 worldPos = new Vector2(newX, newY);
           // Gets the screen position
@@ -129,8 +129,8 @@ public class Sprite {
 
           float worldScale = Game.getWorldScale();
 
-          int screenWidth = (int) (width * worldScale);
-          int screenHeight = (int) (height * worldScale);
+          int screenWidth = (int) (width * worldScale * scale);
+          int screenHeight = (int) (height * worldScale * scale);
 
           g.drawImage(image, (int) screenPos.getX(), (int) screenPos.getY(), screenWidth, screenHeight, null);
           g.setTransform(old);
@@ -149,18 +149,11 @@ public class Sprite {
      // Scales the sprite
      public void scale(float sc) {
           this.scale *= sc;
-          // Scales the width & height
-          this.width *= sc;
-          this.height *= sc;
      }
 
      // Sets the scale
      public void setScale(float sc) {
           this.scale = sc;
-          // Scales the width & height
-          this.width *= scale;
-          this.height *= scale;
-          
      }
 
 }
