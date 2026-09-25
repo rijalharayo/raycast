@@ -38,7 +38,7 @@ Instead of relying heavily on pre-built physics or geometry libraries, the proje
 
 # 🧠 What Makes This Project Different?
 
-The main goal of Ray Shooter is not simply to make a game.
+The main goal of Ray Cast is not simply to make a game.
 
 It is also an experiment in **building a small 2D game/physics engine from the ground up**.
 
@@ -63,7 +63,7 @@ The project therefore combines **game development, computer graphics, geometry, 
 
 # 📐 Mathematics Used
 
-Ray Shooter makes extensive use of mathematics for both gameplay and engine functionality.
+Ray Cast makes extensive use of mathematics for both gameplay and engine functionality.
 
 ## 1. Trigonometry
 
