@@ -1,8 +1,8 @@
-# 🔦 Ray Shooter
+# 🔦 Ray Cast
 
 > A custom 2D ray-shooting game and physics engine built from scratch in Java.
 
-Ray Shooter is a 2D physics-based puzzle/shooter project focused on **light, geometry, optics, and custom engine development**.
+Ray Cast is a 2D physics-based puzzle/shooter project focused on **light, geometry, optics, and custom engine development**.
 
 Instead of relying heavily on pre-built physics or geometry libraries, the project implements its own mathematical and rendering systems for vectors, matrices, lines, shapes, collision detection, raycasting, reflection, refraction, portals, lenses, and interactive objects.
 
