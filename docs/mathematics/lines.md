@@ -26,6 +26,7 @@ In the implementation, these are stored as:
 
 ```java
 protected Vector2 start;
+
 protected Vector2 end;
 ```
 
@@ -191,8 +192,8 @@ This is because the \(90^\circ\) counter-clockwise rotation matrix is:
 $$
 R_{90}=
 \begin{bmatrix}
-0&-1\\
-1&0
+0 & -1\\
+1 & 0
 \end{bmatrix}
 $$
 
@@ -367,8 +368,8 @@ These equations can be represented as a matrix equation:
 
 $$
 \begin{bmatrix}
-A_1&B_1\\
-A_2&B_2
+A_1 & B_1\\
+A_2 & B_2
 \end{bmatrix}
 \begin{bmatrix}
 x\\
@@ -386,8 +387,8 @@ The coefficient matrix is:
 $$
 M=
 \begin{bmatrix}
-A_1&B_1\\
-A_2&B_2
+A_1 & B_1\\
+A_2 & B_2
 \end{bmatrix}
 $$
 
@@ -418,8 +419,8 @@ For \(x\):
 $$
 M_x=
 \begin{bmatrix}
-C_1&B_1\\
-C_2&B_2
+C_1 & B_1\\
+C_2 & B_2
 \end{bmatrix}
 $$
 
@@ -436,8 +437,8 @@ For \(y\):
 $$
 M_y=
 \begin{bmatrix}
-A_1&C_1\\
-A_2&C_2
+A_1 & C_1\\
+A_2 & C_2
 \end{bmatrix}
 $$
 
@@ -455,8 +456,8 @@ $$
 \boxed{
 \det
 \begin{bmatrix}
-a&b\\
-c&d
+a & b\\
+c & d
 \end{bmatrix}
 =ad-bc
 }
@@ -494,8 +495,8 @@ For:
 $$
 M=
 \begin{bmatrix}
-A_1&B_1\\
-A_2&B_2
+A_1 & B_1\\
+A_2 & B_2
 \end{bmatrix}
 $$
 
@@ -535,7 +536,7 @@ For example, two finite segments may lie on intersecting infinite lines but be p
 A---------B
 
 
-                  C---------D
+                    C---------D
 ```
 
 Their infinite lines intersect, but the actual segments do not.
@@ -583,7 +584,8 @@ Therefore:
 $$
 \boxed{
 (\vec{AB}\cdot\vec{AP})
-(\vec{AB}\cdot\vec{BP})\leq0
+(\vec{AB}\cdot\vec{BP})
+\leq0
 }
 $$
 
@@ -844,8 +846,8 @@ where:
 $$
 R(\theta)=
 \begin{bmatrix}
-\cos\theta&-\sin\theta\\
-\sin\theta&\cos\theta
+\cos\theta & -\sin\theta\\
+\sin\theta & \cos\theta
 \end{bmatrix}
 $$
 
@@ -966,7 +968,8 @@ using Cramer's Rule.
 $$
 \boxed{
 (\vec{AB}\cdot\vec{AP})
-(\vec{AB}\cdot\vec{BP})\leq0
+(\vec{AB}\cdot\vec{BP})
+\leq0
 }
 $$
 
